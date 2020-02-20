@@ -50,7 +50,46 @@ export default class Home extends Vue {
 
   .start {
     width: 1648px;
-    margin: auto;
+    margin: 0 auto;
+    transform-origin: top;
+  }
+}
+
+@media screen and(max-width: 1680px) and(min-width: 1261px) {
+  .home {
+    .start {
+      width: 1236px;
+    }
+    .start-menu__column:nth-child(4) {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and(max-width: 1260px) and(min-width:865px) {
+  .home {
+    .start {
+      width: 824px;
+    }
+    .start-menu__column:nth-child(2n + 1) {
+      margin-left: 0;
+    }
+  }
+}
+
+@media screen and(max-width:864px) {
+  .home {
+    .start {
+      max-width: 700px;
+      width: 100%;
+    }
+    .start-header {
+      padding: 32px 16px 24px 16px;
+    }
+    .start-menu__column {
+      margin-left: 0;
+    }
   }
 }
 </style>

@@ -28,8 +28,7 @@ export default class StartHeader extends Vue {}
   display: flex;
   user-select: none;
   height: 48px;
-  margin: 64px 0 48px 0;
-  box-sizing: border-box;
+  padding: 64px 0 48px 0;
   color: #ffffff;
   &__left,
   &__right {

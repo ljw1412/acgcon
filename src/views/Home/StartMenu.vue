@@ -37,8 +37,10 @@ export default class StartMenu extends Vue {
       { w: 2, h: 1 }
     ],
     [
-      { w: 1, h: 2 },
-      { w: 1, h: 2 },
+      { w: 1, h: 1 },
+      { w: 1, h: 1 },
+      { w: 1, h: 1 },
+      { w: 1, h: 1 },
       { w: 1, h: 1 },
       { w: 1, h: 1 }
     ]
@@ -48,13 +50,15 @@ export default class StartMenu extends Vue {
 
 <style lang="scss">
 .start-menu {
-  display: flex;
-  align-items: flex-start;
+  text-align: center;
+
   &__column {
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-between;
     width: 400px;
+    text-align: left;
+    vertical-align: top;
     & + & {
       margin-left: 16px;
     }
