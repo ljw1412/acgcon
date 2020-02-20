@@ -2,12 +2,23 @@
   <div class="home">
     <div class="bg"
       :style="{'background-image':`url('${backgroundUrl}')`}"></div>
+    <div class="start">
+      <start-header></start-header>
+      <start-menu></start-menu>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-@Component
+import StartHeader from './StartHeader.vue'
+import StartMenu from './StartMenu.vue'
+@Component({
+  components: {
+    StartHeader,
+    StartMenu
+  }
+})
 export default class Home extends Vue {
   backgroundUrl = ''
 
@@ -35,6 +46,11 @@ export default class Home extends Vue {
     background-position: center;
     background-size: cover;
     z-index: -10;
+  }
+
+  .start {
+    width: 1648px;
+    margin: auto;
   }
 }
 </style>

@@ -2,10 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import '@/style/global.scss'
 import createAxios from '@/utils/api'
+import manzhaiUI from 'manzhai-ui'
+
+import 'manzhai-ui/lib/manzhai-ui.css'
+import '@/style/global.scss'
 
 Vue.config.productionTip = false
+
+Vue.use(manzhaiUI)
 
 Vue.prototype.$axios = createAxios()
 
