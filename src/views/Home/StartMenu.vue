@@ -6,7 +6,12 @@
       <start-tile v-for="(item,j) of rows"
         :w="item.w"
         :h="item.h"
-        :key="`${i}-${j}`"></start-tile>
+        :key="`${i}-${j}`">
+        <template v-if="item.component">
+          <component :is="item.component"
+            v-bind="item.props"></component>
+        </template>
+      </start-tile>
     </div>
   </div>
 </template>
@@ -14,6 +19,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import StartTile from './StartTile.vue'
+import StartEntrance from './StartEntrance.vue'
 @Component({
   components: {
     StartTile
@@ -26,13 +32,28 @@ export default class StartMenu extends Vue {
       { w: 2, h: 1 }
     ],
     [
-      { w: 1, h: 1 },
-      { w: 1, h: 1 },
-      { w: 2, h: 1 },
-      { w: 2, h: 1 }
+      {
+        w: 2,
+        h: 1,
+        component: StartEntrance,
+        props: { title: '漫画' }
+      },
+      {
+        w: 2,
+        h: 1,
+        component: StartEntrance,
+        props: { title: '动画' }
+      },
+      {
+        w: 2,
+        h: 1,
+        component: StartEntrance,
+        props: { title: '游戏' }
+      }
     ],
     [
-      { w: 2, h: 1 },
+      { w: 1, h: 1 },
+      { w: 1, h: 1 },
       { w: 2, h: 1 },
       { w: 2, h: 1 }
     ],

@@ -1,19 +1,25 @@
-<template>
-  <div class="start-tile"
-    :class="{
-      'start-tile--h2': h === 2,
-      'start-tile--w2': w === 2
-    }"></div>
-</template>
-
-<script lang="ts">
+<script lang="tsx">
 import { Component, Vue, Prop } from 'vue-property-decorator'
+import { CreateElement } from 'vue'
 @Component
 export default class StartTile extends Vue {
   @Prop(Number)
   readonly w!: number
   @Prop(Number)
   readonly h!: number
+
+  render(h: CreateElement) {
+    const data = {
+      class: [
+        'start-tile',
+        {
+          'start-tile--h2': this.h === 2,
+          'start-tile--w2': this.w === 2
+        }
+      ]
+    }
+    return <div {...data}>{this.$slots.default}</div>
+  }
 }
 </script>
 
