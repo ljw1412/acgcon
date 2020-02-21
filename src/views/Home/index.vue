@@ -23,8 +23,22 @@ export default class Home extends Vue {
   backgroundUrl = ''
 
   async fetchBackground() {
-    const imageList = (await this.$axios.get('base/bg_bing')).data
-    this.backgroundUrl = imageList[0].url
+    const bgData =
+      localStorage.getItem('home-background') || '{"url":"","updateTime":0}'
+    let { url, updateTime } = JSON.parse(bgData)
+    if (moment().diff(moment(updateTime), 'hours') > 2) {
+      try {
+        const imageList = (await this.$axios.get('base/bg_bing')).data
+        url = imageList[0].url
+        localStorage.setItem(
+          'home-background',
+          JSON.stringify({ url, updateTime: +new Date() })
+        )
+      } catch (error) {
+        console.error('[home] 获取背景失败。')
+      }
+    }
+    this.backgroundUrl = url
   }
 
   mounted() {
