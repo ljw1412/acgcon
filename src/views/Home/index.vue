@@ -11,8 +11,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import StartHeader from './StartHeader.vue'
-import StartMenu from './StartMenu.vue'
+import StartHeader from './components/start/Header.vue'
+import StartMenu from './components/start/Menu.vue'
 @Component({
   components: {
     StartHeader,

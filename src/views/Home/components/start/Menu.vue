@@ -20,8 +20,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import StartTile from './StartTile.vue'
-import StartEntrance from './StartEntrance.vue'
+import StartTile from './Tile.vue'
+import StartEntrance from './Entrance.vue'
 @Component({
   components: {
     StartTile
