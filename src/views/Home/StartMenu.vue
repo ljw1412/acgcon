@@ -6,6 +6,8 @@
       <start-tile v-for="(item,j) of rows"
         :w="item.w"
         :h="item.h"
+        :to="item.to"
+        :href="item.href"
         :key="`${i}-${j}`">
         <template v-if="item.component">
           <component :is="item.component"
@@ -35,18 +37,21 @@ export default class StartMenu extends Vue {
       {
         w: 2,
         h: 1,
+        to: { name: 'comicHome' },
         component: StartEntrance,
         props: { title: '漫画' }
       },
       {
         w: 2,
         h: 1,
+        to: { name: 'animationHome' },
         component: StartEntrance,
         props: { title: '动画' }
       },
       {
         w: 2,
         h: 1,
+        to: { name: 'gameHome' },
         component: StartEntrance,
         props: { title: '游戏' }
       }
@@ -58,7 +63,7 @@ export default class StartMenu extends Vue {
       { w: 2, h: 1 }
     ],
     [
-      { w: 1, h: 1 },
+      { w: 1, h: 1, props: { title: '最近更新' } },
       { w: 1, h: 1 },
       { w: 1, h: 1 },
       { w: 1, h: 1 },
