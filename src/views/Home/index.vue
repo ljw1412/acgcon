@@ -20,12 +20,15 @@ import StartMenu from './StartMenu.vue'
   }
 })
 export default class Home extends Vue {
+  logger = this.$getACGLogger('Home')
   backgroundUrl = ''
 
   async fetchBackground() {
     const bgData =
       localStorage.getItem('home-background') || '{"url":"","updateTime":0}'
     let { url, updateTime } = JSON.parse(bgData)
+    if (url) this.backgroundUrl = url
+    // 如果距离上一次请求小于2小时，优先使用本地存储的背景地址。
     if (moment().diff(moment(updateTime), 'hours') > 2) {
       try {
         const imageList = (await this.$axios.get('base/bg_bing')).data
@@ -35,7 +38,7 @@ export default class Home extends Vue {
           JSON.stringify({ url, updateTime: +new Date() })
         )
       } catch (error) {
-        console.error('[home] 获取背景失败。')
+        this.logger.error('获取背景失败!')
       }
     }
     this.backgroundUrl = url
