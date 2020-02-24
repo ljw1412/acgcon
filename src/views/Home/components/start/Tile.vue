@@ -3,7 +3,11 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 import { CreateElement } from 'vue'
 import { RawLocation } from 'vue-router'
 
-@Component
+@Component({
+  provide() {
+    return { tile: this }
+  }
+})
 export default class StartTile extends Vue {
   @Prop(Number)
   readonly w!: number
@@ -22,7 +26,6 @@ export default class StartTile extends Vue {
     const data = {
       class: [
         'start-tile',
-
         {
           'start-tile--h2': this.h === 2,
           'start-tile--w2': this.w === 2,
@@ -42,19 +45,30 @@ export default class StartTile extends Vue {
         }
       }
     }
-    return <div {...data}>{this.$slots.default}</div>
+    return (
+      <div class="start-tile-wrapper">
+        <div {...data}>{this.$slots.default}</div>
+      </div>
+    )
   }
 }
 </script>
 
 <style lang="scss">
-.start-tile {
+.start-tile-wrapper {
   display: inline-block;
+  margin-bottom: 16px;
+}
+
+.start-tile {
   width: 192px;
   height: 192px;
-  margin-bottom: 16px;
   font-size: 16px;
-  background-color: #ffffff;
+  background-color: rgba($color: #ffffff, $alpha: 0.8);
+  &__content {
+    width: 100%;
+    height: 100%;
+  }
   &--h2 {
     height: 400px;
   }

@@ -22,6 +22,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import StartTile from './Tile.vue'
 import StartEntrance from './Entrance.vue'
+import StartBigTitle from './BigTitle.vue'
 @Component({
   components: {
     StartTile
@@ -63,7 +64,12 @@ export default class StartMenu extends Vue {
       { w: 2, h: 1 }
     ],
     [
-      { w: 1, h: 1, props: { title: '最近更新' } },
+      {
+        w: 1,
+        h: 1,
+        component: StartBigTitle,
+        props: { html: '百科<br/>更新' }
+      },
       { w: 1, h: 1 },
       { w: 1, h: 1 },
       { w: 1, h: 1 },
