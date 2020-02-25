@@ -16,7 +16,13 @@ const routes: RouteConfig[] = [
   },
   ...animationRoutes,
   ...comicRoutes,
-  ...gameRoutes
+  ...gameRoutes,
+  {
+    path: '/:type(animation|comic|game)/baike',
+    name: 'baike',
+    component: () =>
+      import(/* webpackChunkName: "home" */ '@/views/Baike/index.vue')
+  }
 ]
 
 const router = new VueRouter({
