@@ -5,7 +5,8 @@ const routes: RouteConfig[] = [
     path: '/game',
     name: 'gameHome',
     component: () =>
-      import(/* webpackChunkName: "home" */ '@/views/Game/index.vue')
+      import(/* webpackChunkName: "home" */ '@/views/Game/index.vue'),
+    meta: { title: '游戏 - ACG控' }
   }
 ]
 

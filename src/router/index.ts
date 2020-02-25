@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
+import bindEvents from './_event'
 import animationRoutes from './animation'
 import comicRoutes from './comic'
 import gameRoutes from './game'
@@ -23,5 +24,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+bindEvents(router)
 
 export default router

@@ -5,7 +5,8 @@ const routes: RouteConfig[] = [
     path: '/animation',
     name: 'animationHome',
     component: () =>
-      import(/* webpackChunkName: "home" */ '@/views/Animation/index.vue')
+      import(/* webpackChunkName: "home" */ '@/views/Animation/index.vue'),
+    meta: { title: '动画 - ACG控' }
   }
 ]
 
