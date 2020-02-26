@@ -1,8 +1,16 @@
-import { AxiosStatic } from 'axios'
+import {
+  AxiosStatic,
+  AxiosResponse,
+  AxiosRequestConfig,
+  AxiosInstance,
+  AxiosPromise
+} from 'axios'
 
 declare module 'vue/types/vue' {
   interface Vue {
     $axios: AxiosStatic
+    $get: (url: string, config?: AxiosRequestConfig) => any
+    $post: (url: string, config?: AxiosRequestConfig) => any
     $getAcgLogger: (
       name: string
     ) => {

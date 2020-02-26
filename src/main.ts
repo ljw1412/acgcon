@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import createAxios from '@/utils/api'
+import createAxios, { get, post } from '@/utils/api'
 import { getLogger } from '@/utils/logger'
 import manzhaiUI from 'manzhai-ui'
 
@@ -14,6 +14,8 @@ Vue.config.productionTip = false
 Vue.use(manzhaiUI)
 
 Vue.prototype.$axios = createAxios()
+Vue.prototype.$get = get
+Vue.prototype.$post = post
 Vue.prototype.$getAcgLogger = getLogger
 
 new Vue({
