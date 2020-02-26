@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 Vue.use(manzhaiUI)
 
 Vue.prototype.$axios = createAxios()
-Vue.prototype.$getACGLogger = getLogger
+Vue.prototype.$getAcgLogger = getLogger
 
 new Vue({
   router,

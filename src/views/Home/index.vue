@@ -20,7 +20,7 @@ import StartMenu from './components/start/Menu.vue'
   }
 })
 export default class Home extends Vue {
-  logger = this.$getACGLogger('Home')
+  logger = this.$getAcgLogger('Home')
   backgroundUrl = ''
 
   async fetchBackground() {

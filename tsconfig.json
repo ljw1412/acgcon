@@ -13,7 +13,11 @@
     "baseUrl": ".",
     "types": ["webpack-env"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@a/*": ["src/views/Main/Animation"],
+      "@c/*": ["src/views/Main/Comic"],
+      "@g/*": ["src/views/Main/Game"],
+      "@~": ["src/views/Main/_Common"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },

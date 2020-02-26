@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import bindEvents from './_event'
-import animationRoutes from './animation'
-import comicRoutes from './comic'
-import gameRoutes from './game'
 
 Vue.use(VueRouter)
 
@@ -14,14 +11,32 @@ const routes: RouteConfig[] = [
     component: () =>
       import(/* webpackChunkName: "home" */ '@/views/Home/index.vue')
   },
-  ...animationRoutes,
-  ...comicRoutes,
-  ...gameRoutes,
   {
-    path: '/:type(animation|comic|game)/baike',
-    name: 'baike',
+    path: '/v1',
+    redirect: { name: 'home' },
     component: () =>
-      import(/* webpackChunkName: "home" */ '@/views/Baike/index.vue')
+      import(/* webpackChunkName: "acghome" */ '@/views/Main/index.vue'),
+    children: [
+      {
+        path: ':acgType(animation|comic|game)',
+        name: 'subHome',
+        components: {
+          animation: () =>
+            import(/* webpackChunkName: "acghome" */ '@a/Home/index.vue'),
+          comic: () =>
+            import(/* webpackChunkName: "acghome" */ '@c/Home/index.vue'),
+          game: () =>
+            import(/* webpackChunkName: "acghome" */ '@g/Home/index.vue')
+        }
+      },
+      {
+        path: ':acgType(animation|comic|game)/baike',
+        name: 'baike',
+        component: () =>
+          import(/* webpackChunkName: "baike" */ '@~/Baike/index.vue'),
+        meta: { title: '百科' }
+      }
+    ]
   }
 ]
 

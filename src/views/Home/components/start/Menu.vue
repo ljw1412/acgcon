@@ -38,21 +38,21 @@ export default class StartMenu extends Vue {
       {
         w: 2,
         h: 1,
-        to: { name: 'comicHome' },
-        component: StartEntrance,
-        props: { title: '漫画' }
-      },
-      {
-        w: 2,
-        h: 1,
-        to: { name: 'animationHome' },
+        to: { name: 'subHome', params: { acgType: 'animation' } },
         component: StartEntrance,
         props: { title: '动画' }
       },
       {
         w: 2,
         h: 1,
-        to: { name: 'gameHome' },
+        to: { name: 'subHome', params: { acgType: 'comic' } },
+        component: StartEntrance,
+        props: { title: '漫画' }
+      },
+      {
+        w: 2,
+        h: 1,
+        to: { name: 'subHome', params: { acgType: 'game' } },
         component: StartEntrance,
         props: { title: '游戏' }
       }
