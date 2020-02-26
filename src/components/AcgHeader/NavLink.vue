@@ -1,0 +1,62 @@
+<template>
+  <div class="nav-link">
+    <ul class="nav-link-ul">
+      <router-link v-for="nav of navList"
+        :key="nav.label"
+        :to="nav.to"
+        #default="{href, isExactActive}">
+        <li class="nav-link-item"
+          :class="{'nav-link-item--active':isExactActive}">
+          {{navigate}}
+          <a :href="href"
+            @click="navigate"
+            class="link">{{nav.label}}</a>
+        </li>
+      </router-link>
+    </ul>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+@Component
+export default class NavLink extends Vue {
+  navList = [
+    {
+      label: 'ACG大本营',
+      to: { name: 'home' }
+    },
+    {
+      label: '动画',
+      to: { name: 'subHome', params: { acgType: 'animation' } }
+    },
+    {
+      label: '漫画',
+      to: { name: 'subHome', params: { acgType: 'comic' } }
+    },
+    {
+      label: '游戏',
+      to: { name: 'subHome', params: { acgType: 'game' } }
+    }
+  ]
+}
+</script>
+
+<style lang="scss">
+.nav-link {
+  .nav-link-ul {
+    display: flex;
+    align-items: center;
+    .nav-link-item {
+      margin-right: 12px;
+      .link {
+        font-size: 14px;
+        color: #fff;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        white-space: nowrap;
+        display: flex;
+      }
+    }
+  }
+}
+</style>
