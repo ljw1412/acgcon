@@ -2,6 +2,7 @@
   <div class="acg-header">
     <topbar></topbar>
     <top-banner></top-banner>
+    <top-logo></top-logo>
   </div>
 </template>
 
@@ -9,8 +10,9 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Topbar from './Topbar.vue'
 import TopBanner from './TopBanner.vue'
+import TopLogo from './TopLogo.vue'
 @Component({
-  components: { Topbar, TopBanner }
+  components: { Topbar, TopBanner, TopLogo }
 })
 export default class AcgHeader extends Vue {}
 </script>

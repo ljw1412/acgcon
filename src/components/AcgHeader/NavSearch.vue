@@ -18,14 +18,18 @@ export default class NavSearch extends Vue {
   width: 480px;
   height: 36px;
   background-color: #fff;
+  transition: width 0.3s;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1080px) {
   .nav-search {
-    position: relative;
-    transform: none;
-    left: initial;
-    top: initial;
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nav-search {
+    display: none;
   }
 }
 </style>

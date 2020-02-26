@@ -4,10 +4,9 @@
       <router-link v-for="nav of navList"
         :key="nav.label"
         :to="nav.to"
-        #default="{href, isExactActive}">
+        #default="{href, navigate, isExactActive}">
         <li class="nav-link-item"
           :class="{'nav-link-item--active':isExactActive}">
-          {{navigate}}
           <a :href="href"
             @click="navigate"
             class="link">{{nav.label}}</a>

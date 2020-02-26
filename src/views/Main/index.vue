@@ -1,7 +1,6 @@
 <template>
   <div class="acg-main">
     <acg-header></acg-header>
-    <div>{{acgType}}</div>
     <router-view :name="acgType"></router-view>
   </div>
 </template>
