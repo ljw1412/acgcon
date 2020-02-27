@@ -2,7 +2,6 @@
   <div class="acg-header">
     <topbar></topbar>
     <top-banner :bg-url="banner.bg"></top-banner>
-    <top-logo></top-logo>
   </div>
 </template>
 

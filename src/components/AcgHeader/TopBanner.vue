@@ -1,11 +1,18 @@
 <template>
   <div class="top-banner"
-    :style="{backgroundImage:`url(${bgUrl})`}"></div>
+    :style="{backgroundImage:`url(${bgUrl})`}">
+    <div class="top-banner__content">
+      <top-logo></top-logo>
+      <top-search></top-search>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-@Component
+import TopLogo from './TopLogo.vue'
+import TopSearch from './TopSearch.vue'
+@Component({ components: { TopLogo, TopSearch } })
 export default class TopBanner extends Vue {
   @Prop({ type: String, default: '' })
   readonly bgUrl!: string
@@ -20,5 +27,14 @@ export default class TopBanner extends Vue {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    .top-search {
+      margin-top: 20px;
+    }
+  }
 }
 </style>

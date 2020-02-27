@@ -2,7 +2,6 @@
   <div class="acg-topbar">
     <div class="acg-topbar__content flex-center-space-between">
       <nav-link></nav-link>
-      <nav-search></nav-search>
       <nav-user-center></nav-user-center>
     </div>
   </div>
@@ -11,11 +10,10 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import NavLink from './NavLink.vue'
-import NavSearch from './NavSearch.vue'
 import NavUserCenter from './NavUserCenter.vue'
 
 @Component({
-  components: { NavLink, NavSearch, NavUserCenter }
+  components: { NavLink, NavUserCenter }
 })
 export default class AcgTopbar extends Vue {}
 </script>

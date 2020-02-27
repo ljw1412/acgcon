@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-search absolute-center">
+  <div class="top-search">
 
   </div>
 </template>
@@ -13,23 +13,11 @@ export default class NavSearch extends Vue {
 </script>
 
 <style lang="scss">
-.nav-search {
-  margin: 0 10px;
-  width: 480px;
+.top-search {
+  width: calc(100% - 40px);
+  max-width: 500px;
   height: 36px;
   background-color: #fff;
   transition: width 0.3s;
-}
-
-@media screen and (max-width: 1080px) {
-  .nav-search {
-    width: 40%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .nav-search {
-    display: none;
-  }
 }
 </style>

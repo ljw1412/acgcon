@@ -1,7 +1,6 @@
 <template>
-  <div class="top-logo absolute-center">
+  <div class="top-logo">
     <div class="top-logo__title">ACG控</div>
-    <div></div>
     <div>
       <div class="top-logo__sub-title">{{current.title}}</div>
       <div class="top-logo__text">{{current.text}}</div>
@@ -48,6 +47,14 @@ export default class TopLogo extends Vue {
   &__text {
     font-size: 20px;
     line-height: 20px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .top-logo {
+    text-align: center;
+    &__title {
+      display: none;
+    }
   }
 }
 </style>
