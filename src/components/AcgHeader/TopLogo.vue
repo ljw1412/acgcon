@@ -20,7 +20,7 @@ const logoMap: Record<string, any> = {
 @Component
 export default class TopLogo extends Vue {
   @Prop(String)
-  readonly acgType!: 'animation' | 'comic' | 'game'
+  readonly acgType!: Acgcon.Types
 
   get current() {
     const acgType = this.$route.params.acgType || this.acgType

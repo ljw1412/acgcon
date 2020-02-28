@@ -1,21 +1,24 @@
 <template>
   <div class="acg-topbar">
     <div class="acg-topbar__content flex-center-space-between">
-      <nav-link></nav-link>
+      <nav-link :links="links"></nav-link>
       <nav-user-center></nav-user-center>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import NavLink from './NavLink.vue'
 import NavUserCenter from './NavUserCenter.vue'
 
 @Component({
   components: { NavLink, NavUserCenter }
 })
-export default class AcgTopbar extends Vue {}
+export default class AcgTopbar extends Vue {
+  @Prop({ type: Array, default: () => [] })
+  readonly links!: Record<string, any>[]
+}
 </script>
 
 <style lang="scss">

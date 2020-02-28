@@ -1,18 +1,23 @@
 <template>
   <div class="acg-main">
     <acg-header :banner="config.banner"></acg-header>
-    <router-view :name="acgType"></router-view>
+    <div class="acg-main-content">
+      <mz-fixed-section sticky
+        placeholder>
+        <acg-navigation></acg-navigation>
+      </mz-fixed-section>
+      <router-view :name="acgType"></router-view>
+      <div style="height:1000px"></div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import AcgHeader from '@/components/AcgHeader/index.vue'
-@Component({
-  components: {
-    AcgHeader
-  }
-})
+import AcgNavigation from '@/components/AcgNavigation.vue'
+
+@Component({ components: { AcgHeader, AcgNavigation } })
 export default class AcgHome extends Vue {
   config = {}
 
@@ -35,4 +40,22 @@ export default class AcgHome extends Vue {
 </script>
 
 <style lang="scss">
+.acg-main-content {
+  position: relative;
+  z-index: 1;
+  .mz-fixed-section.is-sticky {
+    .acg-navigation {
+      margin-top: 0;
+      padding-top: 0;
+      line-height: 60px;
+      background-image: none;
+      background-color: #ffffff;
+      transition: background-color 0.15s;
+      box-shadow: 0 -1px 2px rgba(#000, 0.3);
+      .link {
+        color: #333333;
+      }
+    }
+  }
+}
 </style>

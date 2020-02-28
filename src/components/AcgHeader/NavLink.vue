@@ -1,7 +1,7 @@
 <template>
   <div class="nav-link">
     <ul class="nav-link-ul">
-      <router-link v-for="nav of navList"
+      <router-link v-for="nav of links"
         :key="nav.label"
         :to="nav.to"
         #default="{href, navigate, isExactActive}">
@@ -17,27 +17,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component
 export default class NavLink extends Vue {
-  navList = [
-    {
-      label: 'ACG大本营',
-      to: { name: 'home' }
-    },
-    {
-      label: '动画',
-      to: { name: 'subHome', params: { acgType: 'animation' } }
-    },
-    {
-      label: '漫画',
-      to: { name: 'subHome', params: { acgType: 'comic' } }
-    },
-    {
-      label: '游戏',
-      to: { name: 'subHome', params: { acgType: 'game' } }
-    }
-  ]
+  @Prop({ type: Array, default: () => [] })
+  readonly links!: Record<string, any>[]
 }
 </script>
 
