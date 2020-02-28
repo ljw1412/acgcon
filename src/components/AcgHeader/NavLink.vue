@@ -26,20 +26,18 @@ export default class NavLink extends Vue {
 </script>
 
 <style lang="scss">
-.nav-link {
-  .nav-link-ul {
-    display: flex;
-    align-items: center;
-    .nav-link-item {
-      margin-right: 12px;
-      .link {
-        font-size: 14px;
-        color: #fff;
-        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-        white-space: nowrap;
-        display: flex;
-        transition: color 0.5s;
-      }
+.nav-link-ul {
+  display: flex;
+  align-items: center;
+  .nav-link-item {
+    margin-right: 12px;
+    .link {
+      display: flex;
+      color: #fff;
+      font-size: 14px;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+      white-space: nowrap;
+      transition: all 0.3s;
     }
   }
 }

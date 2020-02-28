@@ -1,10 +1,16 @@
 <template>
-  <!-- 粘性导航栏 -->
-  <mz-fixed-section class="acg-navigation-wrapper"
-    sticky
+  <mz-fixed-section sticky
     placeholder>
-    <nav-link :links="navList"
-      class="acg-navigation"></nav-link>
+    <div class="acg-navigation">
+      <div class="acg-navigation__content  flex-center-space-between">
+        <nav-link :links="navList"></nav-link>
+        <div class="acg-navigation__right">
+
+          <div class="acg-navigation__user"></div>
+        </div>
+      </div>
+
+    </div>
   </mz-fixed-section>
 </template>
 
@@ -33,30 +39,66 @@ export default class AcgNavigation extends Vue {
   margin-top: -60px;
   line-height: 30px;
   box-sizing: border-box;
-  transition: all 0.3s;
-  .nav-link-ul {
+  transition: all 0.2s;
+  &__content {
     width: 1600px;
     margin: 0 auto;
-    .nav-link-item {
-      padding: 0 20px;
+    .nav-link-ul {
+      padding: 0 12px;
+    }
+    .link {
+      padding: 0 14px;
+    }
+  }
+  &__right {
+    flex-shrink: 0;
+  }
+
+  &__user {
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-color: red;
+  }
+}
+
+.mz-fixed-section.is-sticky {
+  .acg-navigation {
+    margin-top: 0;
+    padding-top: 0;
+    background-image: none;
+    background-color: #ffffff;
+    box-shadow: 0 -1px 5px rgba(#000, 0.3);
+    &__content {
+      height: 100%;
+    }
+    &__user {
+      display: block;
+    }
+
+    .link {
+      color: #333333;
     }
   }
 }
 
-.acg-navigation-wrapper > .mz-fixed-section.is-sticky > .acg-navigation {
-  margin-top: 0;
-  padding-top: 15px;
-  background-image: none;
-  background-color: #ffffff;
-  box-shadow: 0 -1px 2px rgba(#000, 0.3);
-  .link {
-    color: #333333;
+@media screen and (max-width: 1600px) {
+  .acg-navigation__content {
+    width: 100%;
   }
 }
 
-@media screen and (max-width: 1600px) {
-  .acg-navigation .nav-link-ul {
-    width: 100%;
+@media screen and (max-width: 650px) {
+  .acg-navigation__content {
+    .nav-link-ul {
+      padding: 0 5px;
+    }
+    .nav-link-item {
+      margin: 0 5px;
+    }
+    .link {
+      padding: 0 10px;
+    }
   }
 }
 </style>
