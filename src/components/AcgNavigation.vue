@@ -1,15 +1,15 @@
 <template>
-  <mz-fixed-section sticky
+  <mz-fixed-section class="acg-navigation-wrapper"
+    sticky
     placeholder>
     <div class="acg-navigation">
-      <div class="acg-navigation__content  flex-center-space-between">
+      <div class="acg-navigation__content flex-center-space-between">
         <nav-link :links="navList"></nav-link>
         <div class="acg-navigation__right">
 
           <div class="acg-navigation__user"></div>
         </div>
       </div>
-
     </div>
   </mz-fixed-section>
 </template>
@@ -32,11 +32,14 @@ export default class AcgNavigation extends Vue {
 </script>
 
 <style lang="scss">
+.acg-navigation-wrapper {
+  margin-top: -60px;
+}
+
 .acg-navigation {
   height: 60px;
   width: 100%;
   padding-top: 20px;
-  margin-top: -60px;
   line-height: 30px;
   box-sizing: border-box;
   transition: all 0.2s;
@@ -64,7 +67,6 @@ export default class AcgNavigation extends Vue {
 
 .mz-fixed-section.is-sticky {
   .acg-navigation {
-    margin-top: 0;
     padding-top: 0;
     background-image: none;
     background-color: #ffffff;
