@@ -2,7 +2,7 @@ const navMap: Record<string, Acgcon.NavigationItem[]> = {
   common: [
     {
       label: '资讯',
-      to: ''
+      to: { name: 'information' }
     }
   ],
   animation: [
@@ -12,15 +12,15 @@ const navMap: Record<string, Acgcon.NavigationItem[]> = {
     },
     {
       label: '声优',
-      to: ''
+      to: { name: 'baike', params: { baikeType: 'va' } }
     },
     {
       label: '监督',
-      to: ''
+      to: { name: 'baike', params: { baikeType: 'director' } }
     },
     {
       label: '公司',
-      to: ''
+      to: { name: 'baike', params: { baikeType: 'company' } }
     }
   ],
   comic: [],

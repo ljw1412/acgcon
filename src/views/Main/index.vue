@@ -4,7 +4,7 @@
     <div class="acg-main-content">
       <!-- 导航栏 -->
       <acg-navigation></acg-navigation>
-      <router-view :name="acgType"></router-view>
+      <router-view :name="currentRouterName"></router-view>
       <div style="height:1000px"></div>
     </div>
   </div>
@@ -21,6 +21,11 @@ export default class AcgHome extends Vue {
 
   get acgType() {
     return this.$route.params.acgType
+  }
+
+  get currentRouterName() {
+    if (this.$route.name === 'subHome') return this.acgType
+    return 'default'
   }
 
   async fetchConfig() {

@@ -30,7 +30,14 @@ const routes: RouteConfig[] = [
         }
       },
       {
-        path: ':acgType(animation|comic|game)/baike',
+        path: ':acgType(animation|comic|game)/information',
+        name: 'information',
+        component: () =>
+          import(/* webpackChunkName: "baike" */ '@~/Information/index.vue'),
+        meta: { title: '资讯' }
+      },
+      {
+        path: ':acgType(animation|comic|game)/baike/:baikeType?',
         name: 'baike',
         component: () =>
           import(/* webpackChunkName: "baike" */ '@~/Baike/index.vue'),
