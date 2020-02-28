@@ -38,6 +38,7 @@ export default class NavLink extends Vue {
         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
         white-space: nowrap;
         display: flex;
+        transition: color 0.5s;
       }
     }
   }

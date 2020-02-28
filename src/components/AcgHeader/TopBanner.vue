@@ -5,6 +5,7 @@
       <top-logo></top-logo>
       <top-search></top-search>
     </div>
+    <div class="top-banner__bottom-shade"></div>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ export default class TopBanner extends Vue {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -35,6 +37,16 @@ export default class TopBanner extends Vue {
     .top-search {
       margin-top: 20px;
     }
+  }
+
+  &__bottom-shade {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 140px;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(22, 22, 26, 0), #16161a 100%);
   }
 }
 </style>

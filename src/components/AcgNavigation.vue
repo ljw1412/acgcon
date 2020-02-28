@@ -1,7 +1,11 @@
 <template>
-  <div class="acg-navigation">
-    <nav-link :links="navList"></nav-link>
-  </div>
+  <!-- 粘性导航栏 -->
+  <mz-fixed-section class="acg-navigation-wrapper"
+    sticky
+    placeholder>
+    <nav-link :links="navList"
+      class="acg-navigation"></nav-link>
+  </mz-fixed-section>
 </template>
 
 <script lang="ts">
@@ -25,24 +29,33 @@ export default class AcgNavigation extends Vue {
 .acg-navigation {
   height: 60px;
   width: 100%;
-  padding-top: 10px;
+  padding-top: 20px;
   margin-top: -60px;
-  line-height: 50px;
+  line-height: 30px;
   box-sizing: border-box;
-  background-image: linear-gradient(0, rgba(0, 0, 0, 0.8) 0, transparent 100%);
-  .nav-link {
+  transition: all 0.3s;
+  .nav-link-ul {
     width: 1600px;
     margin: 0 auto;
-    .nav-link-ul {
-      .nav-link-item {
-        padding: 0 20px;
-      }
+    .nav-link-item {
+      padding: 0 20px;
     }
   }
 }
 
+.acg-navigation-wrapper > .mz-fixed-section.is-sticky > .acg-navigation {
+  margin-top: 0;
+  padding-top: 15px;
+  background-image: none;
+  background-color: #ffffff;
+  box-shadow: 0 -1px 2px rgba(#000, 0.3);
+  .link {
+    color: #333333;
+  }
+}
+
 @media screen and (max-width: 1600px) {
-  .acg-navigation .nav-link {
+  .acg-navigation .nav-link-ul {
     width: 100%;
   }
 }
