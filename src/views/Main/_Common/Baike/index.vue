@@ -1,26 +1,38 @@
 <template>
   <div class="acg-baike">
-    <mz-button @click="fetchTags">查询Tags</mz-button>
+    <sticky-filter :acg-type="acgType"
+      :baike-type="baikeType"
+      @change="handleFilterChange"></sticky-filter>
+    <div class="acg-baike__content">
+
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import StickyFilter from './components/StickyFilter.vue'
 import AcgVue from '@/mixins/AcgVue'
 
-@Component
+@Component({ components: { StickyFilter } })
 export default class AcgBaike extends AcgVue {
   get baikeType() {
     return this.$route.params.baikeType || this.acgType
   }
 
-  async fetchTags() {
-    const tags = await this.$get('baike/tags', {
-      params: { acgType: this.acgType, type: this.baikeType }
-    })
+  handleFilterChange(filter: Record<string, any>) {
+    console.log(filter)
   }
 }
 </script>
 
 <style lang="scss">
+.acg-baike {
+  display: flex;
+  justify-content: space-between;
+  &__content {
+    width: calc(100% - 320px);
+    margin-left: auto;
+  }
+}
 </style>

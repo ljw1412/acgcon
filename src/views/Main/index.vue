@@ -4,7 +4,10 @@
     <div class="acg-main-content">
       <!-- 导航栏 -->
       <acg-navigation></acg-navigation>
-      <router-view :name="currentRouterName"></router-view>
+      <div class="acg-main-core"
+        :data-name="currentRouterName">
+        <router-view :name="currentRouterName"></router-view>
+      </div>
       <div style="height:1000px"></div>
     </div>
   </div>
@@ -46,5 +49,16 @@ export default class AcgHome extends Vue {
 .acg-main-content {
   position: relative;
   z-index: 10;
+}
+
+.acg-main-core {
+  width: 1600px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1600px) {
+  .acg-main-core {
+    width: 100%;
+  }
 }
 </style>
