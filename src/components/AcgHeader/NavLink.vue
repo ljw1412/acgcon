@@ -30,6 +30,7 @@ export default class NavLink extends Vue {
   display: flex;
   align-items: center;
   .nav-link-item {
+    position: relative;
     margin-right: 12px;
     .link {
       display: flex;

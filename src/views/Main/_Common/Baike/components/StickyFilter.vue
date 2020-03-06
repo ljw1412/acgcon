@@ -1,5 +1,5 @@
 <template>
-  <mz-fixed-section class="acg-sticky-filer"
+  <mz-fixed-section class="acg-sticky-filter"
     sticky
     placeholder
     :offset-top="60">
@@ -61,9 +61,4 @@ export default class AcgStickyFiler extends Vue {
 </script>
 
 <style lang="scss">
-.acg-sticky-filer {
-  > .mz-fixed-section {
-    width: 300px;
-  }
-}
 </style>

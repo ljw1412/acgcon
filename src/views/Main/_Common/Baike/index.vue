@@ -27,11 +27,17 @@ export default class AcgBaike extends AcgVue {
 </script>
 
 <style lang="scss">
+$filter-width: 300px;
 .acg-baike {
   display: flex;
   justify-content: space-between;
+  padding: 0 15px;
+  .acg-sticky-filter > .mz-fixed-section {
+    width: $filter-width;
+  }
+
   &__content {
-    width: calc(100% - 320px);
+    width: calc(100% - $filter-width - 20px);
     margin-left: auto;
   }
 }

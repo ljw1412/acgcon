@@ -48,6 +48,15 @@ export default class AcgNavigation extends Vue {
     margin: 0 auto;
     .nav-link-ul {
       padding: 0 12px;
+      .nav-link-item--active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background-color: var(--color-primary);
+      }
     }
     .link {
       padding: 0 14px;
