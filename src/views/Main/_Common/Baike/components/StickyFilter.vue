@@ -3,14 +3,16 @@
     sticky
     placeholder
     :offset-top="60">
-    <mz-filter-section v-model="selected[group.value]"
-      v-for="group of tagList"
-      :key="group._id"
-      :label="group.name">
-      <mz-filter-section-item v-for="tag of group.children"
-        :key="tag.value"
-        :value="tag.value">{{ tag.name }}</mz-filter-section-item>
-    </mz-filter-section>
+    <mz-scrollbar>
+      <mz-filter-section v-model="selected[group.value]"
+        v-for="group of tagList"
+        :key="group._id"
+        :label="group.name">
+        <mz-filter-section-item v-for="tag of group.children"
+          :key="tag.value"
+          :value="tag.value">{{ tag.name }}</mz-filter-section-item>
+      </mz-filter-section>
+    </mz-scrollbar>
   </mz-fixed-section>
 </template>
 
@@ -62,10 +64,22 @@ export default class AcgStickyFiler extends Vue {
 
 <style lang="scss">
 .acg-sticky-filter {
+  .mz-filter-section {
+    overflow-x: hidden;
+  }
+
+  .mz-fixed-section.is-fixed {
+    height: calc(100% - 60px);
+  }
+
+  .mz-scrollbar {
+    height: 100%;
+  }
+
   .mz-filter-section-item {
     &__label {
       font-variant-numeric: tabular-nums;
-      width: 45px;
+      width: 44px;
       height: 26px;
       line-height: 26px;
       font-size: 16px;
