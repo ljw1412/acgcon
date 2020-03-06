@@ -61,4 +61,16 @@ export default class AcgStickyFiler extends Vue {
 </script>
 
 <style lang="scss">
+.acg-sticky-filter {
+  .mz-filter-section-item {
+    &__label {
+      font-variant-numeric: tabular-nums;
+      width: 45px;
+      height: 26px;
+      line-height: 26px;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+}
 </style>
