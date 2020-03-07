@@ -1,6 +1,10 @@
 <template>
   <div class="acg-baike-filter">
-    <mz-filter-section-group v-model="value">
+    <div class="acg-baike-filter__title">筛选</div>
+    <div v-show="loading">正在加载中……</div>
+    <div v-show="!loading && !tagList.length">暂无筛选</div>
+    <mz-filter-section-group v-model="value"
+      v-show="!loading">
       <mz-filter-section v-for="item of tagList"
         outlined
         label-position="right"
@@ -27,9 +31,11 @@ export default class AcgBaikeFilter extends Vue {
 
   value = {}
   tagList: Record<string, any>[] = []
+  loading = false
 
   async fetchTags() {
     this.tagList = []
+    this.loading = true
     const tagList = await this.$get('baike/tags', {
       params: { acgType: this.acgType, type: this.baikeType }
     })
@@ -41,6 +47,7 @@ export default class AcgBaikeFilter extends Vue {
       )
     })
     this.tagList = tagList
+    this.loading = false
   }
 
   mounted() {
@@ -65,11 +72,19 @@ export default class AcgBaikeFilter extends Vue {
 @import '../var.scss';
 .acg-baike-filter {
   width: $filter-width;
+  min-height: 100px;
   margin-bottom: 20px;
   box-sizing: border-box;
   padding: 16px 26px;
   box-shadow: 1px 1px 5px rgba(#000, 0.1);
   transition: width 0.15s linear;
+  &__title {
+    height: 22px;
+    line-height: 22px;
+    font-size: 18px;
+    padding-bottom: 12px;
+  }
+
   .mz-filter-section__label {
     font-size: 14px;
     font-weight: bold;
