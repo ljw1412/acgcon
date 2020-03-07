@@ -1,8 +1,8 @@
 <template>
   <div class="acg-baike">
-    <sticky-filter :acg-type="acgType"
+    <baike-filter :acg-type="acgType"
       :baike-type="baikeType"
-      @change="handleFilterChange"></sticky-filter>
+      @change="handleFilterChange"></baike-filter>
     <div class="acg-baike__content">
 
     </div>
@@ -11,10 +11,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import StickyFilter from './components/StickyFilter.vue'
+import BaikeFilter from './components/Filter.vue'
 import AcgVue from '@/mixins/AcgVue'
 
-@Component({ components: { StickyFilter } })
+@Component({ components: { BaikeFilter } })
 export default class AcgBaike extends AcgVue {
   get baikeType() {
     return this.$route.params.baikeType || this.acgType
@@ -27,18 +27,26 @@ export default class AcgBaike extends AcgVue {
 </script>
 
 <style lang="scss">
-$filter-width: 300px;
+@import './var.scss';
 .acg-baike {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
-  .acg-sticky-filter > .mz-fixed-section {
-    width: $filter-width;
-  }
 
   &__content {
-    width: calc(100% - $filter-width - 20px);
+    width: calc(100% - #{$filter-width} - 20px);
     margin-left: auto;
+    transition: width 0.15s linear;
+  }
+}
+
+@media screen and (max-width: 864px) {
+  .acg-baike {
+    flex-direction: column;
+    .acg-baike-filter,
+    &__content {
+      width: 100%;
+    }
   }
 }
 </style>
