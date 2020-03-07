@@ -52,7 +52,8 @@ export default class AcgHome extends Vue {
 }
 
 .acg-main-core {
-  width: 1600px;
+  max-width: 1600px;
+  padding-top: 20px;
   margin: 0 auto;
 }
 

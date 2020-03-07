@@ -42,9 +42,9 @@ export default class AcgNavigation extends Vue {
   padding-top: 20px;
   line-height: 30px;
   box-sizing: border-box;
-  transition: all 0.2s;
+
   &__content {
-    width: 1600px;
+    max-width: 1600px;
     margin: 0 auto;
     .nav-link-ul {
       padding: 0 12px;
@@ -80,6 +80,7 @@ export default class AcgNavigation extends Vue {
     background-image: none;
     background-color: #ffffff;
     box-shadow: 0 -1px 5px rgba(#000, 0.3);
+    transition: all 0.2s;
     &__content {
       height: 100%;
     }
