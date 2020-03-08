@@ -2,7 +2,8 @@
   <div class="acg-baike-filter">
     <div class="acg-baike-filter__title">筛选</div>
     <div v-show="loading">正在加载中……</div>
-    <div v-show="!loading && !tagList.length">暂无筛选</div>
+    <div v-show="error">加载失败</div>
+    <div v-show="!error && !loading && !tagList.length ">暂无筛选</div>
     <mz-filter-section-group v-model="value"
       v-show="!loading">
       <mz-filter-section v-for="item of tagList"
@@ -32,22 +33,28 @@ export default class AcgBaikeFilter extends Vue {
   value = {}
   tagList: Record<string, any>[] = []
   loading = false
+  error = false
 
   async fetchTags() {
     this.tagList = []
     this.loading = true
-    const tagList = await this.$get('baike/tags', {
-      params: { acgType: this.acgType, type: this.baikeType }
-    })
-    tagList.forEach((group: any) => {
-      this.$set(
-        this.value,
-        group.value,
-        group.children.length ? group.children[0].value : null
-      )
-    })
-    this.tagList = tagList
-    this.loading = false
+    try {
+      const tagList = await this.$get('baike/tags', {
+        params: { acgType: this.acgType, type: this.baikeType }
+      })
+      tagList.forEach((group: any) => {
+        this.$set(
+          this.value,
+          group.value,
+          group.children.length ? group.children[0].value : null
+        )
+      })
+      this.tagList = tagList
+    } catch (error) {
+      this.error = true
+    } finally {
+      this.loading = false
+    }
   }
 
   mounted() {
