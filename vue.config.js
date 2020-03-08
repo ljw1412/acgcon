@@ -1,4 +1,5 @@
 const { resolve } = require('path')
+const HtmlWebpackTopBannerPlugin = require('./plugins/html-webpack-top-banner-plugin')
 
 const config = {
   configureWebpack: {
@@ -10,6 +11,11 @@ const config = {
         '@~': resolve('src/views/Main/_Common')
       }
     },
+    plugins: [
+      new HtmlWebpackTopBannerPlugin({
+        banner: `Build Time: ${new Date()}`
+      })
+    ],
     externals: {
       moment: 'moment'
     }
