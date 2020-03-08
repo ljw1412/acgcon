@@ -1,22 +1,26 @@
 <template>
   <div class="acg-baike-filter">
     <div class="acg-baike-filter__title">筛选</div>
-    <div v-show="loading">正在加载中……</div>
-    <div v-show="error">加载失败</div>
-    <div v-show="!error && !loading && !tagList.length ">暂无筛选</div>
-    <mz-filter-section-group v-model="value"
-      v-show="!loading">
-      <mz-filter-section v-for="item of tagList"
-        outlined
-        label-position="right"
-        :name="item.value"
-        :key="item._id">
-        <template #label>{{item.name}}</template>
-        <mz-filter-section-item v-for="tag of item.children"
-          :key="tag.value"
-          :value="tag.value">{{ tag.name }}</mz-filter-section-item>
-      </mz-filter-section>
-    </mz-filter-section-group>
+    <mz-state :value="state">
+      <template #loading>正在加载中……</template>
+      <template #error>加载失败</template>
+      <template #empty>暂无筛选</template>
+      <template #success>
+        <mz-filter-section-group v-model="value"
+          v-show="!loading">
+          <mz-filter-section v-for="item of tagList"
+            outlined
+            label-position="right"
+            :name="item.value"
+            :key="item._id">
+            <template #label>{{item.name}}</template>
+            <mz-filter-section-item v-for="tag of item.children"
+              :key="tag.value"
+              :value="tag.value">{{ tag.name }}</mz-filter-section-item>
+          </mz-filter-section>
+        </mz-filter-section-group>
+      </template>
+    </mz-state>
   </div>
 </template>
 
@@ -34,6 +38,13 @@ export default class AcgBaikeFilter extends Vue {
   tagList: Record<string, any>[] = []
   loading = false
   error = false
+
+  get state() {
+    if (this.loading) return 'loading'
+    if (this.error) return 'error'
+    if (!this.tagList.length) return 'empty'
+    return 'success'
+  }
 
   async fetchTags() {
     this.tagList = []
