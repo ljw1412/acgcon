@@ -15,6 +15,10 @@ const navMap: Record<string, Acgcon.NavigationItem[]> = {
       to: { name: 'baike', params: { baikeType: 'va' } }
     },
     {
+      label: '角色',
+      to: { name: 'baike', params: { baikeType: 'character' } }
+    },
+    {
       label: '监督',
       to: { name: 'baike', params: { baikeType: 'director' } }
     },
@@ -23,8 +27,34 @@ const navMap: Record<string, Acgcon.NavigationItem[]> = {
       to: { name: 'baike', params: { baikeType: 'company' } }
     }
   ],
-  comic: [],
-  game: []
+  comic: [
+    {
+      label: '漫画',
+      to: { name: 'baike' }
+    },
+    {
+      label: '作者',
+      to: { name: 'baike', params: { baikeType: 'author' } }
+    },
+    {
+      label: '杂志',
+      to: { name: 'baike', params: { baikeType: 'magazine' } }
+    },
+    {
+      label: '公司',
+      to: { name: 'baike', params: { baikeType: 'company' } }
+    }
+  ],
+  game: [
+    {
+      label: '游戏',
+      to: { name: 'baike' }
+    },
+    {
+      label: '公司',
+      to: { name: 'baike', params: { baikeType: 'company' } }
+    }
+  ]
 }
 
 export function getNavByAcgType(acgType: Acgcon.Types) {
