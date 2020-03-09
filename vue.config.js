@@ -1,5 +1,5 @@
 const { resolve } = require('path')
-const HtmlWebpackTopBannerPlugin = require('./plugins/html-webpack-top-banner-plugin')
+const HtmlWebpackTopBannerPlugin = require('html-webpack-top-banner-plugin')
 
 const config = {
   configureWebpack: {
