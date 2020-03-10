@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
+import admin from './admin'
+import acg from './acg'
 import bindEvents from './_event'
 
 Vue.use(VueRouter)
@@ -11,40 +13,9 @@ const routes: RouteConfig[] = [
     component: () =>
       import(/* webpackChunkName: "home" */ '@/views/Home/index.vue')
   },
-  {
-    path: '/v1',
-    redirect: { name: 'home' },
-    component: () =>
-      import(/* webpackChunkName: "acghome" */ '@/views/Main/index.vue'),
-    children: [
-      {
-        path: ':acgType(animation|comic|game)',
-        name: 'subHome',
-        components: {
-          animation: () =>
-            import(/* webpackChunkName: "acghome" */ '@a/Home/index.vue'),
-          comic: () =>
-            import(/* webpackChunkName: "acghome" */ '@c/Home/index.vue'),
-          game: () =>
-            import(/* webpackChunkName: "acghome" */ '@g/Home/index.vue')
-        }
-      },
-      {
-        path: ':acgType(animation|comic|game)/information',
-        name: 'information',
-        component: () =>
-          import(/* webpackChunkName: "baike" */ '@~/Information/index.vue'),
-        meta: { title: '资讯' }
-      },
-      {
-        path: ':acgType(animation|comic|game)/baike/:baikeType?',
-        name: 'baike',
-        component: () =>
-          import(/* webpackChunkName: "baike" */ '@~/Baike/index.vue'),
-        meta: { title: '百科' }
-      }
-    ]
-  }
+  // TODO: 鉴权, router.addRoutes 动态加载
+  ...admin,
+  ...acg
 ]
 
 const router = new VueRouter({
