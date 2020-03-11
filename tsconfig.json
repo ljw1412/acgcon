@@ -17,7 +17,8 @@
       "@a/*": ["src/views/Main/Animation"],
       "@c/*": ["src/views/Main/Comic"],
       "@g/*": ["src/views/Main/Game"],
-      "@~": ["src/views/Main/_Common"]
+      "@~": ["src/views/Main/_Common"],
+      "@admin": ["src/views/Admin"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
