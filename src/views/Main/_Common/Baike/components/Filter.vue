@@ -11,12 +11,12 @@
           <mz-filter-section v-for="item of tagList"
             outlined
             label-position="right"
-            :name="item.value"
+            :name="item._id"
             :key="item._id">
             <template #label>{{item.name}}</template>
-            <mz-filter-section-item v-for="tag of item.children"
-              :key="tag.value"
-              :value="tag.value">{{ tag.name }}</mz-filter-section-item>
+            <mz-filter-section-item v-for="tag of item.tags"
+              :key="tag._id"
+              :value="tag._id">{{ tag.name }}</mz-filter-section-item>
           </mz-filter-section>
         </mz-filter-section-group>
       </template>
@@ -50,15 +50,8 @@ export default class AcgBaikeFilter extends Vue {
     this.tagList = []
     this.loading = true
     try {
-      const tagList = await this.$get('baike/tags', {
+      const tagList = await this.$get('baike/filter', {
         params: { acgType: this.acgType, type: this.baikeType }
-      })
-      tagList.forEach((group: any) => {
-        this.$set(
-          this.value,
-          group.value,
-          group.children.length ? group.children[0].value : null
-        )
       })
       this.tagList = tagList
     } catch (error) {
