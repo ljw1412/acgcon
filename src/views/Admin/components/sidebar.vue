@@ -9,7 +9,9 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class AdminSidebar extends Vue {
-  navigations = [{ label: '筛选项管理', to: { name: 'adminFilter' } }]
+  navigations = [
+    { label: '筛选项管理', icon: 'md-pricetags', to: { name: 'adminFilter' } }
+  ]
 }
 </script>
 

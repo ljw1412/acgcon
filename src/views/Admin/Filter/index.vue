@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-acg-filter">
+  <div class="acg-admin-filter">
     <mz-select v-model="acgType"
       dropdownMatchSelectWidth
       style="width:200px;"
@@ -11,7 +11,7 @@
       label="百科类型"
       :list="baikeTypeList"></mz-select>
 
-    <div class="admin-acg-filter__content">
+    <div class="acg-admin-filter__content">
       <div v-for="item of list"
         :key="item._id"
         class="">
@@ -30,7 +30,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { getBaikeTypesByAcgType } from '../../../configs/base'
 
 @Component
-export default class AdminAcgFilter extends Vue {
+export default class AcgAdminFilter extends Vue {
   acgType = 'animation'
   acgTypeList = [
     { value: 'animation', label: '动画' },
@@ -61,7 +61,7 @@ export default class AdminAcgFilter extends Vue {
 </script>
 
 <style lang="scss">
-.admin-acg-filter {
+.acg-admin-filter {
   .mz-select {
     display: inline-block;
   }
