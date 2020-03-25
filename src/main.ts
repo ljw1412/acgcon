@@ -8,6 +8,7 @@ import manzhaiUI from 'manzhai-ui'
 
 import 'manzhai-ui/lib/manzhai-ui.css'
 import '@/style/global.scss'
+import controllers from '@/controllers/index'
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,7 @@ Vue.prototype.$axios = createAxios()
 Vue.prototype.$get = get
 Vue.prototype.$post = post
 Vue.prototype.$getAcgLogger = getLogger
+Vue.prototype.$acg = controllers
 
 new Vue({
   router,

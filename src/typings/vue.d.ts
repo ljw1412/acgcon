@@ -1,10 +1,5 @@
-import {
-  AxiosStatic,
-  AxiosResponse,
-  AxiosRequestConfig,
-  AxiosInstance,
-  AxiosPromise
-} from 'axios'
+import { AxiosStatic, AxiosRequestConfig } from 'axios'
+import Controllers from '@/controllers/index'
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -18,5 +13,6 @@ declare module 'vue/types/vue' {
       error: (...args: any[]) => void
       warn: (...args: any[]) => void
     }
+    $acg: typeof Controllers
   }
 }

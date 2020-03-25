@@ -4,7 +4,8 @@
       <div class="start-header__logo">ACG控</div>
     </div>
     <div class="start-header__right">
-      <div class="start-header__user">
+      <div class="start-header__user"
+        @click="onUserClick">
         <div>
           <div class="start-header__username">用户名</div>
           <div class="start-header__userinfo">
@@ -20,7 +21,11 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 @Component
-export default class StartHeader extends Vue {}
+export default class StartHeader extends Vue {
+  onUserClick() {
+    this.$acg.user.login.show()
+  }
+}
 </script>
 
 <style lang="scss">
