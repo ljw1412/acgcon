@@ -7,10 +7,11 @@
     <mz-state v-model="state">
       <template #loginName>
         <div class="acg-login-modal__login-name">
-          <mz-input v-model="loginName"
-            outlined
+          <mz-input v-model="loginName.value"
             label="用户名"
-            key="loginName"></mz-input>
+            outlined
+            :error="!!loginName.error"
+            :errorMessage="loginName.error"></mz-input>
           <mz-button flat
             :ripple="false"
             color="primary"
@@ -20,12 +21,13 @@
 
       <template #password>
         <div class="acg-login-modal__password">
-          <div>{{loginName}}</div>
-          <mz-input v-model="password"
-            outlined
-            type="password"
+          <div>{{loginName.value}}</div>
+          <mz-input v-model="password.value"
             label="密码"
-            key="password"></mz-input>
+            type="password"
+            outlined
+            :error="!!password.error"
+            :errorMessage="password.error"></mz-input>
         </div>
       </template>
     </mz-state>
@@ -43,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Model } from 'vue-property-decorator'
+import { Component, Vue, Prop, Model, Watch } from 'vue-property-decorator'
 
 const footerButtons = {
   loginName: { neutral: '创建账号', positive: '下一步' },
@@ -57,8 +59,8 @@ export default class AcgLoginModal extends Vue {
   @Prop({ type: Function, default: () => {} })
   readonly afterClose!: Function
 
-  loginName = ''
-  password = ''
+  loginName = { value: '', error: '', label: '用户名' }
+  password = { value: '', error: '', label: '密码' }
   state: keyof typeof footerButtons = 'loginName'
 
   get mVisible() {
@@ -73,10 +75,30 @@ export default class AcgLoginModal extends Vue {
     return footerButtons[this.state]
   }
 
+  reset() {
+    Object.keys(footerButtons).forEach(key => {
+      const data = this[key as keyof typeof footerButtons]
+      Object.assign(data, { value: '', error: '' })
+    })
+  }
+
   onNeutralButtonClick() {}
 
   onPositiveButtonClick() {
-    this.state = 'password'
+    // this.state = 'password'
+    const data = this[this.state]
+
+    if (!data.value.trim()) {
+      data.error = `请输入${data.label}`
+      return
+    }
+
+    data.error = '用户名不存在'
+  }
+
+  @Watch('visible')
+  onVisible(visible: boolean) {
+    visible && this.reset()
   }
 }
 </script>
@@ -92,9 +114,14 @@ export default class AcgLoginModal extends Vue {
     height: 200px;
   }
 
+  .mz-input__helper-line {
+    height: 20px;
+  }
+
   .mz-button {
     font-weight: 500;
   }
+
   .mz-modal__footer {
     display: flex;
     justify-content: space-between;
