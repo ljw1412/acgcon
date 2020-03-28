@@ -8,7 +8,6 @@
         :data-name="currentRouterName">
         <router-view :name="currentRouterName"></router-view>
       </div>
-      <div style="height:1000px"></div>
     </div>
   </div>
 </template>

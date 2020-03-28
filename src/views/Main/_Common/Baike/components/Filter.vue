@@ -1,6 +1,8 @@
 <template>
-  <div class="acg-baike-filter">
-    <div class="acg-baike-filter__title">筛选</div>
+  <mz-card class="acg-baike-filter"
+    :elevation="-1">
+    <mz-heading class="acg-baike-filter__title"
+      :level="7">筛选</mz-heading>
     <mz-state :value="state">
       <template #loading>正在加载中……</template>
       <template #error>加载失败</template>
@@ -21,7 +23,7 @@
         </mz-filter-section-group>
       </template>
     </mz-state>
-  </div>
+  </mz-card>
 </template>
 
 <script lang="ts">
@@ -87,12 +89,11 @@ export default class AcgBaikeFilter extends Vue {
   margin-bottom: 20px;
   box-sizing: border-box;
   padding: 16px 26px;
-  box-shadow: 1px 1px 5px rgba(#000, 0.1);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   transition: width 0.15s linear;
   &__title {
-    height: 22px;
-    line-height: 22px;
-    font-size: 18px;
+    line-height: 1.5em;
     padding-bottom: 12px;
   }
 
