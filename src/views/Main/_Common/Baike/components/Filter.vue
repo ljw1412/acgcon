@@ -86,6 +86,7 @@ export default class AcgBaikeFilter extends Vue {
 .acg-baike-filter {
   width: $filter-width;
   min-height: 100px;
+  height: 100%;
   margin-bottom: 20px;
   box-sizing: border-box;
   padding: 16px 26px;

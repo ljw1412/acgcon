@@ -34,6 +34,7 @@ export default class AcgBaike extends AcgVue {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
+  margin-bottom: 20px;
 
   &__content {
     width: calc(100% - #{$filter-width} - 20px);
