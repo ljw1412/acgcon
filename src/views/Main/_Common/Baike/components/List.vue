@@ -19,7 +19,8 @@
         正在加载中……
       </template>
       <template #list>
-        <ul class="acg-baike-list-ul"
+        <ul ref="ul"
+          class="acg-baike-list-ul"
           :class="`acg-baike-list-ul--${displayMode}`">
           <baike-list-item v-for="item of list"
             :key="item._id"></baike-list-item>
@@ -31,20 +32,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Ref } from 'vue-property-decorator'
 import BaikeListItem from './Item.vue'
 
 @Component({ components: { BaikeListItem } })
 export default class AcgBaikeList extends Vue {
+  @Ref('ul')
+  readonly ulRef!: HTMLUListElement
+
   state = 'loading'
   displayMode = 'list'
   list: any[] = []
+
+  onresize() {
+    console.log(this.ulRef.clientWidth)
+  }
 
   mounted() {
     setTimeout(() => {
       this.state = 'list'
       this.list = new Array(30).fill('').map((item, index) => ({ _id: index }))
     }, 0)
+    window.addEventListener('resize', this.onresize, false)
+  }
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onresize, false)
   }
 }
 </script>

@@ -38,7 +38,6 @@ export default class AcgBaike extends AcgVue {
 
   &__content {
     width: calc(100% - #{$filter-width} - 20px);
-    margin-left: auto;
     transition: width 0.15s linear;
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
