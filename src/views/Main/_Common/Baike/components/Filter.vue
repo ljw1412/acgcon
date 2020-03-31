@@ -102,16 +102,5 @@ export default class AcgBaikeFilter extends Vue {
     font-size: 14px;
     font-weight: bold;
   }
-
-  .mz-filter-section-item {
-    &__label {
-      font-variant-numeric: tabular-nums;
-      width: 44px;
-      height: 22px;
-      line-height: 22px;
-      font-size: 14px;
-      text-align: center;
-    }
-  }
 }
 </style>

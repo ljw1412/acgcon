@@ -10,17 +10,21 @@
       style="width:200px;"
       label="百科类型"
       :list="baikeTypeList"></mz-select>
+    <mz-button color="primary">新增标签组</mz-button>
 
     <div class="acg-admin-filter__content">
-      <div v-for="item of list"
-        :key="item._id"
-        class="">
-        <div>{{item.name}}</div>
-        <div>
-          <span v-for="tag of item.tags"
-            :key="tag._id">{{tag.name}}</span>
-        </div>
-      </div>
+      <mz-row :gutter="10"
+        flex
+        style="flex-wrap:wrap;">
+        <mz-col v-for="item of list"
+          :key="item._id"
+          :md="12"
+          :lg="8"
+          style="margin-bottom:10px;">
+          <tag-group :data="item"></tag-group>
+        </mz-col>
+      </mz-row>
+
     </div>
   </div>
 </template>
@@ -28,10 +32,11 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { getBaikeTypesByAcgType } from '../../../configs/base'
+import TagGroup from './TagGroup.vue'
 
-@Component
+@Component({ components: { TagGroup } })
 export default class AcgAdminFilter extends Vue {
-  acgType = 'animation'
+  acgType = ''
   acgTypeList = [
     { value: 'animation', label: '动画' },
     { value: 'comic', label: '漫画' },
@@ -47,7 +52,11 @@ export default class AcgAdminFilter extends Vue {
     })
   }
 
-  @Watch('acgType', { immediate: true })
+  mounted() {
+    this.acgType = 'animation'
+  }
+
+  @Watch('acgType')
   onAcgTypeChange(val: Acgcon.Types) {
     this.baikeTypeList = getBaikeTypesByAcgType(val)
     this.baikeType = this.baikeTypeList[0].value
@@ -64,6 +73,13 @@ export default class AcgAdminFilter extends Vue {
 .acg-admin-filter {
   .mz-select {
     display: inline-block;
+  }
+
+  .mz-tag {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 </style>

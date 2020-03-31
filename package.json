@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
-    "manzhai-ui": "^0.0.29",
+    "manzhai-ui": "^0.1.0",
     "qs": "^6.9.2",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
