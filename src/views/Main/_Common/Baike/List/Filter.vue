@@ -1,6 +1,6 @@
 <template>
   <mz-card class="acg-baike-filter"
-    :elevation="-1">
+    :elevation="0">
     <mz-heading class="acg-baike-filter__title"
       :level="7">筛选</mz-heading>
     <mz-state :value="state">
@@ -28,14 +28,10 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import AcgVue from '@/mixins/AcgVue'
 
 @Component
-export default class AcgBaikeFilter extends Vue {
-  @Prop(String)
-  readonly acgType!: string
-  @Prop(String)
-  readonly baikeType!: string
-
+export default class AcgBaikeFilter extends AcgVue {
   value = {}
   tagList: Record<string, any>[] = []
   loading = false
@@ -93,6 +89,7 @@ export default class AcgBaikeFilter extends Vue {
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   transition: width 0.15s linear;
+  will-change: width;
   &__title {
     line-height: 1.5em;
     padding-bottom: 12px;

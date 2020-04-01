@@ -9,4 +9,9 @@ declare global {
       to?: RawLocation
     }
   }
+
+  interface ResizeObserverEntry {
+    target: EventTarget
+    contentRect: DOMRectReadOnly
+  }
 }

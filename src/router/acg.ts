@@ -30,7 +30,7 @@ export default [
         path: ':acgType(animation|comic|game)/baike/:baikeType?',
         name: 'baike',
         component: () =>
-          import(/* webpackChunkName: "baike" */ '@~/Baike/index.vue'),
+          import(/* webpackChunkName: "baike" */ '@~/Baike/List/index.vue'),
         meta: { title: '百科' }
       }
     ]
