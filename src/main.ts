@@ -7,7 +7,7 @@ import { getLogger } from '@/utils/logger'
 import manzhaiUI from 'manzhai-ui'
 
 import 'manzhai-ui/lib/manzhai-ui.css'
-import '@/style/global.scss'
+import '@/styles/global.scss'
 import controllers from '@/controllers/index'
 
 Vue.config.productionTip = false

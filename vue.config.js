@@ -20,6 +20,13 @@ const config = {
     externals: {
       moment: 'moment'
     }
+  },
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `@import '@/styles/index.scss';`
+      }
+    }
   }
 }
 
