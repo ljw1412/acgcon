@@ -1,7 +1,9 @@
 <template>
   <div class="acg-baike-content">
-    <div v-for="item of list"
+    <router-link v-for="item of list"
       class="acg-baike-content__item"
+      target="_blank"
+      :to="{name:'baikeDetail',params:{...$route.params,id:item._id}}"
       :key="item._id">
       <mz-card :elevation="0">
         <mz-image :src="item.cover"
@@ -23,7 +25,7 @@
             :level="9">{{item.desc}}</mz-heading>
         </div>
       </mz-card>
-    </div>
+    </router-link>
   </div>
 </template>
 

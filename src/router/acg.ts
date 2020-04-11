@@ -34,5 +34,19 @@ export default [
         meta: { title: '百科' }
       }
     ]
+  },
+  {
+    path: '/baike/:acgType(animation|comic|game)/:baikeType?/detail/:id',
+    name: 'baikeDetail',
+    component: () =>
+      import(/* webpackChunkName: "baike" */ '@~/Baike/Detail/index.vue'),
+    meta: { title: '百科' }
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: () =>
+      import(/* webpackChunkName: "baike" */ '@~/Search/Home.vue'),
+    meta: { title: '搜索' }
   }
 ] as RouteConfig[]
