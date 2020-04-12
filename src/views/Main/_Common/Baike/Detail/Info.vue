@@ -41,6 +41,8 @@ export default class AcgBaikeInfo extends Vue {
 </script>
 
 <style lang="scss">
+$transition: all 0.15s linear;
+
 .acg-baike-info-wrp {
   position: relative;
 }
@@ -50,6 +52,7 @@ export default class AcgBaikeInfo extends Vue {
   background-color: $black-background-color;
   overflow: hidden;
   transform: translateZ(0);
+  transition: $transition;
 }
 
 .acg-baike-info-bg {
@@ -70,11 +73,12 @@ export default class AcgBaikeInfo extends Vue {
 .acg-baike-info-content {
   position: relative;
   max-width: 1600px;
-  height: calc(100% - 50px);
+  height: 100%;
   margin: 0 auto;
   padding: 120px 40px 0 330px;
   box-sizing: border-box;
   color: #ffffff;
+  transition: $transition;
 }
 
 .acg-baike-info-title {
@@ -109,6 +113,7 @@ export default class AcgBaikeInfo extends Vue {
   width: 255px;
   height: 340px;
   box-shadow: 2px 1px 10px rgba($color: #000000, $alpha: 0.5);
+  transition: $transition;
   img {
     width: 100%;
     height: 100%;
@@ -118,5 +123,35 @@ export default class AcgBaikeInfo extends Vue {
 .acg-baike-info-desc {
   margin-left: 290px;
   min-height: 180px;
+  transition: $transition;
+}
+
+@media screen and (max-width: $screen-width-sm) {
+  .acg-baike-info {
+    height: 280px;
+  }
+
+  .acg-baike-info-content {
+    padding: 60px 20px 0 190px;
+  }
+
+  .acg-baike-info-title {
+    font-size: 22px;
+  }
+
+  .acg-baike-info-card {
+    margin-top: 0;
+    padding: 20px;
+  }
+
+  .acg-baike-info-cover {
+    width: 150px;
+    height: 200px;
+    left: 20px;
+    top: -220px;
+  }
+  .acg-baike-info-desc {
+    margin-left: 0;
+  }
 }
 </style>

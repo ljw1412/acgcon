@@ -1,6 +1,6 @@
 <template>
   <div class="acg-baike-detail">
-    <acg-navigation></acg-navigation>
+    <!-- <acg-navigation></acg-navigation> -->
     <baike-info :info="info"></baike-info>
   </div>
 </template>
