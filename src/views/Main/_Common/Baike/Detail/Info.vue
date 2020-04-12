@@ -1,32 +1,32 @@
 <template>
-  <div class="acg-baike-info">
-    <mz-image class="acg-baike-info-bg"
-      background
-      width="110%"
-      height="110%"
-      fit="cover"
-      :src="info.cover"></mz-image>
-    <div class="acg-baike-info-content">
-      <div class="acg-baike-info-inner flex">
-        <div class="acg-baike-info-cover">
-          <mz-image fit="cover"
-            :src="info.cover"></mz-image>
+  <div class="acg-baike-info-wrp">
+    <div class="acg-baike-info">
+      <mz-image class="acg-baike-info-bg"
+        background
+        width="110%"
+        height="110%"
+        fit="cover"
+        :src="info.cover"></mz-image>
+      <div class="acg-baike-info-content">
+        <mz-heading class="acg-baike-info-title"
+          :level="1">{{info.title}}</mz-heading>
+        <div class="acg-baike-info-tags">
+          <mz-tag v-for="tag of info.tags"
+            size="medium"
+            outlined
+            :color="tag.color"
+            :key="tag.name">{{tag.name}}</mz-tag>
         </div>
-        <div class="acg-baike-info-right">
-          <mz-heading class="acg-baike-info-title"
-            :level="1">{{info.title}}</mz-heading>
-          <div class="acg-baike-info-tags">
-            <mz-tag v-for="tag of info.tags"
-              size="medium"
-              outlined
-              :color="tag.color"
-              :key="tag.name">{{tag.name}}</mz-tag>
-          </div>
-          <div class="acg-baike-info-author">{{info.author}}</div>
-          <div class="acg-baike-info-desc">{{info.desc}}</div>
-        </div>
+        <div class="acg-baike-info-author">{{info.author}}</div>
       </div>
     </div>
+    <mz-card class="acg-baike-info-card">
+      <div class="acg-baike-info-cover">
+        <mz-image fit="cover"
+          :src="info.cover"></mz-image>
+      </div>
+      <div class="acg-baike-info-desc">{{info.desc}}</div>
+    </mz-card>
   </div>
 </template>
 
@@ -41,6 +41,10 @@ export default class AcgBaikeInfo extends Vue {
 </script>
 
 <style lang="scss">
+.acg-baike-info-wrp {
+  position: relative;
+}
+
 .acg-baike-info {
   height: 440px;
   background-color: $black-background-color;
@@ -68,38 +72,17 @@ export default class AcgBaikeInfo extends Vue {
   max-width: 1600px;
   height: calc(100% - 50px);
   margin: 0 auto;
-  padding: 0 40px;
-  padding-top: 50px;
+  padding: 120px 40px 0 330px;
   box-sizing: border-box;
-}
-
-.acg-baike-info-inner {
-  padding: 45px 0;
-}
-
-.acg-baike-info-cover {
-  flex-shrink: 0;
-  width: 225px;
-  height: 300px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.acg-baike-info-right {
-  flex-grow: 1;
-  margin-left: 20px;
   color: #ffffff;
 }
 
 .acg-baike-info-title {
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
 
 .acg-baike-info-tags,
-.acg-baike-info-author,
-.acg-baike-info-desc {
+.acg-baike-info-author {
   margin-top: 10px;
 }
 
@@ -109,7 +92,31 @@ export default class AcgBaikeInfo extends Vue {
   }
 }
 
+.acg-baike-info-card {
+  position: relative;
+  min-height: 500px;
+  max-width: $screen-width-lg;
+  margin: -200px auto 20px;
+  border-radius: 10px;
+  padding: 20px 40px;
+  box-sizing: border-box;
+}
+
+.acg-baike-info-cover {
+  position: absolute;
+  top: -140px;
+  left: 40px;
+  width: 255px;
+  height: 340px;
+  box-shadow: 2px 1px 10px rgba($color: #000000, $alpha: 0.5);
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .acg-baike-info-desc {
-  @include multi-ellipsis(7);
+  margin-left: 290px;
+  min-height: 180px;
 }
 </style>
