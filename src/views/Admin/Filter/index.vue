@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { getBaikeTypesByAcgType } from '../../../configs/base'
+import { getBaikeTypesByAcgType } from '@/configs/index'
 import TagGroup from './TagGroup.vue'
 
 @Component({ components: { TagGroup } })

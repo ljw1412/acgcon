@@ -24,7 +24,7 @@ export default class TopBanner extends Vue {
 .top-banner {
   width: 100%;
   height: 100%;
-  background-color: #333;
+  background-color: $black-background-color;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

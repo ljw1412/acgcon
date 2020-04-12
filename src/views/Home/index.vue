@@ -95,7 +95,7 @@ export default class Home extends Vue {
   }
 }
 
-@media screen and(max-width:864px) {
+@media screen and(max-width:$screen-width-sm) {
   .home {
     .start {
       max-width: 700px;

@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
+import { pageHomeList } from '@/configs/index'
 import Topbar from './Topbar.vue'
 import TopBanner from './TopBanner.vue'
 import TopLogo from './TopLogo.vue'
@@ -17,24 +18,7 @@ export default class AcgHeader extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   readonly banner!: Record<string, any>
 
-  navList = [
-    {
-      label: 'ACG大本营',
-      to: { name: 'home' }
-    },
-    {
-      label: '动画',
-      to: { name: 'subHome', params: { acgType: 'animation' } }
-    },
-    {
-      label: '漫画',
-      to: { name: 'subHome', params: { acgType: 'comic' } }
-    },
-    {
-      label: '游戏',
-      to: { name: 'subHome', params: { acgType: 'game' } }
-    }
-  ]
+  navList = pageHomeList
 }
 </script>
 

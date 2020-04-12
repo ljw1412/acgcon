@@ -27,7 +27,7 @@ export default class AcgBaike extends AcgVue {
   padding: 0 15px;
 }
 
-@media screen and (max-width: 864px) {
+@media screen and (max-width: $screen-width-sm) {
   .acg-baike {
     flex-direction: column;
   }

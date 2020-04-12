@@ -1,5 +1,24 @@
 import { Location } from 'vue-router'
 
+export const pageHomeList = [
+  {
+    label: 'ACG大本营',
+    to: { name: 'home' }
+  },
+  {
+    label: '动画',
+    to: { name: 'subHome', params: { acgType: 'animation' } }
+  },
+  {
+    label: '漫画',
+    to: { name: 'subHome', params: { acgType: 'comic' } }
+  },
+  {
+    label: '游戏',
+    to: { name: 'subHome', params: { acgType: 'game' } }
+  }
+]
+
 const navMap: Record<string, Acgcon.NavigationItem[]> = {
   common: [
     {
@@ -70,12 +89,18 @@ const navMap: Record<string, Acgcon.NavigationItem[]> = {
   ]
 }
 
-export function getNavByAcgType(acgType: Acgcon.Types) {
-  return [
-    { label: '首页', to: { name: 'subHome', params: { acgType } } },
-    ...navMap.common,
-    ...navMap[acgType]
-  ]
+export function getNavByAcgType(
+  acgType: Acgcon.Types,
+  hasHome: boolean = true
+) {
+  const list: Acgcon.NavigationItem[] = []
+  if (hasHome) {
+    list.unshift({
+      label: '首页',
+      to: { name: 'subHome', params: { acgType } }
+    })
+  }
+  return list.concat([...navMap.common, ...navMap[acgType]])
 }
 
 export function getBaikeTypesByAcgType(acgType: Acgcon.Types) {

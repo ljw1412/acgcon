@@ -3,7 +3,8 @@
     <acg-header :banner="config.banner"></acg-header>
     <div class="acg-main-content">
       <!-- 导航栏 -->
-      <acg-navigation></acg-navigation>
+      <acg-navigation fixable
+        offsetTop="-60px"></acg-navigation>
       <div class="acg-main-core"
         :data-name="currentRouterName">
         <router-view :name="currentRouterName"></router-view>
@@ -15,7 +16,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import AcgHeader from '@/components/AcgHeader/index.vue'
-import AcgNavigation from '@/components/AcgNavigation.vue'
+import AcgNavigation from '@/components/AcgNavigation/index.vue'
 
 @Component({ components: { AcgHeader, AcgNavigation } })
 export default class AcgHome extends Vue {
@@ -51,12 +52,12 @@ export default class AcgHome extends Vue {
 }
 
 .acg-main-core {
-  max-width: 1600px;
+  max-width: $screen-width-lg;
   padding-top: 20px;
   margin: 0 auto;
 }
 
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: $screen-width-lg) {
   .acg-main-core {
     width: 100%;
   }
