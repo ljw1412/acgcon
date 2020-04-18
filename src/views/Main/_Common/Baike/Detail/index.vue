@@ -1,7 +1,9 @@
 <template>
   <div class="acg-baike-detail">
     <!-- <acg-navigation></acg-navigation> -->
+    <baike-header :info="info"></baike-header>
     <baike-info :info="info"></baike-info>
+    <baike-basic></baike-basic>
   </div>
 </template>
 
@@ -9,9 +11,13 @@
 import { Component, Vue } from 'vue-property-decorator'
 import AcgVue from '@/mixins/AcgVue'
 import AcgNavigation from '@/components/AcgNavigation/index.vue'
+import BaikeHeader from './Header.vue'
 import BaikeInfo from './Info.vue'
+import BaikeBasic from './Basic.vue'
 
-@Component({ components: { AcgNavigation, BaikeInfo } })
+@Component({
+  components: { AcgNavigation, BaikeHeader, BaikeInfo, BaikeBasic }
+})
 export default class AcgBaikeDetail extends AcgVue {
   info: Acgcon.BaikeItem = {
     _id: 1,
@@ -29,10 +35,14 @@ export default class AcgBaikeDetail extends AcgVue {
 <style lang="scss">
 .acg-baike-detail {
   position: relative;
-  > .acg-navigation {
-    position: absolute;
-    height: 50px;
-    z-index: 10;
+  // > .acg-navigation {
+  //   position: absolute;
+  //   height: 50px;
+  //   z-index: 10;
+  // }
+  > .mz-card {
+    border-radius: 4px;
+    margin-bottom: 20px;
   }
 }
 </style>
