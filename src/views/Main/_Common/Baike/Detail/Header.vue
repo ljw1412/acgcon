@@ -69,6 +69,7 @@ export default class AcgBaikeHeader extends Vue {
 }
 
 .acg-baike-header-title {
+  color: #ffffff;
   text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
 
