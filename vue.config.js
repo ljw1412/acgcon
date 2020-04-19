@@ -26,12 +26,6 @@ const config = {
       scss: {
         prependData: ({ resourcePath, rootContext }) => {
           const relativePath = relative(rootContext, resourcePath)
-          console.log(
-            '\n',
-            relativePath,
-            !relativePath.startsWith(join('src', 'styles'))
-          )
-
           return !relativePath.startsWith(join('src', 'styles'))
             ? "@import '@/styles/scss/index.scss';"
             : ''
