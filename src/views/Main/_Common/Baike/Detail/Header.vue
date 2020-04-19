@@ -13,7 +13,7 @@
         <mz-tag v-for="tag of info.tags"
           size="medium"
           outlined
-          :color="tag.color"
+          :color="tag.color || '#ffffff'"
           :key="tag.name">{{tag.name}}</mz-tag>
       </div>
       <div class="acg-baike-header-author">{{info.author}}</div>
