@@ -1,6 +1,5 @@
 <template>
   <div class="acg-baike-detail">
-    <!-- <acg-navigation></acg-navigation> -->
     <baike-header :info="info"></baike-header>
     <baike-info :info="info"></baike-info>
     <baike-basic></baike-basic>
@@ -35,14 +34,18 @@ export default class AcgBaikeDetail extends AcgVue {
 <style lang="scss">
 .acg-baike-detail {
   position: relative;
-  // > .acg-navigation {
-  //   position: absolute;
-  //   height: 50px;
-  //   z-index: 10;
-  // }
+
   > .mz-card {
     border-radius: 4px;
     margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: $screen-width-sm) {
+  .acg-baike-detail {
+    > .mz-card {
+      border-radius: 0;
+    }
   }
 }
 </style>
