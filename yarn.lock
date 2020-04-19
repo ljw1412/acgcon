@@ -5280,10 +5280,10 @@ mamacro@^0.0.3:
   resolved "https://registry.npm.taobao.org/mamacro/download/mamacro-0.0.3.tgz#ad2c9576197c9f1abf308d0787865bd975a3f3e4"
   integrity sha1-rSyVdhl8nxq/MI0Hh4Zb2XWj8+Q=
 
-manzhai-ui@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/manzhai-ui/-/manzhai-ui-0.1.0.tgz#be37f940e99dd2196b2e5e4d15ee4218802ba74c"
-  integrity sha512-97xGouRFCMfkOic+PgW0IrW9UQrHGL57orbWKFRS2AAXEnmqJ3SJMTnaV0jcNAIhHfoAALManS24cp9Hc5UjPA==
+manzhai-ui@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/manzhai-ui/-/manzhai-ui-0.1.1.tgz#643937662ae695ae5186f6bf4f0af2eb1ed7ff5a"
+  integrity sha512-5UJJ9ZV084aeAIalSdnDDDj+vzyKWr7vHaS6XHSpqlQeLK3b8HVrxOc0Y66QvxZ4Hy3KcYLtJFZXhc/yfygZcw==
   dependencies:
     core-js "^3.6.4"
     glob "^7.1.6"

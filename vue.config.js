@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const { resolve, relative, join } = require('path')
 const HtmlWebpackTopBannerPlugin = require('html-webpack-top-banner-plugin')
 
 const config = {
@@ -24,7 +24,18 @@ const config = {
   css: {
     loaderOptions: {
       scss: {
-        prependData: `@import '@/styles/index.scss';`
+        prependData: ({ resourcePath, rootContext }) => {
+          const relativePath = relative(rootContext, resourcePath)
+          console.log(
+            '\n',
+            relativePath,
+            !relativePath.startsWith(join('src', 'styles'))
+          )
+
+          return !relativePath.startsWith(join('src', 'styles'))
+            ? "@import '@/styles/scss/index.scss';"
+            : ''
+        }
       }
     }
   }
