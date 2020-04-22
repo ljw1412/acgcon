@@ -41,6 +41,13 @@ export default class AcgBaikeDetail extends AcgVue {
   }
 }
 
+@media screen and (max-width: $screen-width-lg + 20) and (min-width: $screen-width-sm+1) {
+  .acg-baike-detail > .mz-card {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
 @media screen and (max-width: $screen-width-sm) {
   .acg-baike-detail {
     > .mz-card {

@@ -48,12 +48,6 @@ export default class AcgBaikeInfo extends Vue {
   margin-left: 290px;
   transition: $base-transition;
 }
-@media screen and (max-width: $screen-width-lg + 20) and (min-width: $screen-width-sm+1) {
-  .acg-baike-info {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-}
 
 @media screen and (max-width: $screen-width-sm) {
   .acg-baike-info {

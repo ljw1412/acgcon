@@ -60,6 +60,7 @@ export default class AcgBaikeBasic extends Vue {
   display: flex;
   width: 33.33%;
   font-size: 14px;
+  margin-bottom: 4px;
   &__name {
     flex-shrink: 0;
     width: 100px;
