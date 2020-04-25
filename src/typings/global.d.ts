@@ -8,7 +8,7 @@ declare global {
       type?: string
       to?: RawLocation
     }
-    type BaikeItem = {
+    type BaikeData = {
       _id: string | number
       title: string
       author: string

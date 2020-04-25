@@ -14,7 +14,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component
 export default class AcgBaikeInfo extends Vue {
   @Prop({ type: Object, default: () => ({}) })
-  readonly info!: Acgcon.BaikeItem
+  readonly info!: Acgcon.BaikeData
 }
 </script>
 

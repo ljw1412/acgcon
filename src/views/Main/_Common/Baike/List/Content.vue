@@ -36,7 +36,7 @@ import AcgVue from '@/mixins/AcgVue'
 
 @Component
 export default class AcgBaikeContent extends AcgVue {
-  list: Acgcon.BaikeItem[] = [
+  list: Acgcon.BaikeData[] = [
     {
       _id: 1,
       title: '关于我转生变成史莱姆这档事',

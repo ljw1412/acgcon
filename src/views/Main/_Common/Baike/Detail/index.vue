@@ -18,7 +18,7 @@ import BaikeBasic from './Basic.vue'
   components: { AcgNavigation, BaikeHeader, BaikeInfo, BaikeBasic }
 })
 export default class AcgBaikeDetail extends AcgVue {
-  info: Acgcon.BaikeItem = {
+  info: Acgcon.BaikeData = {
     _id: 1,
     title: '关于我转生变成史莱姆这档事',
     author: '8bit',
