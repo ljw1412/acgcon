@@ -35,9 +35,11 @@ export default class AcgBaikeDetail extends AcgVue {
 .acg-baike-detail {
   position: relative;
 
-  > .mz-card {
-    border-radius: 4px;
+  > .acg-title-card {
     margin-bottom: 20px;
+    max-width: $screen-width-lg;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

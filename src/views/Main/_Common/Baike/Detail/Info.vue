@@ -1,11 +1,11 @@
 <template>
-  <mz-card class="acg-baike-info">
+  <acg-title-card class="acg-baike-info">
     <div class="acg-baike-info-cover">
       <mz-image fit="cover"
         :src="info.cover"></mz-image>
     </div>
     <div class="acg-baike-info-desc">{{info.desc}}</div>
-  </mz-card>
+  </acg-title-card>
 </template>
 
 <script lang="ts">
@@ -22,12 +22,9 @@ export default class AcgBaikeInfo extends Vue {
 @import '../var.scss';
 
 .acg-baike-info {
-  position: relative;
   min-height: 280px;
-  max-width: $screen-width-lg;
-  margin: -200px auto 20px;
-  padding: 20px 40px;
-  box-sizing: border-box;
+  margin-top: -200px;
+  margin-bottom: 20px;
 }
 
 .acg-baike-info-cover {

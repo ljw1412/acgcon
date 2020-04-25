@@ -1,5 +1,6 @@
 <template>
-  <mz-card class="acg-baike-basic">
+  <acg-title-card title="基本信息"
+    class="acg-baike-basic">
     <ul class="acg-baike-basic-block">
       <li class="acg-baike-basic-item"
         v-for="(item, index) of basic"
@@ -8,7 +9,7 @@
         <div class="acg-baike-basic-item__value">{{item.value}}</div>
       </li>
     </ul>
-  </mz-card>
+  </acg-title-card>
 </template>
 
 <script lang="ts">
@@ -46,14 +47,11 @@ export default class AcgBaikeBasic extends Vue {
 <style lang="scss">
 .acg-baike-basic {
   position: relative;
-  max-width: $screen-width-lg;
-  margin: 0 auto;
 }
 
 .acg-baike-basic-block {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
 }
 
 .acg-baike-basic-item {

@@ -8,10 +8,13 @@ import manzhaiUI from 'manzhai-ui'
 
 import '@/styles/global.scss'
 import controllers from '@/controllers/index'
+import AcgTitleCard from '@/components/AcgTitleCard/index.vue'
 
 Vue.config.productionTip = false
 
 Vue.use(manzhaiUI)
+
+Vue.component('AcgTitleCard', AcgTitleCard)
 
 Vue.prototype.$axios = createAxios()
 Vue.prototype.$get = get
