@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts">
+import './index.scss'
 import { Component, Vue } from 'vue-property-decorator'
 import AcgVue from '@/mixins/AcgVue'
 import AcgNavigation from '@/components/AcgNavigation/index.vue'
@@ -57,31 +58,3 @@ export default class AcgBaikeDetail extends AcgVue {
   }
 }
 </script>
-
-<style lang="scss">
-.acg-baike-detail {
-  position: relative;
-
-  > .acg-title-card {
-    margin-bottom: 20px;
-    max-width: $screen-width-lg;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media screen and (max-width: $screen-width-lg + 20) and (min-width: $screen-width-sm + 1) {
-  .acg-baike-detail > .mz-card {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-}
-
-@media screen and (max-width: $screen-width-sm) {
-  .acg-baike-detail {
-    > .mz-card {
-      border-radius: 0;
-    }
-  }
-}
-</style>

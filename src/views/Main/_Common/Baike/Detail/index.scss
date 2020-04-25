@@ -1,0 +1,165 @@
+@import '../var.scss';
+
+.acg-baike-detail {
+  position: relative;
+
+  > .acg-title-card {
+    margin-bottom: 20px;
+    max-width: $screen-width-lg;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// 顶部
+.acg-baike-header {
+  height: 440px;
+  background-color: $black-background-color;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: $base-transition;
+}
+
+.acg-baike-header-bg {
+  position: absolute;
+  top: -5%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  filter: blur(40px);
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+  }
+}
+
+.acg-baike-header-content {
+  position: relative;
+  max-width: 1600px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 120px 40px 0 330px;
+  box-sizing: border-box;
+  color: #ffffff;
+  transition: $base-transition;
+}
+
+.acg-baike-header-title {
+  color: #ffffff;
+  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+}
+
+.acg-baike-header-tags,
+.acg-baike-header-author {
+  margin-top: 10px;
+}
+
+.acg-baike-header-tags {
+  .mz-tag + .mz-tag {
+    margin-left: 5px;
+  }
+}
+
+// 信息
+.acg-baike-info {
+  min-height: 280px;
+  margin-top: -200px;
+  margin-bottom: 20px;
+}
+
+.acg-baike-info-cover {
+  position: absolute;
+  top: -140px;
+  left: 40px;
+  width: 255px;
+  height: 340px;
+  box-shadow: 2px 1px 10px rgba($color: #000000, $alpha: 0.5);
+  transition: $base-transition;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.acg-baike-info-desc {
+  margin-left: 290px;
+  transition: $base-transition;
+}
+
+// 基础数据
+.acg-baike-basic {
+  position: relative;
+}
+
+.acg-baike-basic-block {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.acg-baike-basic-item {
+  display: flex;
+  width: 33.33%;
+  font-size: 14px;
+  margin-bottom: 4px;
+  &__name {
+    flex-shrink: 0;
+    width: 100px;
+  }
+  &__value {
+    padding-right: 10px;
+  }
+}
+
+@media screen and (max-width: $screen-width-lg + 20) and (min-width: $screen-width-sm + 1) {
+  .acg-baike-detail > .acg-title-card {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .acg-baike-basic-item {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: $screen-width-sm) {
+  .acg-baike-detail {
+    .acg-title-card > .mz-card {
+      border-radius: 0;
+      padding: 15px;
+    }
+  }
+
+  .acg-baike-header {
+    height: 280px;
+  }
+
+  .acg-baike-header-content {
+    padding: 60px 20px 0 190px;
+  }
+
+  .acg-baike-header-title {
+    font-size: 22px;
+  }
+
+  .acg-baike-info {
+    margin-top: 0;
+    min-height: inherit;
+  }
+
+  .acg-baike-info-cover {
+    width: 150px;
+    height: 200px;
+    left: 20px;
+    top: -220px;
+  }
+
+  .acg-baike-info-desc {
+    margin-left: 0;
+  }
+
+  .acg-baike-basic-item {
+    width: 100%;
+  }
+}
