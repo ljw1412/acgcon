@@ -15,6 +15,7 @@ declare global {
       cover: string
       desc: string
       tags?: { name: string; color?: string; textColor?: string }[]
+      basic?: { name: string; value: string }[]
     }
   }
 

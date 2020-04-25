@@ -49,7 +49,6 @@ export default class AcgBaikeInfo extends Vue {
 @media screen and (max-width: $screen-width-sm) {
   .acg-baike-info {
     margin-top: 0;
-    padding: 20px;
     min-height: inherit;
   }
 

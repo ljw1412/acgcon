@@ -39,14 +39,16 @@ export default class AcgTitleCard extends Vue {
 
   &__header {
     flex-shrink: 0;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   &__title {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 22px;
+    line-height: 24px;
+    font-weight: 400;
     color: $color-text-primary;
     text-shadow: 0 0 16px $color-primary;
+    padding: 0 8px;
   }
 
   > .mz-card {
