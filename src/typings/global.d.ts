@@ -8,6 +8,7 @@ declare global {
       type?: string
       to?: RawLocation
     }
+
     interface BaikeData {
       _id: string | number
       title: string
@@ -16,6 +17,22 @@ declare global {
       desc: string
       tags?: { name: string; color?: string; textColor?: string }[]
       basic?: { name: string; value: string }[]
+    }
+
+    interface BaikeSectionText {
+      type: 'html' | 'text'
+      data: string
+      style?: string
+    }
+    interface BaikeSectionTable {
+      type: 'table'
+      data: any[]
+      style?: string
+    }
+    type BaikeSectionItem = BaikeSectionText | BaikeSectionTable
+    interface BaikeSection {
+      title: string
+      items: BaikeSectionItem[]
     }
   }
 
