@@ -1,6 +1,7 @@
 <script lang="tsx">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { CreateElement } from 'vue'
+import { CreateElement, VNodeData } from 'vue'
+import { slugify } from 'transliteration'
 
 @Component
 export default class AcgTitleCard extends Vue {
@@ -11,12 +12,26 @@ export default class AcgTitleCard extends Vue {
 
   renderHeader() {
     if (!this.$slots.title && !this.title) return
+
+    const useTitle = !!this.title
+
+    const data: VNodeData = {
+      class: 'acg-title-card__header',
+      props: {
+        level: 4,
+        title: this.title,
+        anchor: useTitle ? 'mz-anchor-symbol' : false,
+        invisibleAnchor: useTitle
+      },
+      attrs: { id: slugify(this.title || '') || undefined }
+    }
+
     return (
-      <div class="acg-title-card__header">
+      <mz-heading {...data}>
         {this.$slots.title || (
           <span class="acg-title-card__title">{this.title}</span>
         )}
-      </div>
+      </mz-heading>
     )
   }
 
@@ -43,7 +58,6 @@ export default class AcgTitleCard extends Vue {
   }
 
   &__title {
-    font-size: 22px;
     line-height: 24px;
     font-weight: 400;
     color: $color-text-primary;

@@ -12,6 +12,7 @@
     "core-js": "^3.6.4",
     "manzhai-ui": "^0.1.7",
     "qs": "^6.9.2",
+    "transliteration": "^2.1.8",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.1",
