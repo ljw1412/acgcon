@@ -1,25 +1,8 @@
 import Vue, { RenderContext, CreateElement } from 'vue'
-
-function renderTable(data: any[], style?: string) {
-  return <table class="acg-baike-table"></table>
-}
+import BaikeSectionItem from './SectionItem'
 
 function renderContent(h: CreateElement, item: Acgcon.BaikeSectionItem) {
-  const data: Record<string, any> = {
-    class: `acg-baike-${item.type}`,
-    style: item.style
-  }
-  switch (item.type) {
-    case 'text':
-      return item.data
-        .split('\n')
-        .map((text: string) => <p {...data}>{text}</p>)
-    case 'html':
-      data.domProps = { innerHTML: item.data }
-      return <div {...data}></div>
-    case 'table':
-      return renderTable(item.data, item.style)
-  }
+  return h(BaikeSectionItem, { props: item })
 }
 
 export default Vue.extend({
