@@ -40,4 +40,8 @@ declare global {
     target: EventTarget
     contentRect: DOMRectReadOnly
   }
+
+  interface Window {
+    $acg: Record<string, any>
+  }
 }

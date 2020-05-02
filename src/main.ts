@@ -27,3 +27,11 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+console.log(
+  '夜间模式: window.$acg.changeTheme("dark")\n还原: window.$acg.changeTheme("")'
+)
+
+window.$acg = {
+  changeTheme: Vue.prototype.$changeTheme
+}
