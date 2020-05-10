@@ -123,6 +123,25 @@
   }
 }
 
+// 单元模块
+
+.acg-baike-image {
+  text-align: center;
+  img {
+    max-width: 100%;
+  }
+}
+
+.acg-baike-left-right {
+  &__inner {
+    display: flex;
+
+    & > * + * {
+      margin-left: 20px;
+    }
+  }
+}
+
 @media screen and (max-width: $screen-width-lg + 20) and (min-width: $screen-width-sm + 1) {
   .acg-baike-detail {
     > .acg-title-card {
@@ -178,5 +197,15 @@
 
   .acg-baike-basic-item {
     width: 100%;
+  }
+
+  .acg-baike-left-right {
+    &__inner {
+      flex-direction: column;
+      > * + * {
+        margin-left: 0;
+        margin-top: 20px;
+      }
+    }
   }
 }

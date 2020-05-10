@@ -93,7 +93,7 @@ export default class AcgBaikeDetail extends AcgVue {
             type: 'image',
             data:
               'https://bkimg.cdn.bcebos.com/pic/0e2442a7d933c89510ff8ef7d71373f0830200bc?x-bce-process=image/resize,m_lfit,w_500,h_500,limit_1',
-            style: 'max-width: 100%'
+            style: 'max-width: 400px;'
           }
         }
       ]
@@ -111,6 +111,15 @@ export default class AcgBaikeDetail extends AcgVue {
           data:
             '利姆鲁·特恩佩斯特（Rimuru Tempest）\n种族：魔粘性精神体\n加护：暴风纹章\n称号：魔物统帅、真正的魔王\n魔法：元素魔法、物理魔法、精灵魔法、上位精灵召唤、上位恶魔召唤\n固有能力：无限再生、万能感知、万能变化、魔王霸气、强化分身、万能丝\n究极能力：\n智慧之王——思考加速、解析鉴定、并列演算、咏唱破弃、森罗万象、统合分离、能力改变\n暴食之王——捕食、胃袋、拟态、隔离、腐蚀、魂喰、食物连锁\n誓约之王——无限牢狱、法则操作、万能结界、空间支配\n暴风之王——暴风龙召唤、暴风龙复原、暴风系魔法\n耐性：痛觉无效、物理攻击无效、自然影响无效、状态异常无效、精神攻击耐性、圣魔攻击耐性\n拟态：恶魔、精灵、黑狼、黑蛇、蜘蛛、蝙蝠、蜥蜴等 [7] \n原名三上悟，是一名普通的上班族，因保护他人而被刺死并转生到异世界成为了史莱姆。拥有能夺取对手能力的“捕食者”、精通世界真理的“大贤者”、衍生出新技能的“异变者”三大独有能力。\n继承了井泽静江的能力、意念和幼时身姿，并在文库版第五卷觉醒为新的魔王。',
           style: ''
+        }
+      ]
+    },
+    {
+      title: 'test',
+      items: [
+        {
+          type: 'html',
+          data: '<a href="about:blank">test</a>'
         }
       ]
     }

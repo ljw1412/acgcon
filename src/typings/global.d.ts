@@ -47,6 +47,15 @@ declare global {
       | BaikeSectionImage
       | BaikeSectionTable
       | BaikeSectionLeftRight
+
+    interface BaikeSectionItemTypeMap {
+      html: BaikeSectionText
+      text: BaikeSectionText
+      image: BaikeSectionImage
+      table: BaikeSectionTable
+      'left-right': BaikeSectionLeftRight
+    }
+
     interface BaikeSection {
       title: string
       items: BaikeSectionItem[]

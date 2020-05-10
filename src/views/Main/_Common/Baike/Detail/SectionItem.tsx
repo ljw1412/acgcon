@@ -1,73 +1,80 @@
-import Vue, { RenderContext, CreateElement } from 'vue'
-import { VNodeData } from 'vue/types/umd'
+import Vue, { RenderContext, CreateElement, VNodeData } from 'vue'
+import { parseStyleText } from '@/utils/vue-helper'
+import { only } from '@/utils/object'
 
-function renderText(h: CreateElement, content: string) {
-  return content.split('\n').map((text: string) => <p>{text}</p>)
+type SectionTypes = keyof Acgcon.BaikeSectionItemTypeMap
+
+function getFactory(h: CreateElement) {
+  const factory = {
+    text: ({ data, style }: Acgcon.BaikeSectionText) => {
+      return data.split('\n').map((text: string) => <p style={style}>{text}</p>)
+    },
+    html: ({ data, style }: Acgcon.BaikeSectionText) => {
+      return <div domProps={{ innerHTML: data }} style={style}></div>
+    },
+    table: ({ data, style }: Acgcon.BaikeSectionTable) => {
+      return <table style={style}></table>
+    },
+    image: ({ data, style }: Acgcon.BaikeSectionImage) => {
+      return <mz-image src={data} style={style} />
+    },
+    'left-right': ({ left, right, style }: Acgcon.BaikeSectionLeftRight) => {
+      return (
+        <div class="acg-baike-left-right__inner" style={style}>
+          {getVnode(h, factory, left)}
+          {getVnode(h, factory, right)}
+        </div>
+      )
+    }
+  }
+  return factory
 }
 
-function renderTable(
-  h: CreateElement,
-  item: Acgcon.BaikeSectionTable,
-  base: Record<string, any>
+function getContent(
+  factory: Record<SectionTypes, (item: Acgcon.BaikeSectionItem) => {}>,
+  type: SectionTypes,
+  item: Acgcon.BaikeSectionItem
 ) {
-  return <table class="acg-baike-table" {...base}></table>
+  const render = factory[type]
+  return render(item)
 }
 
-function renderImage(h: CreateElement, base: Record<string, any>) {
-  return <mz-image {...base} />
+function getItem(ctx: RenderContext<Record<string, any>>) {
+  const item = only(ctx.props, 'type data style left right')
+  if (!item.type) item.type = 'text'
+  if (!item.data && ctx.slots().default) {
+    item.data = ctx.slots().default[0].text
+  }
+  return item as Acgcon.BaikeSectionItem
 }
 
-function renderLR(
+function getVnode(
   h: CreateElement,
-  item: Acgcon.BaikeSectionLeftRight,
-  base: Record<string, any>
-) {
-  const { left, right } = item
-
-  return (
-    <div class="d-flex" {...base}>
-      {renderContent(h, left, { staticStyle: { flex: '1 1 auto' } })}
-      {renderContent(h, right, { staticStyle: { flex: '0 0 auto' } })}
-    </div>
-  )
-}
-
-function renderContent(
-  h: CreateElement,
+  factory: any,
   item: Acgcon.BaikeSectionItem,
-  { staticClass, staticStyle }: VNodeData
+  ctx?: RenderContext<Record<string, any>>
 ) {
-  const base: Record<string, any> = {
-    class: [`acg-baike-${item.type}`, staticClass],
-    style: [item.style, staticStyle]
+  const wrapperData: Record<string, any> = {
+    class: [`acg-baike-${item.type}`],
+    style: [parseStyleText(item.style)]
   }
-  switch (item.type) {
-    case 'text':
-      return <div {...base}>{renderText(h, item.data)}</div>
-    case 'html':
-      base.domProps = { innerHTML: item.data }
-      return <div {...base}></div>
-    case 'table':
-      return renderTable(h, item, base)
-    case 'image':
-      base.props = { src: item.data }
-      return renderImage(h, base)
-    case 'left-right':
-      return renderLR(h, item, base)
-    default:
-      return <div class="acg-baike-compile-error"></div>
+  if (item.type === 'image') wrapperData.style = []
+  if (ctx) {
+    const { staticClass, staticStyle } = ctx.data
+    wrapperData.class.push(staticClass)
+    wrapperData.style.push(staticStyle)
   }
+
+  return <div {...wrapperData}>{getContent(factory, item.type, item)}</div>
 }
 
 export default Vue.extend({
   name: 'AcgBaikeSectionItem',
   functional: true,
   render(h, ctx: RenderContext<Record<string, any>>) {
-    let { type = 'text', data = '', style, left, right } = ctx.props
-    if (!data && ctx.slots().default) {
-      data = ctx.slots().default[0].text
-    }
+    const factory = getFactory(h)
+    const item = getItem(ctx)
 
-    return renderContent(h, { type, data, style, left, right }, ctx.data)
+    return getVnode(h, factory, item, ctx)
   }
 })
