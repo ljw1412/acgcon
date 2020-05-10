@@ -24,12 +24,29 @@ declare global {
       data: string
       style?: string
     }
+
+    interface BaikeSectionImage {
+      type: 'image'
+      data: string
+      style?: string
+    }
+
     interface BaikeSectionTable {
       type: 'table'
       data: any[]
       style?: string
     }
-    type BaikeSectionItem = BaikeSectionText | BaikeSectionTable
+    interface BaikeSectionLeftRight {
+      type: 'left-right'
+      left: BaikeSectionItem
+      right: BaikeSectionItem
+      style?: string
+    }
+    type BaikeSectionItem =
+      | BaikeSectionText
+      | BaikeSectionImage
+      | BaikeSectionTable
+      | BaikeSectionLeftRight
     interface BaikeSection {
       title: string
       items: BaikeSectionItem[]

@@ -117,6 +117,7 @@ export default class AcgBaikeContent extends AcgVue {
       &__tags {
         @include ellipsis;
         margin-bottom: 4px;
+        font-size: 0;
         .mz-tag + .mz-tag {
           margin-left: 2px;
         }
