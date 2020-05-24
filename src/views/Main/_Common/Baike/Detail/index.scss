@@ -142,6 +142,12 @@
   }
 }
 
+.acg-baike-table {
+  > table {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: $screen-width-lg + 20) and (min-width: $screen-width-sm + 1) {
   .acg-baike-detail {
     > .acg-title-card {

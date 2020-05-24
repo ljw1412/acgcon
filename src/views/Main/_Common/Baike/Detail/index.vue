@@ -115,11 +115,14 @@ export default class AcgBaikeDetail extends AcgVue {
       ]
     },
     {
-      title: 'test',
+      title: 'table',
       items: [
         {
-          type: 'html',
-          data: '<a href="about:blank">test</a>'
+          type: 'table',
+          data: [
+            ['a', 'b', 'c'],
+            ['!', '?', '^']
+          ]
         }
       ]
     }

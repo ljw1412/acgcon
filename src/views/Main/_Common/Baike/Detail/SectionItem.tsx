@@ -13,7 +13,17 @@ function getFactory(h: CreateElement) {
       return <div domProps={{ innerHTML: data }} style={style}></div>
     },
     table: ({ data, style }: Acgcon.BaikeSectionTable) => {
-      return <table style={style}></table>
+      return (
+        <table style={style}>
+          {data.map((tr, index) => (
+            <tr>
+              {tr.map((text: any) =>
+                index ? <td>{text}</td> : <th>{text}</th>
+              )}
+            </tr>
+          ))}
+        </table>
+      )
     },
     image: ({ data, style }: Acgcon.BaikeSectionImage) => {
       return <mz-image src={data} style={style} />
