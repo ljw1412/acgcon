@@ -5,6 +5,7 @@ import store from './store'
 import createAxios, { get, post } from '@/utils/api'
 import { getLogger } from '@/utils/logger'
 import manzhaiUI from 'manzhai-ui'
+import '@ljw1412/icon'
 
 import '@/styles/global.scss'
 import controllers from '@/controllers/index'

@@ -8,9 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@ljw1412/icon": "^0.0.6",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
-    "manzhai-ui": "^0.1.7",
+    "manzhai-ui": "^0.1.9",
     "qs": "^6.9.2",
     "transliteration": "^2.1.8",
     "vue": "^2.6.11",

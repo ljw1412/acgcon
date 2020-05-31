@@ -14,15 +14,11 @@ function getFactory(h: CreateElement) {
     },
     table: ({ data, style }: Acgcon.BaikeSectionTable) => {
       return (
-        <table style={style}>
-          {data.map((tr, index) => (
-            <tr>
-              {tr.map((text: any) =>
-                index ? <td>{text}</td> : <th>{text}</th>
-              )}
-            </tr>
-          ))}
-        </table>
+        <mz-table-simple
+          data={data}
+          style={style}
+          header={true}
+        ></mz-table-simple>
       )
     },
     image: ({ data, style }: Acgcon.BaikeSectionImage) => {
