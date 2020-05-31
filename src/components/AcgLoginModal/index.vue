@@ -1,130 +1,145 @@
 <template>
-  <mz-modal class="acg-login-modal"
-    v-model="mVisible"
-    title="登录"
-    @open="state = 'loginName'"
-    @closed="afterClose">
-    <mz-state v-model="state">
-      <template #loginName>
-        <div class="acg-login-modal__login-name">
-          <mz-input v-model="loginName.value"
-            label="用户名"
-            outlined
-            :error="!!loginName.error"
-            :errorMessage="loginName.error"></mz-input>
-          <mz-button flat
-            :ripple="false"
-            color="primary"
-            size="small">忘记了自己的用户名？</mz-button>
-        </div>
-      </template>
+  <transition name="mz-fade">
+    <div v-show="visible"
+      class="acg-login-modal">
+      <mz-mask :visible="true"
+        :z-index="0"></mz-mask>
 
-      <template #password>
-        <div class="acg-login-modal__password">
-          <div>{{loginName.value}}</div>
-          <mz-input v-model="password.value"
-            label="密码"
-            type="password"
-            outlined
-            :error="!!password.error"
-            :errorMessage="password.error"></mz-input>
-        </div>
-      </template>
-    </mz-state>
+      <div class="acg-login-modal__body">
+        <span class="acg-login-modal__title">登录</span>
+        <mz-button class="acg-login-modal__close-btn"
+          flat
+          icon
+          width="60px"
+          height="60px"
+          radius="0"
+          text-color="#fff"
+          @click="$emit('visible:change',false)">
+          <mz-icon name="close"
+            size="32"></mz-icon>
+        </mz-button>
 
-    <template #footer>
-      <mz-button flat
-        color="primary"
-        size="medium"
-        @click="onNeutralButtonClick">{{config.neutral}}</mz-button>
-      <mz-button color="primary"
-        size="medium"
-        @click="onPositiveButtonClick">{{config.positive}}</mz-button>
-    </template>
-  </mz-modal>
+        <mz-state :value="state">
+          <template #username>
+            <login-field v-model="user.name"
+              placeholder="请输入用户名或邮箱"
+              @entry="onEntry('username',$event)"></login-field>
+          </template>
+
+          <template #password>
+            <login-field v-model="user.password"
+              type="password"
+              placeholder="请输入密码"
+              @entry="onEntry('password',$event)">
+              <div slot="top"
+                class="user-base">
+                <div class="user-base__avatar">头像</div>
+                <div class="user-base__username">{{user.name}}</div>
+              </div>
+            </login-field>
+          </template>
+
+          <template #wait></template>
+          <template #success></template>
+        </mz-state>
+      </div>
+    </div>
+  </transition>
+
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Model, Watch } from 'vue-property-decorator'
+import { Component, Vue, Model, Watch } from 'vue-property-decorator'
+import LoginField from './LoginField.vue'
 
-const footerButtons = {
-  loginName: { neutral: '创建账号', positive: '下一步' },
-  password: { neutral: '忘记密码', positive: '下一步' }
-}
-
-@Component
+@Component({ components: { LoginField } })
 export default class AcgLoginModal extends Vue {
-  @Model('input', { type: Boolean })
+  @Model('visible:change', Boolean)
   readonly visible!: boolean
-  @Prop({ type: Function, default: () => {} })
-  readonly afterClose!: Function
 
-  loginName = { value: '', error: '', label: '用户名' }
-  password = { value: '', error: '', label: '密码' }
-  state: keyof typeof footerButtons = 'loginName'
+  user = { name: '', password: '' }
+  state = ''
 
-  get mVisible() {
-    return this.visible
-  }
-
-  set mVisible(val: boolean) {
-    this.$emit('input', val)
-  }
-
-  get config() {
-    return footerButtons[this.state]
-  }
-
-  reset() {
-    Object.keys(footerButtons).forEach(key => {
-      const data = this[key as keyof typeof footerButtons]
-      Object.assign(data, { value: '', error: '' })
-    })
-  }
-
-  onNeutralButtonClick() {}
-
-  onPositiveButtonClick() {
-    // this.state = 'password'
-    const data = this[this.state]
-
-    if (!data.value.trim()) {
-      data.error = `请输入${data.label}`
-      return
+  onEntry(type: string, value: string) {
+    if (type === 'username') {
+      this.fetchUsernameExists()
+    } else if (type === 'password') {
+      this.state = 'wait'
+      this.fetchLogin()
     }
+    console.log(type, value)
+  }
 
-    data.error = '用户名不存在'
+  fetchUsernameExists() {
+    this.state = 'password'
+  }
+
+  fetchLogin() {
+    this.state = 'success'
   }
 
   @Watch('visible')
-  onVisible(visible: boolean) {
-    visible && this.reset()
+  onVisibleChange(visible: boolean) {
+    if (visible) {
+      this.state = 'username'
+      this.user.password = ''
+    } else {
+      this.$emit('hide')
+    }
   }
 }
 </script>
 
 <style lang="scss">
 .acg-login-modal {
-  &__login-name,
-  &__password {
-    padding-top: 50px;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &__body {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
   }
 
-  .mz-state {
-    height: 200px;
+  &__title {
+    font-size: 32px;
+    line-height: 60px;
+    padding-left: 20px;
+    color: #fff;
+    user-select: none;
   }
 
-  .mz-input__helper-line {
-    height: 20px;
+  &__close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
-  .mz-button {
-    font-weight: 500;
-  }
-
-  .mz-modal__footer {
-    display: flex;
-    justify-content: space-between;
+  .user-base {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(-100%);
+    color: #ffffff;
+    &__avatar {
+      width: 140px;
+      height: 140px;
+      margin: auto;
+      border: 1px solid #fff;
+      box-sizing: border-box;
+    }
+    &__username {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 60px;
+    }
   }
 }
 </style>

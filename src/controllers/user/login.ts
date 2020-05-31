@@ -9,9 +9,11 @@ function initInstance() {
       propsData: { afterClose: hide }
     })
 
-    instance.$on('input', (visible: boolean) => {
+    instance.$on('visible:change', (visible: boolean) => {
       instance.visible = visible
     })
+
+    instance.$on('hide', hide)
   }
 }
 
