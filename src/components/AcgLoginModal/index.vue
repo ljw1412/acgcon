@@ -23,14 +23,23 @@
           <template #username>
             <login-field v-model="user.name"
               placeholder="请输入用户名或邮箱"
-              @entry="onEntry('username',$event)"></login-field>
+              :loading="loading"
+              :max-length="12"
+              :error="error"
+              :disabled="user.name.length < 6"
+              @entry="onEntry('username',$event)"
+              @focus="error = ''">
+            </login-field>
           </template>
-
           <template #password>
             <login-field v-model="user.password"
               type="password"
               placeholder="请输入密码"
-              @entry="onEntry('password',$event)">
+              :loading="loading"
+              :error="error"
+              :disabled="user.name.length < 6"
+              @entry="onEntry('password',$event)"
+              @focus="error = ''">
               <div slot="top"
                 class="user-base">
                 <div class="user-base__avatar">头像</div>
@@ -38,8 +47,6 @@
               </div>
             </login-field>
           </template>
-
-          <template #wait></template>
           <template #success></template>
         </mz-state>
       </div>
@@ -57,25 +64,47 @@ export default class AcgLoginModal extends Vue {
   @Model('visible:change', Boolean)
   readonly visible!: boolean
 
-  user = { name: '', password: '' }
+  user = { name: '', password: '', avatar: '' }
+  loading = false
+  error = ''
   state = ''
 
   onEntry(type: string, value: string) {
+    this.error = ''
+    this.loading = true
     if (type === 'username') {
       this.fetchUsernameExists()
     } else if (type === 'password') {
-      this.state = 'wait'
       this.fetchLogin()
     }
-    console.log(type, value)
   }
 
-  fetchUsernameExists() {
-    this.state = 'password'
+  async fetchUsernameExists() {
+    try {
+      const res = await this.$get('user/exists', {
+        params: { loginName: this.user.name }
+      })
+      this.user.avatar = res.avatar || ''
+      this.state = 'password'
+      this.loading = false
+    } catch (error) {
+      this.error = error.data.message
+      this.loading = false
+    }
   }
 
-  fetchLogin() {
-    this.state = 'success'
+  async fetchLogin() {
+    try {
+      const res = await this.$post('user/login', {
+        loginName: this.user.name,
+        password: this.user.password
+      })
+      this.state = 'success'
+      this.loading = false
+    } catch (error) {
+      this.error = error.data.message
+      this.loading = false
+    }
   }
 
   @Watch('visible')
@@ -121,11 +150,11 @@ export default class AcgLoginModal extends Vue {
   }
 
   .user-base {
-    position: absolute;
-    top: 0;
-    left: 0;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
     width: 100%;
-    transform: translateY(-100%);
+    // transform: translateY(-100%);
     color: #ffffff;
     &__avatar {
       width: 140px;

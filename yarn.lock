@@ -811,10 +811,10 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@ljw1412/icon@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@ljw1412/icon/-/icon-0.0.6.tgz#eda5a157bbd674d57eb2938abcd690cd6dd565cf"
-  integrity sha512-nvYHHpGY+MUyojTZmSbau2UBbRxRCr1tkvzuqwCpBDJIEiE4pwoSKN/Gbr9fDsMYTFhcSsz3KXPRrOTfo+6mcw==
+"@ljw1412/ionicons-sprite@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@ljw1412/ionicons-sprite/-/ionicons-sprite-1.0.0.tgz#73fe8069849389f3777a797ed471ac266dd38dce"
+  integrity sha512-avaAsdqR2Q0nzRXr+p6qg+l8KyRdksUHc5C+CCkLHj+L2kMWDQ1sNDK0iIdZEwsdYHoNYHazvp5TZeeRyY7Few==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -2380,10 +2380,10 @@ color-string@^1.5.2:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
-color@^3.0.0:
+color@^3.0.0, color@^3.1.2:
   version "3.1.2"
-  resolved "https://registry.npm.taobao.org/color/download/color-3.1.2.tgz#68148e7f85d41ad7649c5fa8c8106f098d229e10"
-  integrity sha1-aBSOf4XUGtdknF+oyBBvCY0inhA=
+  resolved "https://registry.yarnpkg.com/color/-/color-3.1.2.tgz#68148e7f85d41ad7649c5fa8c8106f098d229e10"
+  integrity sha512-vXTJhHebByxZn3lDvDJYw4lR5+uB3vuoHsuYA5AKuxRVn5wzzIfQKGLBmgdVRHKTJYeK5rvJcHnrd0Li49CFpg==
   dependencies:
     color-convert "^1.9.1"
     color-string "^1.5.2"
@@ -5300,12 +5300,13 @@ mamacro@^0.0.3:
   resolved "https://registry.npm.taobao.org/mamacro/download/mamacro-0.0.3.tgz#ad2c9576197c9f1abf308d0787865bd975a3f3e4"
   integrity sha1-rSyVdhl8nxq/MI0Hh4Zb2XWj8+Q=
 
-manzhai-ui@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/manzhai-ui/-/manzhai-ui-0.1.9.tgz#e2c47903316e675c9ca09d116f5fbab88ec2384c"
-  integrity sha512-c9u8K8HOMam9SEPhjwah6DTiVkB53wimAG65+hsQyvSkReGpfabNy0QXiAJCtbIzqyrsf0J+1qqesrmU8vTDeg==
+manzhai-ui@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/manzhai-ui/-/manzhai-ui-0.1.12.tgz#bf014faaaeb43342aafa5efc8060586134228bda"
+  integrity sha512-q/7pRhmhdT9NQQLXzdm/U5I4niVjv1M8Q4jlNIs5N+LdD1o7iTNnS5G4uFEog8PaPjOfoagXWB8lqgOKh04Dug==
   dependencies:
     "@types/file-saver" "^2.0.1"
+    color "^3.1.2"
     core-js "^3.6.4"
     file-saver "^2.0.2"
     glob "^7.1.6"

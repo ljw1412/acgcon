@@ -5,8 +5,12 @@
       <mz-input v-model="mValue"
         shadow
         class="acg-login-field__input"
+        :disabled="loading"
+        :maxlength="maxlength"
         :type="type"
-        :placeholder="placeholder">
+        :placeholder="placeholder"
+        @focus="$emit('focus')"
+        @blur="$emit('blur')">
       </mz-input>
       <mz-button color="primary"
         icon
@@ -15,11 +19,18 @@
         width="60px"
         radius="0"
         class="acg-login-field__entry"
+        :disabled="disabled || loading"
         @click="$emit('entry',value)">
-        <mz-icon name="arrow-forward-outline"
+        <mz-loading v-if="loading" />
+        <mz-icon v-else
+          name="arrow-forward-outline"
           size="26"></mz-icon>
       </mz-button>
     </mz-input-group>
+    <transition name="mz-zoom">
+      <div v-show="isShowError"
+        class="acg-login-field__error">{{error}}</div>
+    </transition>
     <slot name="bottom"></slot>
   </div>
 </template>
@@ -35,6 +46,18 @@ export default class AcgLoginField extends Vue {
   readonly type!: string
   @Prop(String)
   readonly placeholder!: string
+  @Prop(Boolean)
+  readonly loading!: boolean
+  @Prop(Boolean)
+  readonly disabled!: boolean
+  @Prop([String, Number])
+  readonly maxlength!: string | number
+  @Prop(String)
+  readonly error!: string
+
+  get isShowError() {
+    return !!this.error
+  }
 
   get mValue() {
     return this.value
@@ -69,6 +92,20 @@ export default class AcgLoginField extends Vue {
 
   &__entry {
     flex-shrink: 0;
+  }
+
+  &__error {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    text-align: center;
+    color: $color-danger;
+    padding: 5px;
+    font-weight: 500;
+    text-shadow: 1px 1px 1px #000;
   }
 }
 </style>
