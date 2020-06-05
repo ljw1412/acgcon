@@ -1,7 +1,6 @@
 import userLogin from './user/login'
+import { get, set } from './user/local'
 
 export default {
-  user: {
-    login: userLogin
-  }
+  user: { get, set, login: userLogin }
 }

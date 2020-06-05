@@ -100,6 +100,7 @@ export default class AcgLoginModal extends Vue {
         password: this.user.password
       })
       this.state = 'success'
+      this.$acg.user.set(res)
       this.loading = false
     } catch (error) {
       this.error = error.data.message
