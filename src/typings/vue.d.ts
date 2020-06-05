@@ -5,7 +5,7 @@ declare module 'vue/types/vue' {
   interface Vue {
     $axios: AxiosStatic
     $get: (url: string, config?: AxiosRequestConfig) => any
-    $post: (url: string, config?: AxiosRequestConfig) => any
+    $post: (url: string, data?: any, config?: AxiosRequestConfig) => any
     $getAcgLogger: (
       name: string
     ) => {

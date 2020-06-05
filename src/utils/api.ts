@@ -16,10 +16,28 @@ export async function get(url: string, config?: AxiosRequestConfig) {
     const response = await createAxios().get(url, config)
     return response.data
   } catch (error) {
-    throw error
+    if (error.isAxiosError) {
+      error.data = error.response.data
+    }
+    return Promise.reject(error)
   }
 }
 
-export function post(url: string, data?: any, config?: AxiosRequestConfig) {
-  return createAxios().post(url, data, config)
+export async function post(
+  url: string,
+  data?: any,
+  config?: AxiosRequestConfig
+) {
+  try {
+    const response = await createAxios({
+      xsrfCookieName: 'csrfToken',
+      xsrfHeaderName: 'X-CSRF-Token'
+    }).post(url, data, config)
+    return response.data
+  } catch (error) {
+    if (error.isAxiosError) {
+      error.data = error.response.data
+    }
+    return Promise.reject(error)
+  }
 }
