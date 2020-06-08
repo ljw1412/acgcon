@@ -22,24 +22,26 @@
         <mz-state :value="state">
           <template #username>
             <login-field v-model="user.name"
+              ref="usernameField"
               placeholder="请输入用户名或邮箱"
               :loading="loading"
               :max-length="12"
               :error="error"
               :disabled="user.name.length < 6"
               @entry="onEntry('username',$event)"
-              @focus="error = ''">
+              @change="error = ''">
             </login-field>
           </template>
           <template #password>
             <login-field v-model="user.password"
+              ref="passwordField"
               type="password"
               placeholder="请输入密码"
               :loading="loading"
               :error="error"
-              :disabled="user.name.length < 6"
+              :disabled="user.password.length < 6"
               @entry="onEntry('password',$event)"
-              @focus="error = ''">
+              @change="error = ''">
               <div slot="top"
                 class="user-base">
                 <div class="user-base__avatar">头像</div>
@@ -69,6 +71,19 @@ export default class AcgLoginModal extends Vue {
   error = ''
   state = ''
 
+  fieldFocus(name: string) {
+    this.$nextTick(() => {
+      const field = this.$refs[name] as LoginField
+      field && field.focus()
+    })
+  }
+
+  setFieldError(error: string) {
+    this.error = error
+    this.loading = false
+    this.fieldFocus(this.state + 'Field')
+  }
+
   onEntry(type: string, value: string) {
     this.error = ''
     this.loading = true
@@ -88,8 +103,7 @@ export default class AcgLoginModal extends Vue {
       this.state = 'password'
       this.loading = false
     } catch (error) {
-      this.error = error.data.message
-      this.loading = false
+      this.setFieldError(error.data.message)
     }
   }
 
@@ -103,8 +117,7 @@ export default class AcgLoginModal extends Vue {
       this.$acg.user.set(res)
       this.loading = false
     } catch (error) {
-      this.error = error.data.message
-      this.loading = false
+      this.setFieldError(error.data.message)
     }
   }
 
@@ -114,7 +127,15 @@ export default class AcgLoginModal extends Vue {
       this.state = 'username'
       this.user.password = ''
     } else {
+      this.state = ''
       this.$emit('hide')
+    }
+  }
+
+  @Watch('state')
+  onStateChange(state: string) {
+    if (['username', 'password'].includes(state)) {
+      this.fieldFocus(state + 'Field')
     }
   }
 }

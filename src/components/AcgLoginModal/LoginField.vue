@@ -3,6 +3,7 @@
     <slot name="top"></slot>
     <mz-input-group>
       <mz-input v-model="mValue"
+        ref="input"
         shadow
         class="acg-login-field__input"
         :disabled="loading"
@@ -10,7 +11,8 @@
         :type="type"
         :placeholder="placeholder"
         @focus="$emit('focus')"
-        @blur="$emit('blur')">
+        @blur="$emit('blur')"
+        @keydown.native.enter="!disabled && $emit('entry',value)">
       </mz-input>
       <mz-button color="primary"
         icon
@@ -36,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Model } from 'vue-property-decorator'
+import { Component, Vue, Prop, Model, Ref, Watch } from 'vue-property-decorator'
 
 @Component
 export default class AcgLoginField extends Vue {
@@ -54,6 +56,8 @@ export default class AcgLoginField extends Vue {
   readonly maxlength!: string | number
   @Prop(String)
   readonly error!: string
+  @Ref('input')
+  readonly inputRef!: { $refs: { input: { focus: () => void } } }
 
   get isShowError() {
     return !!this.error
@@ -65,6 +69,17 @@ export default class AcgLoginField extends Vue {
 
   set mValue(val) {
     this.$emit('input', val)
+  }
+
+  focus() {
+    try {
+      this.inputRef.$refs.input.focus()
+    } catch (error) {}
+  }
+
+  @Watch('mValue')
+  onValueChange(value: string) {
+    this.$emit('change', value)
   }
 }
 </script>

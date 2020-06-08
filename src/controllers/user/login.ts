@@ -20,6 +20,7 @@ function initInstance() {
 function show() {
   initInstance()
   document.body.appendChild(instance.$el)
+  document.body.style.overflow = 'hidden'
   instance.visible = true
 }
 
@@ -27,6 +28,7 @@ function hide() {
   initInstance()
   instance.visible = false
   document.body.removeChild(instance.$el)
+  document.body.style.overflow = ''
 }
 
 export default { show, hide }
