@@ -59,12 +59,15 @@
 
 <script lang="ts">
 import { Component, Vue, Model, Watch } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
 import LoginField from './LoginField.vue'
 
 @Component({ components: { LoginField } })
 export default class AcgLoginModal extends Vue {
   @Model('visible:change', Boolean)
   readonly visible!: boolean
+  @(namespace('user').Action)
+  readonly fetchCurrentUser!: Function
 
   user = { name: '', password: '', avatar: '' }
   loading = false
@@ -114,9 +117,11 @@ export default class AcgLoginModal extends Vue {
         password: this.user.password
       })
       this.state = 'success'
-      this.$acg.user.set(res)
       this.loading = false
+      this.fetchCurrentUser(res)
     } catch (error) {
+      console.log(error)
+
       this.setFieldError(error.data.message)
     }
   }

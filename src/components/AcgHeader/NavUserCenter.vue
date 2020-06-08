@@ -1,16 +1,14 @@
 <template>
   <div class="nav-user-center"
-    @click="onUserClick">用户名</div>
+    @click="onUserClick">{{nickname}}</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import AcgUser from '@/mixins/AcgUser'
+
 @Component
-export default class NavUserCenter extends Vue {
-  onUserClick() {
-    this.$acg.user.login.show()
-  }
-}
+export default class NavUserCenter extends AcgUser {}
 </script>
 
 <style lang="scss">

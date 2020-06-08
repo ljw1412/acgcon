@@ -16,7 +16,6 @@ function setTitle(title = '', type: string) {
 
 const beforeEach: NavigationGuard = (to, from, next) => {
   setTitle(to.meta.title, to.params.acgType)
-
   next()
 }
 

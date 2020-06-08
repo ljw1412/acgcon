@@ -7,7 +7,7 @@
       <div class="start-header__user"
         @click="onUserClick">
         <div>
-          <div class="start-header__username">用户名</div>
+          <div class="start-header__username">{{nickname}}</div>
           <div class="start-header__userinfo">
             <span class="start-header__user-level">LV.1</span>
           </div>
@@ -20,12 +20,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import AcgUser from '@/mixins/AcgUser'
+
 @Component
-export default class StartHeader extends Vue {
-  onUserClick() {
-    this.$acg.user.login.show()
-  }
-}
+export default class StartHeader extends AcgUser {}
 </script>
 
 <style lang="scss">

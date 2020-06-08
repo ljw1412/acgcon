@@ -1,10 +1,12 @@
 import AcgLoginModal from '@/components/AcgLoginModal/index.vue'
+import store from '@/store/index'
 
 let instance: any
 
 function initInstance() {
   if (!instance) {
     instance = new AcgLoginModal({
+      store,
       el: document.createElement('div'),
       propsData: { afterClose: hide }
     })
