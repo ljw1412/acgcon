@@ -1,14 +1,17 @@
 <template>
-  <div class="nav-user-center"
-    @click="onUserClick">{{nickname}}</div>
+  <div class="nav-user-center">
+    <acg-user-avatar inner-info
+      radius="50%"
+      :size="36" />
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import AcgUser from '@/mixins/AcgUser'
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 
-@Component
-export default class NavUserCenter extends AcgUser {}
+@Component({ components: { AcgUserAvatar } })
+export default class NavUserCenter extends Vue {}
 </script>
 
 <style lang="scss">

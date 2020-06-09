@@ -5,7 +5,8 @@ export default {
   namespaced: true,
   state: { _id: '' },
   getters: {
-    isLogined: state => !!state._id
+    isLogined: state => !!state._id,
+    nickname: (state, getter) => (getter.isLogined ? state.nickname : '未登录')
   },
   mutations: {
     setCurrentUser(state, user) {

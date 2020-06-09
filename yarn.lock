@@ -5399,10 +5399,10 @@ make-dir@^3.0.2:
   dependencies:
     semver "^6.0.0"
 
-manzhai-ui@^0.1.12:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/manzhai-ui/-/manzhai-ui-0.1.12.tgz#bf014faaaeb43342aafa5efc8060586134228bda"
-  integrity sha512-q/7pRhmhdT9NQQLXzdm/U5I4niVjv1M8Q4jlNIs5N+LdD1o7iTNnS5G4uFEog8PaPjOfoagXWB8lqgOKh04Dug==
+manzhai-ui@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/manzhai-ui/-/manzhai-ui-0.1.13.tgz#cef7c8abef0b2d420b55e9165fe52a6569610a80"
+  integrity sha512-2gqKrJKAfkATdY7X9AicSqXMFsl+WXY4imUrVSpe7XaYg4o74hjJtlp3Bim7b8d1SJWidbuRfew1mKG7DYmNJA==
   dependencies:
     "@types/file-saver" "^2.0.1"
     color "^3.1.2"

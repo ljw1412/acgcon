@@ -4,15 +4,15 @@
       <div class="start-header__logo">ACG控</div>
     </div>
     <div class="start-header__right">
-      <div class="start-header__user"
-        @click="onUserClick">
+      <div class="start-header__user">
         <div>
           <div class="start-header__username">{{nickname}}</div>
           <div class="start-header__userinfo">
             <span class="start-header__user-level">LV.1</span>
           </div>
         </div>
-        <div class="start-header__avatar"></div>
+        <acg-user-avatar class="start-header__avatar"
+          :size="48" />
       </div>
     </div>
   </div>
@@ -20,10 +20,16 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import AcgUser from '@/mixins/AcgUser'
+import { State, namespace } from 'vuex-class'
+import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 
-@Component
-export default class StartHeader extends AcgUser {}
+@Component({ components: { AcgUserAvatar } })
+export default class StartHeader extends Vue {
+  @State
+  readonly user!: Record<string, any>
+  @(namespace('user').Getter)
+  readonly nickname!: string
+}
 </script>
 
 <style lang="scss">
@@ -58,9 +64,6 @@ export default class StartHeader extends AcgUser {}
   }
   &__avatar {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    background-color: #c8c8c8;
     margin-left: 8px;
   }
 }

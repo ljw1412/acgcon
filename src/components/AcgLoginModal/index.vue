@@ -69,10 +69,16 @@ export default class AcgLoginModal extends Vue {
   @(namespace('user').Action)
   readonly fetchCurrentUser!: Function
 
-  user = { name: '', password: '', avatar: '' }
+  user: Record<string, string> = { name: '', password: '', avatar: '' }
   loading = false
   error = ''
   state = ''
+
+  clearUser() {
+    for (const key in this.user) {
+      this.user[key] = ''
+    }
+  }
 
   fieldFocus(name: string) {
     this.$nextTick(() => {
@@ -120,8 +126,6 @@ export default class AcgLoginModal extends Vue {
       this.loading = false
       this.fetchCurrentUser(res)
     } catch (error) {
-      console.log(error)
-
       this.setFieldError(error.data.message)
     }
   }
@@ -129,8 +133,8 @@ export default class AcgLoginModal extends Vue {
   @Watch('visible')
   onVisibleChange(visible: boolean) {
     if (visible) {
+      this.clearUser()
       this.state = 'username'
-      this.user.password = ''
     } else {
       this.state = ''
       this.$emit('hide')
