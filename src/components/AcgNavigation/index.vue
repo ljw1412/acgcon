@@ -1,15 +1,18 @@
 <script lang="tsx">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import NavLink from '@/components/AcgHeader/NavLink.vue'
+import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 import { getNavByAcgType } from '@/configs/index'
 import { CreateElement } from 'vue'
 
-@Component({ components: { NavLink } })
+@Component({ components: { NavLink, AcgUserAvatar } })
 export default class AcgNavigation extends Vue {
   @Prop(Boolean)
   readonly fixable!: boolean
   @Prop(String)
   readonly offsetTop!: string
+
+  isFixed = false
 
   get acgType() {
     return this.$route.params.acgType as Acgcon.Types
@@ -25,7 +28,9 @@ export default class AcgNavigation extends Vue {
         <div class="acg-navigation__content flex-center-space-between">
           <nav-link links={this.navList}></nav-link>
           <div class="acg-navigation__right">
-            <div class="acg-navigation__user"></div>
+            {this.isFixed && (
+              <acg-user-avatar size={60} inner-info></acg-user-avatar>
+            )}
           </div>
         </div>
       </div>
@@ -38,7 +43,12 @@ export default class AcgNavigation extends Vue {
     const data = {
       class: ['acg-navigation-wrapper'],
       props: { sticky: true, placeholder: true },
-      style: { marginTop: this.offsetTop }
+      style: { marginTop: this.offsetTop },
+      on: {
+        change: (isFixed: boolean) => {
+          this.isFixed = isFixed
+        }
+      }
     }
     return <mz-fixed-section {...data}>{navigationVNode}</mz-fixed-section>
   }
