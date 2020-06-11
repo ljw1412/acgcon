@@ -30,6 +30,9 @@
       <mz-list clickable
         size="small"
         @item-click="onMenuClick">
+        <mz-list-item v-if="isAdmin"
+          title="后台管理"
+          value="management"></mz-list-item>
         <mz-list-item title="个人中心"></mz-list-item>
         <mz-list-item title="消息"></mz-list-item>
         <mz-list-item title="登出"
@@ -54,8 +57,10 @@ export default class AcgUserDropdown extends Vue {
 
   @State
   readonly user!: Record<string, any>
-  @(namespace('user').Getter('isLogined'))
+  @(namespace('user').Getter)
   readonly isLogined!: boolean
+  @(namespace('user').Getter)
+  readonly isAdmin!: boolean
   @(namespace('user').Getter)
   readonly nickname!: string
   @(namespace('user').Action)
@@ -64,12 +69,17 @@ export default class AcgUserDropdown extends Vue {
   isDisplayDropdown = false
 
   onMenuClick(action: string) {
-    switch (action) {
-      case 'logout':
-        this.logout()
-        break
-    }
     this.isDisplayDropdown = false
+    this.$nextTick(() => {
+      switch (action) {
+        case 'logout':
+          this.logout()
+          break
+        case 'management':
+          this.$router.push({ name: 'admin' })
+          break
+      }
+    })
   }
   onUserClick() {
     if (!this.isLogined) {

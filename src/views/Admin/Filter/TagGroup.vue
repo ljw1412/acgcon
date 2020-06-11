@@ -17,7 +17,7 @@
       <mz-tag class="is-pointer"
         @click="handleAddTagClick">
         <mz-icon slot="prefix"
-          name="md-add-circle-outline"></mz-icon>
+          name="add-circle-outline"></mz-icon>
         <span style="padding-left:3px;">新增</span>
       </mz-tag>
     </div>

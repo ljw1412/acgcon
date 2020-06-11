@@ -14,7 +14,7 @@ const routes: RouteConfig[] = [
       import(/* webpackChunkName: "home" */ '@/views/Home/index.vue')
   },
   // TODO: 鉴权, router.addRoutes 动态加载
-  ...admin,
+  // ...admin,
   ...acg
 ]
 

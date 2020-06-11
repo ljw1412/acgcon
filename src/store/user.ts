@@ -1,12 +1,15 @@
 import { get as $get, post as $post } from '../utils/api'
 import { StoreOptions } from 'vuex'
+import router from '@/router/index'
+import adminRoute from '@/router/admin'
 
 export default {
   namespaced: true,
-  state: { _id: '' },
+  state: { _id: '', role: '' },
   getters: {
     isLogined: state => !!state._id,
-    nickname: (state, getter) => (getter.isLogined ? state.nickname : '未登录')
+    nickname: (state, getter) => (getter.isLogined ? state.nickname : '未登录'),
+    isAdmin: state => state.role.includes('admin')
   },
   mutations: {
     setCurrentUser(state, user) {
@@ -21,6 +24,7 @@ export default {
   actions: {
     async fetchCurrentUser({ commit }) {
       const res = await $get('user/whoami')
+      if (res.role && res.role.includes('admin')) router.addRoutes(adminRoute)
       commit('setCurrentUser', res)
     },
     async logout({ commit }) {

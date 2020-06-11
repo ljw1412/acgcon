@@ -3,13 +3,21 @@
     <mz-select v-model="acgType"
       dropdownMatchSelectWidth
       style="width:200px;"
-      label="ACG类型"
-      :list="acgTypeList"></mz-select>
+      placeholder="ACG类型">
+      <mz-option v-for="item of acgTypeList"
+        :key="item.value"
+        :value="item.value"
+        :laebl="item.label"></mz-option>
+    </mz-select>
     <mz-select v-model="baikeType"
       dropdownMatchSelectWidth
       style="width:200px;"
-      label="百科类型"
-      :list="baikeTypeList"></mz-select>
+      placeholder="百科类型">
+      <mz-option v-for="item of baikeTypeList"
+        :key="item.value"
+        :value="item.value"
+        :laebl="item.label"></mz-option>
+    </mz-select>
     <mz-button color="primary">新增标签组</mz-button>
 
     <div class="acg-admin-filter__content">
