@@ -62,11 +62,6 @@ declare global {
     }
   }
 
-  interface ResizeObserverEntry {
-    target: EventTarget
-    contentRect: DOMRectReadOnly
-  }
-
   interface Window {
     $acg: Record<string, any>
   }

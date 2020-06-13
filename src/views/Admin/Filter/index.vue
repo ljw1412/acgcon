@@ -2,36 +2,37 @@
   <acg-base-layout class="acg-admin-filter">
     <template #action>
       <mz-select v-model="acgType"
-        style="width:140px;"
+        style="width:100px;"
         placeholder="ACG类型">
         <mz-option v-for="item of acgTypeList"
           :key="item.value"
           :value="item.value"
-          :laebl="item.label"></mz-option>
+          :label="item.label"></mz-option>
       </mz-select>
       <mz-select v-model="baikeType"
-        style="width:140px;"
+        style="width:100px;"
         placeholder="百科类型">
         <mz-option v-for="item of baikeTypeList"
           :key="item.value"
           :value="item.value"
-          :laebl="item.label"></mz-option>
+          :label="item.label"></mz-option>
       </mz-select>
-      <mz-button color="primary">新增标签组</mz-button>
+      <mz-button color="primary"
+        @click="displayGroupAddModal">新增标签组</mz-button>
     </template>
-    <div class="acg-admin-filter__content">
-      <mz-row :gutter="10"
-        flex
-        style="flex-wrap:wrap;">
-        <mz-col v-for="item of list"
-          :key="item._id"
-          :md="12"
-          :lg="8"
-          style="margin-bottom:10px;">
-          <tag-group :data="item"></tag-group>
-        </mz-col>
-      </mz-row>
-    </div>
+
+    <mz-row :gutter="10"
+      flex
+      style="flex-wrap:wrap;">
+      <mz-col v-for="item of list"
+        :key="item._id"
+        :md="12"
+        :lg="8"
+        style="margin-bottom:10px;">
+        <tag-group :data="item"></tag-group>
+      </mz-col>
+    </mz-row>
+
   </acg-base-layout>
 </template>
 
@@ -58,8 +59,14 @@ export default class AcgAdminFilter extends Vue {
     })
   }
 
-  mounted() {
-    this.acgType = 'animation'
+  displayGroupAddModal() {
+    // TODO: value 响应式处理
+    let value = ''
+    const input = this.$createElement('mz-input', {
+      props: { value },
+      on: { input: (val: string) => (value = val) }
+    })
+    this.$modal({ title: '新增标签组', content: input })
   }
 
   @Watch('acgType')
@@ -71,6 +78,10 @@ export default class AcgAdminFilter extends Vue {
   @Watch('baikeType')
   onBaikeType() {
     this.fetchFilterList()
+  }
+
+  mounted() {
+    this.acgType = 'animation'
   }
 }
 </script>
