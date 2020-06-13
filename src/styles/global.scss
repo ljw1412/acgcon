@@ -18,3 +18,11 @@ ol,
 ul {
   list-style: none;
 }
+
+html[data-fullscreen] {
+  height: 100%;
+  body,
+  #app {
+    height: 100%;
+  }
+}

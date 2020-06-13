@@ -10,12 +10,14 @@ import '@ljw1412/ionicons-sprite'
 import '@/styles/global.scss'
 import controllers from '@/controllers/index'
 import AcgTitleCard from '@/components/AcgTitleCard/index.vue'
+import AcgBaseLayout from '@/components/AcgLayout/BaseLayout'
 
 Vue.config.productionTip = false
 
 Vue.use(manzhaiUI)
 
 Vue.component('AcgTitleCard', AcgTitleCard)
+Vue.component('AcgBaseLayout', AcgBaseLayout)
 
 Vue.prototype.$axios = createAxios()
 Vue.prototype.$get = get

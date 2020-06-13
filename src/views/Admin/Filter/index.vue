@@ -1,25 +1,24 @@
 <template>
-  <div class="acg-admin-filter">
-    <mz-select v-model="acgType"
-      dropdownMatchSelectWidth
-      style="width:200px;"
-      placeholder="ACG类型">
-      <mz-option v-for="item of acgTypeList"
-        :key="item.value"
-        :value="item.value"
-        :laebl="item.label"></mz-option>
-    </mz-select>
-    <mz-select v-model="baikeType"
-      dropdownMatchSelectWidth
-      style="width:200px;"
-      placeholder="百科类型">
-      <mz-option v-for="item of baikeTypeList"
-        :key="item.value"
-        :value="item.value"
-        :laebl="item.label"></mz-option>
-    </mz-select>
-    <mz-button color="primary">新增标签组</mz-button>
-
+  <acg-base-layout class="acg-admin-filter">
+    <template #action>
+      <mz-select v-model="acgType"
+        style="width:140px;"
+        placeholder="ACG类型">
+        <mz-option v-for="item of acgTypeList"
+          :key="item.value"
+          :value="item.value"
+          :laebl="item.label"></mz-option>
+      </mz-select>
+      <mz-select v-model="baikeType"
+        style="width:140px;"
+        placeholder="百科类型">
+        <mz-option v-for="item of baikeTypeList"
+          :key="item.value"
+          :value="item.value"
+          :laebl="item.label"></mz-option>
+      </mz-select>
+      <mz-button color="primary">新增标签组</mz-button>
+    </template>
     <div class="acg-admin-filter__content">
       <mz-row :gutter="10"
         flex
@@ -32,9 +31,8 @@
           <tag-group :data="item"></tag-group>
         </mz-col>
       </mz-row>
-
     </div>
-  </div>
+  </acg-base-layout>
 </template>
 
 <script lang="ts">

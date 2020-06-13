@@ -25,14 +25,14 @@
     </div>
     <div slot="content"
       style="width:180px;">
-      <div v-if="innerInfo"
+      <div v-if="isLogined && innerInfo"
         style="text-align: center;padding: 10px 5px;">{{nickname}}</div>
       <mz-list clickable
         size="small"
         @item-click="onMenuClick">
         <mz-list-item v-if="isAdmin"
-          title="后台管理"
-          value="management"></mz-list-item>
+          :title="inBackStage?'返回主站':'后台管理'"
+          :value="inBackStage?'main':'management'"></mz-list-item>
         <mz-list-item title="个人中心"></mz-list-item>
         <mz-list-item title="消息"></mz-list-item>
         <mz-list-item title="登出"
@@ -50,10 +50,12 @@ import { namespace, State } from 'vuex-class'
 export default class AcgUserDropdown extends Vue {
   @Prop({ type: Number, default: 36 })
   readonly size!: number
-  @Prop(String)
+  @Prop({ type: String, default: '2px' })
   readonly radius!: string
   @Prop(Boolean)
   readonly innerInfo!: boolean
+  @Prop(Boolean)
+  readonly inBackStage!: boolean
 
   @State
   readonly user!: Record<string, any>
@@ -74,9 +76,13 @@ export default class AcgUserDropdown extends Vue {
       switch (action) {
         case 'logout':
           this.logout()
+          if (this.inBackStage) this.$router.push({ name: 'home' })
           break
         case 'management':
           this.$router.push({ name: 'admin' })
+          break
+        case 'main':
+          this.$router.push({ name: 'home' })
           break
       }
     })
