@@ -44,7 +44,13 @@
               @change="error = ''">
               <div slot="top"
                 class="user-base">
-                <div class="user-base__avatar">头像</div>
+                <div class="user-base__avatar">
+                  <mz-image v-if="user.avatar"
+                    width="100%"
+                    height="100%"
+                    fit="cover"
+                    :src="user.avatar"></mz-image>
+                </div>
                 <div class="user-base__username">{{user.name}}</div>
               </div>
             </login-field>
@@ -112,7 +118,7 @@ export default class AcgLoginModal extends Vue {
       this.state = 'password'
       this.loading = false
     } catch (error) {
-      this.setFieldError(error.data.message)
+      this.setFieldError(error.message)
     }
   }
 
@@ -181,17 +187,13 @@ export default class AcgLoginModal extends Vue {
   }
 
   .user-base {
-    // position: absolute;
-    // top: 0;
-    // left: 0;
     width: 100%;
-    // transform: translateY(-100%);
     color: #ffffff;
+    user-select: none;
     &__avatar {
       width: 140px;
       height: 140px;
       margin: auto;
-      border: 1px solid #fff;
       box-sizing: border-box;
     }
     &__username {
@@ -199,6 +201,7 @@ export default class AcgLoginModal extends Vue {
       font-size: 24px;
       font-weight: 500;
       line-height: 60px;
+      text-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.75);
     }
   }
 }

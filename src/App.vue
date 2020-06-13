@@ -22,4 +22,3 @@ export default class App extends Vue {
 
 <style lang="scss">
 </style>
-fetchCurrentUser
