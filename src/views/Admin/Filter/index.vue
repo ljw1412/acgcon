@@ -19,20 +19,28 @@
       </mz-select>
       <mz-button color="primary"
         @click="displayGroupAddModal">新增标签组</mz-button>
+      <mz-button color="primary"
+        outlined
+        @click="sort = !sort">{{sort?'保存排序':'分类排序'}}</mz-button>
     </template>
 
-    <mz-row :gutter="10"
-      flex
-      style="flex-wrap:wrap;">
+    <draggable tag="mz-row"
+      v-model="list"
+      style="flex-wrap:wrap;"
+      handle=".tag-group-reorder"
+      ghost-class="is-ghost"
+      :component-data="{props:{gutter:10,flex:true}}">
       <mz-col v-for="item of list"
+        style="margin-bottom:10px;"
+        class="tag-group"
         :key="item._id"
         :md="12"
-        :lg="8"
-        style="margin-bottom:10px;">
-        <tag-group :data="item"></tag-group>
+        :lg="8">
+        <tag-group :data="item"
+          :sort="sort"
+          @delete="handleTagGroupDelete"></tag-group>
       </mz-col>
-    </mz-row>
-
+    </draggable>
   </acg-base-layout>
 </template>
 
@@ -52,6 +60,7 @@ export default class AcgAdminFilter extends Vue {
   baikeType = ''
   baikeTypeList: Record<string, any>[] = []
   list: Record<string, any>[] = []
+  sort = false
 
   async fetchFilterList() {
     this.list = await this.$get('baike/filter', {
@@ -59,14 +68,30 @@ export default class AcgAdminFilter extends Vue {
     })
   }
 
-  displayGroupAddModal() {
-    // TODO: value 响应式处理
-    let value = ''
-    const input = this.$createElement('mz-input', {
-      props: { value },
-      on: { input: (val: string) => (value = val) }
+  async createFilter(name: string) {
+    return await this.$post('baike/filter', {
+      name,
+      acgType: this.acgType,
+      type: this.baikeType
     })
-    this.$modal({ title: '新增标签组', content: input })
+  }
+
+  async displayGroupAddModal() {
+    try {
+      const text = await this.$modal.prompt({
+        title: '新增标签组',
+        content: '请输入标签组名称',
+        rules: { test: /.{1,8}/, message: '请输入1-8个字符' },
+        // TODO 无效果？
+        confirm: { color: 'danger' }
+      })
+      await this.createFilter(text as string)
+      await this.fetchFilterList()
+    } catch (error) {}
+  }
+
+  handleTagGroupDelete(item: any) {
+    this.list.remove(item)
   }
 
   @Watch('acgType')
@@ -88,15 +113,9 @@ export default class AcgAdminFilter extends Vue {
 
 <style lang="scss">
 .acg-admin-filter {
-  .mz-select {
-    display: inline-block;
-  }
-
-  .mz-tag {
-    margin-right: 10px;
-    &:last-child {
-      margin-right: 0;
-    }
+  .tag-group.is-ghost .acg-admin-tag-group {
+    box-shadow: 0 0 5px $color-primary;
+    opacity: 0.5;
   }
 }
 </style>

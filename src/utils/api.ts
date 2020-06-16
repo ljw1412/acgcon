@@ -73,4 +73,18 @@ export async function post(
   }
 }
 
+export async function del(url: string, config?: AxiosRequestConfig) {
+  try {
+    const response = await createAxios({
+      xsrfCookieName: 'csrfToken',
+      xsrfHeaderName: 'X-CSRF-Token'
+    }).delete(url, config)
+    return response.data
+  } catch (error) {
+    betterError(error)
+    printError(error)
+    return Promise.reject(error)
+  }
+}
+
 export default createAxios
