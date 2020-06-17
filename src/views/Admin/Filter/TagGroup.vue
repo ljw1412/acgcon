@@ -109,6 +109,10 @@ export default class AcgAdminTagGroup extends Vue {
     await this.$del(`baike/filter/${this.data._id}`)
   }
 
+  async saveTag(name: string) {
+    return await this.$post('baike/tags', { groupId: this.data._id, name })
+  }
+
   async groupDelete() {
     try {
       await this.$modal.confirm({
@@ -147,10 +151,11 @@ export default class AcgAdminTagGroup extends Vue {
     }
   }
 
-  handleAddTag() {
+  async handleAddTag() {
     const text = this.text.trim()
     if (text) {
-      console.log(text)
+      const result = await this.saveTag(text)
+      this.data.tags = result.tags
     }
   }
 }

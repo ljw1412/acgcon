@@ -98,8 +98,9 @@ export default class AcgAdminFilter extends Vue {
         content: '请输入标签组名称',
         rules: { test: /.{1,8}/, message: '请输入1-8个字符' }
       })
-      await this.createFilter(text as string)
-      await this.fetchFilterList()
+      const tagGroup = await this.createFilter(text as string)
+      // await this.fetchFilterList()
+      this.list.push(tagGroup)
     } catch (error) {}
   }
 
