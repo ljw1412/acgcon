@@ -6,20 +6,18 @@
       <div class="tag-group-action">
         <mz-icon v-if="sort"
           name="reorder-three"
-          size="22"
-          class="tag-group-reorder"></mz-icon>
-        <mz-dropdown v-else
+          class="tag-group-reorder"
+          style="cursor: grab;"></mz-icon>
+        <mz-dropdown v-else-if="!isEdit && !isTagSort"
           v-model="isDisplayDropdown"
           arrow
           placement="bottom-end">
-          <mz-icon name="ellipsis-horizontal-circle"
-            size="22"
-            class="is-pointer"></mz-icon>
+          <mz-icon name="ellipsis-horizontal-circle"></mz-icon>
           <div slot="content"
             style="width:120px;">
             <mz-list clickable
               size="medium"
-              @item-click="handleDropdownItemClick">
+              @item-click="handleAction">
               <mz-list-item v-for="item of actionList"
                 :key="item.value"
                 :title="item.title"
@@ -32,19 +30,42 @@
             </mz-list>
           </div>
         </mz-dropdown>
+        <template v-else>
+          <mz-icon v-tooltip.bottom="'取消'"
+            name="close-circle-outline"
+            class="mz-danger--text"
+            @click="handleAction('cancel')"></mz-icon>
+          <mz-icon v-tooltip.bottom="'保存'"
+            name="checkmark-circle-outline"
+            class="mz-success--text"></mz-icon>
+        </template>
       </div>
     </div>
-    <div class="tag-group-tags">
-      <mz-tag v-for="tag of data.tags"
-        closable
-        :key="tag._id">{{tag.name}}</mz-tag>
-      <mz-tag class="is-pointer"
-        @click="handleAddTagClick">
-        <mz-icon slot="prefix"
-          name="add-circle-outline"></mz-icon>
-        <span style="padding-left:3px;">新增</span>
-      </mz-tag>
-    </div>
+
+    <draggable v-show="!sort"
+      v-model="data.tags"
+      tag="div"
+      class="tag-group-tags"
+      :class="{'is-edit':isTagSort}"
+      :draggable="isTagSort?'.tag-item':''">
+      <transition-group tag="div"
+        name="flip-list">
+        <mz-tag v-for="tag of data.tags"
+          class="tag-item"
+          :closable="isEdit"
+          :key="tag._id">{{tag.name}}</mz-tag>
+      </transition-group>
+      <mz-input v-show="isEdit"
+        slot="footer"
+        v-model="text"
+        size="medium"
+        class="create-tag-input"
+        placeholder="输入新增的标签名称，回车添加"
+        @keydown.native.enter="handleAddTag">
+        <mz-icon slot="suffix"
+          name="return-down-back-outline"></mz-icon>
+      </mz-input>
+    </draggable>
   </mz-card>
 </template>
 
@@ -58,12 +79,23 @@ export default class AcgAdminTagGroup extends Vue {
   @Prop(Boolean)
   readonly sort!: boolean
 
+  isDisplayDropdown = false
+  isTagSort = false
+  isEdit = false
+  text = ''
+  tagsBak = []
   actionList = [
     {
-      title: '修改',
-      value: 'update',
+      title: '编辑',
+      value: 'edit',
       class: '',
       icon: 'hammer-outline'
+    },
+    {
+      title: '排序',
+      value: 'sort',
+      class: '',
+      icon: 'swap-horizontal-outline'
     },
     {
       title: '删除',
@@ -73,9 +105,6 @@ export default class AcgAdminTagGroup extends Vue {
     }
   ]
 
-  isDisplayDropdown = false
-  isDeleting = false
-
   async deleteGroup() {
     await this.$del(`baike/filter/${this.data._id}`)
   }
@@ -84,31 +113,45 @@ export default class AcgAdminTagGroup extends Vue {
     try {
       await this.$modal.confirm({
         width: '400px',
+        title: '警告',
         content: `确认要删除标签组“${this.data.name}”吗？(此操作会删除所有该标签组下面的标签)`,
-        title: '警告'
+        confirm: { color: 'danger' }
       })
-      this.isDeleting = true
       await this.deleteGroup()
       this.$emit('delete', this.data)
-    } catch (error) {
-    } finally {
-      this.isDeleting = false
-    }
+    } catch (error) {}
   }
 
-  handleDropdownItemClick(action: string) {
+  async handleAction(action: string) {
+    this.isDisplayDropdown = false
+    await this.$nextTick()
     switch (action) {
       case 'delete':
         this.groupDelete()
-        console.log('success')
         break
-      default:
+      case 'edit':
+        this.isEdit = true
+        break
+      case 'sort':
+        this.isTagSort = true
+        this.tagsBak = this.data.tags
+        break
+      case 'cancel':
+        if (this.isTagSort) {
+          this.data.tags = this.tagsBak
+          this.isTagSort = false
+        } else if (this.isEdit) {
+          this.isEdit = false
+        }
         break
     }
   }
 
-  handleAddTagClick() {
-    console.log(this.data)
+  handleAddTag() {
+    const text = this.text.trim()
+    if (text) {
+      console.log(text)
+    }
   }
 }
 </script>
@@ -123,28 +166,43 @@ export default class AcgAdminTagGroup extends Vue {
 }
 
 .tag-group-tags {
-  padding: 0 10px;
+  padding-left: 10px;
   .mz-tag {
     margin: 0 10px 10px 0;
-    &:last-child {
-      margin-right: 0;
+  }
+
+  &.is-edit {
+    user-select: none;
+    .tag-item {
+      cursor: grab;
     }
   }
 }
 
 .tag-group-action {
-  display: inline-block;
+  display: inline-flex;
   font-size: 0;
+  .mz-icon {
+    font-size: 22px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: 0.5;
+    }
+  }
 }
 
 .tag-group-delete {
-  color: $color-danger;
+  color: $color-danger !important;
   .mz-list-item__title {
     color: inherit;
   }
 }
 
-.tag-group-reorder {
-  cursor: grab;
+.create-tag-input {
+  width: calc(100% - 10px);
+  margin-bottom: 10px;
 }
 </style>

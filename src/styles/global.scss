@@ -26,3 +26,7 @@ html[data-fullscreen] {
     height: 100%;
   }
 }
+
+.flip-list-move {
+  transition: transform 0.2s;
+}

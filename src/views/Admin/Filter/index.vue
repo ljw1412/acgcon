@@ -1,45 +1,59 @@
 <template>
   <acg-base-layout class="acg-admin-filter">
     <template #action>
-      <mz-select v-model="acgType"
-        style="width:100px;"
-        placeholder="ACG类型">
-        <mz-option v-for="item of acgTypeList"
-          :key="item.value"
-          :value="item.value"
-          :label="item.label"></mz-option>
-      </mz-select>
-      <mz-select v-model="baikeType"
-        style="width:100px;"
-        placeholder="百科类型">
-        <mz-option v-for="item of baikeTypeList"
-          :key="item.value"
-          :value="item.value"
-          :label="item.label"></mz-option>
-      </mz-select>
-      <mz-button color="primary"
-        @click="displayGroupAddModal">新增标签组</mz-button>
-      <mz-button color="primary"
-        outlined
-        @click="sort = !sort">{{sort?'保存排序':'分类排序'}}</mz-button>
+      <template v-if="!sort">
+        <mz-select v-model="acgType"
+          style="width:100px;"
+          placeholder="ACG类型">
+          <mz-option v-for="item of acgTypeList"
+            :key="item.value"
+            :value="item.value"
+            :label="item.label"></mz-option>
+        </mz-select>
+        <mz-select v-model="baikeType"
+          style="width:100px;"
+          placeholder="百科类型">
+          <mz-option v-for="item of baikeTypeList"
+            :key="item.value"
+            :value="item.value"
+            :label="item.label"></mz-option>
+        </mz-select>
+        <mz-button color="primary"
+          key="btn-new"
+          @click="displayGroupAddModal">新增标签组</mz-button>
+        <mz-button color="primary"
+          outlined
+          key="btn-sort"
+          @click="handleSort">标签组排序</mz-button>
+      </template>
+      <template v-else>
+        <mz-button color="danger"
+          key="btn-sort-cancel"
+          @click="handleUnsort">放弃排序</mz-button>
+        <mz-button color="success"
+          key="btn-sort-save"
+          @click="sort = !sort">保存排序</mz-button>
+      </template>
     </template>
 
-    <draggable tag="mz-row"
-      v-model="list"
-      style="flex-wrap:wrap;"
+    <draggable v-model="list"
+      group="tag-group"
+      class="tag-group-draggable"
       handle=".tag-group-reorder"
-      ghost-class="is-ghost"
-      :component-data="{props:{gutter:10,flex:true}}">
-      <mz-col v-for="item of list"
-        style="margin-bottom:10px;"
-        class="tag-group"
-        :key="item._id"
-        :md="12"
-        :lg="8">
-        <tag-group :data="item"
-          :sort="sort"
-          @delete="handleTagGroupDelete"></tag-group>
-      </mz-col>
+      ghost-class="is-ghost">
+      <transition-group tag="mz-row"
+        name="flip-list">
+        <mz-col v-for="item of list"
+          style="margin-bottom:10px;"
+          class="tag-group"
+          :key="item._id"
+          :md="12"
+          :lg="8">
+          <tag-group :data="item"
+            :sort="sort"
+            @delete="handleTagGroupDelete"></tag-group>
+        </mz-col>
+      </transition-group>
     </draggable>
   </acg-base-layout>
 </template>
@@ -60,6 +74,7 @@ export default class AcgAdminFilter extends Vue {
   baikeType = ''
   baikeTypeList: Record<string, any>[] = []
   list: Record<string, any>[] = []
+  listBak: Record<string, any>[] = []
   sort = false
 
   async fetchFilterList() {
@@ -81,14 +96,24 @@ export default class AcgAdminFilter extends Vue {
       const text = await this.$modal.prompt({
         title: '新增标签组',
         content: '请输入标签组名称',
-        rules: { test: /.{1,8}/, message: '请输入1-8个字符' },
-        // TODO 无效果？
-        confirm: { color: 'danger' }
+        rules: { test: /.{1,8}/, message: '请输入1-8个字符' }
       })
       await this.createFilter(text as string)
       await this.fetchFilterList()
     } catch (error) {}
   }
+
+  handleSort() {
+    this.sort = true
+    this.listBak = this.list.slice(0)
+  }
+
+  handleUnsort() {
+    this.sort = false
+    this.list = this.listBak
+  }
+
+  handleSaveSort() {}
 
   handleTagGroupDelete(item: any) {
     this.list.remove(item)
@@ -114,8 +139,21 @@ export default class AcgAdminFilter extends Vue {
 <style lang="scss">
 .acg-admin-filter {
   .tag-group.is-ghost .acg-admin-tag-group {
-    box-shadow: 0 0 5px $color-primary;
+    box-shadow: 0 0 10px $color-primary;
     opacity: 0.5;
+  }
+}
+
+.tag-group-draggable {
+  > .mz-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+    > .mz-col {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
   }
 }
 </style>
