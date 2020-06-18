@@ -32,7 +32,7 @@
           @click="handleUnsort">放弃排序</mz-button>
         <mz-button color="success"
           key="btn-sort-save"
-          @click="sort = !sort">保存排序</mz-button>
+          @click="handleSaveSort">保存排序</mz-button>
       </template>
     </template>
 
@@ -91,6 +91,14 @@ export default class AcgAdminFilter extends Vue {
     })
   }
 
+  async saveGroupOrder() {
+    await this.$post('baike/filter/update_order', {
+      list: this.list.map(item => item._id),
+      acgType: this.acgType,
+      type: this.baikeType
+    })
+  }
+
   async displayGroupAddModal() {
     try {
       const text = await this.$modal.prompt({
@@ -114,7 +122,9 @@ export default class AcgAdminFilter extends Vue {
     this.list = this.listBak
   }
 
-  handleSaveSort() {}
+  handleSaveSort() {
+    this.saveGroupOrder()
+  }
 
   handleTagGroupDelete(item: any) {
     this.list.remove(item)

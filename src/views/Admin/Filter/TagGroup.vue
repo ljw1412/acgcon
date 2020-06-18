@@ -4,11 +4,30 @@
     <div class="tag-group-title flex-center-space-between">
       <div>{{data.name}}</div>
       <div class="tag-group-action">
+        <!-- 标签组排序 -->
         <mz-icon v-if="sort"
           name="reorder-three"
           class="tag-group-reorder"
           style="cursor: grab;"></mz-icon>
-        <mz-dropdown v-else-if="!isEdit && !isTagSort"
+        <!-- 组内标签排序 -->
+        <template v-else-if="isTagSort">
+          <mz-icon v-tooltip.bottom="'取消'"
+            name="close-circle-outline"
+            class="mz-danger--text"
+            @click="handleAction('cancel')"></mz-icon>
+          <mz-icon v-tooltip.bottom="'保存'"
+            name="checkmark-circle-outline"
+            class="mz-success--text"></mz-icon>
+        </template>
+        <!-- 此标签组编辑 -->
+        <template v-else-if="isEdit">
+          <mz-icon v-tooltip.bottom="'完成'"
+            name="checkmark-circle-outline"
+            class="mz-success--text"
+            @click="isEdit=!isEdit"></mz-icon>
+        </template>
+        <!-- 一般模式 -->
+        <mz-dropdown v-else
           v-model="isDisplayDropdown"
           arrow
           placement="bottom-end">
@@ -30,15 +49,6 @@
             </mz-list>
           </div>
         </mz-dropdown>
-        <template v-else>
-          <mz-icon v-tooltip.bottom="'取消'"
-            name="close-circle-outline"
-            class="mz-danger--text"
-            @click="handleAction('cancel')"></mz-icon>
-          <mz-icon v-tooltip.bottom="'保存'"
-            name="checkmark-circle-outline"
-            class="mz-success--text"></mz-icon>
-        </template>
       </div>
     </div>
 
@@ -53,14 +63,17 @@
         <mz-tag v-for="tag of data.tags"
           class="tag-item"
           :closable="isEdit"
-          :key="tag._id">{{tag.name}}</mz-tag>
+          :key="tag._id"
+          @close="handleDeleteTag(tag)">{{tag.name}}</mz-tag>
       </transition-group>
       <mz-input v-show="isEdit"
         slot="footer"
+        ref="input"
         v-model="text"
         size="medium"
         class="create-tag-input"
         placeholder="输入新增的标签名称，回车添加"
+        :disabled="isAdding"
         @keydown.native.enter="handleAddTag">
         <mz-icon slot="suffix"
           name="return-down-back-outline"></mz-icon>
@@ -70,7 +83,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Ref } from 'vue-property-decorator'
+import { MzInput } from 'manzhai-ui/types/packages/Input'
 
 @Component
 export default class AcgAdminTagGroup extends Vue {
@@ -78,10 +92,13 @@ export default class AcgAdminTagGroup extends Vue {
   readonly data!: Record<string, any>
   @Prop(Boolean)
   readonly sort!: boolean
+  @Ref('input')
+  readonly inputRef!: MzInput
 
   isDisplayDropdown = false
   isTagSort = false
   isEdit = false
+  isAdding = false
   text = ''
   tagsBak = []
   actionList = [
@@ -107,6 +124,12 @@ export default class AcgAdminTagGroup extends Vue {
 
   async deleteGroup() {
     await this.$del(`baike/filter/${this.data._id}`)
+  }
+
+  async deleteTag(id: string) {
+    return this.$del(`baike/tags/${id}`, {
+      data: { groupId: this.data._id }
+    })
   }
 
   async saveTag(name: string) {
@@ -151,11 +174,33 @@ export default class AcgAdminTagGroup extends Vue {
     }
   }
 
+  async handleDeleteTag(tag: Record<string, any>) {
+    try {
+      await this.$modal.confirm({
+        width: '300px',
+        title: '警告',
+        content: `确认要删除标签“${tag.name}”吗？`,
+        confirm: { color: 'danger' }
+      })
+      const result = await this.deleteTag(tag._id)
+      this.data.tags = result
+    } catch (error) {}
+  }
+
   async handleAddTag() {
     const text = this.text.trim()
     if (text) {
-      const result = await this.saveTag(text)
-      this.data.tags = result.tags
+      this.isAdding = true
+      try {
+        const result = await this.saveTag(text)
+        this.data.tags = result
+        this.text = ''
+      } catch (error) {
+      } finally {
+        this.isAdding = false
+        await this.$nextTick()
+        this.inputRef.focus()
+      }
     }
   }
 }
