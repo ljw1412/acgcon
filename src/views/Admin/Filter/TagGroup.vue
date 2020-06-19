@@ -14,10 +14,11 @@
           <mz-icon v-tooltip.bottom="'取消'"
             name="close-circle-outline"
             class="mz-danger--text"
-            @click="handleAction('cancel')"></mz-icon>
+            @click="handleAction('sort-cancel')"></mz-icon>
           <mz-icon v-tooltip.bottom="'保存'"
             name="checkmark-circle-outline"
-            class="mz-success--text"></mz-icon>
+            class="mz-success--text"
+            @click="handleAction('sort-save')"></mz-icon>
         </template>
         <!-- 此标签组编辑 -->
         <template v-else-if="isEdit">
@@ -27,28 +28,14 @@
             @click="isEdit=!isEdit"></mz-icon>
         </template>
         <!-- 一般模式 -->
-        <mz-dropdown v-else
-          v-model="isDisplayDropdown"
+        <mz-dropdown-menu v-else
           arrow
-          placement="bottom-end">
+          width="120px"
+          placement="bottom-end"
+          :data="actionList"
+          @action="handleAction">
           <mz-icon name="ellipsis-horizontal-circle"></mz-icon>
-          <div slot="content"
-            style="width:120px;">
-            <mz-list clickable
-              size="medium"
-              @item-click="handleAction">
-              <mz-list-item v-for="item of actionList"
-                :key="item.value"
-                :title="item.title"
-                :class="item.class"
-                :value="item.value">
-                <mz-icon slot="prefix"
-                  :name="item.icon"
-                  size="16"></mz-icon>
-              </mz-list-item>
-            </mz-list>
-          </div>
-        </mz-dropdown>
+        </mz-dropdown-menu>
       </div>
     </div>
 
@@ -106,19 +93,19 @@ export default class AcgAdminTagGroup extends Vue {
       title: '编辑',
       value: 'edit',
       class: '',
-      icon: 'hammer-outline'
+      prefixIcon: 'hammer-outline'
     },
     {
       title: '排序',
       value: 'sort',
       class: '',
-      icon: 'swap-horizontal-outline'
+      prefixIcon: 'swap-horizontal-outline'
     },
     {
       title: '删除',
       value: 'delete',
       class: 'tag-group-delete',
-      icon: 'trash-outline'
+      prefixIcon: 'trash-outline'
     }
   ]
 
@@ -134,6 +121,13 @@ export default class AcgAdminTagGroup extends Vue {
 
   async saveTag(name: string) {
     return await this.$post('baike/tags', { groupId: this.data._id, name })
+  }
+
+  async saveTagOrder() {
+    return await this.$post('baike/tags/update_order', {
+      groupId: this.data._id,
+      list: this.data.tags.map((item: any) => item._id)
+    })
   }
 
   async groupDelete() {
@@ -163,13 +157,14 @@ export default class AcgAdminTagGroup extends Vue {
         this.isTagSort = true
         this.tagsBak = this.data.tags
         break
-      case 'cancel':
-        if (this.isTagSort) {
-          this.data.tags = this.tagsBak
-          this.isTagSort = false
-        } else if (this.isEdit) {
-          this.isEdit = false
-        }
+      case 'sort-save':
+        const result = await this.saveTagOrder()
+        this.data.tags = result
+        this.isTagSort = false
+        break
+      case 'sort-cancel':
+        this.data.tags = this.tagsBak
+        this.isTagSort = false
         break
     }
   }

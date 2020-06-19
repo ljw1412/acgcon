@@ -1,15 +1,13 @@
 <template>
-  <mz-tooltip v-model="isDisplayDropdown"
-    interactive
-    arrow
-    role="dropdown"
-    theme="same"
-    animation="shift-away"
+  <mz-dropdown-menu arrow
     placement="bottom-end"
     class="acg-user-avatar"
+    width="180px"
+    trigger="hover"
+    :data="actionList"
     :disabled="!isLogined"
-    :offset="[10, 10]"
-    :hide-on-click="false">
+    :hide-on-click="false"
+    @action="onMenuClick">
     <div class="acg-user-avatar__image"
       :style="{
         width: this.size + 'px',
@@ -23,23 +21,12 @@
         fit="cover"
         :src="user.avatar"></mz-image>
     </div>
-    <div slot="content"
-      style="width:180px;">
+
+    <template #header>
       <div v-if="isLogined && innerInfo"
         style="text-align: center;padding: 10px 5px;">{{nickname}}</div>
-      <mz-list clickable
-        size="small"
-        @item-click="onMenuClick">
-        <mz-list-item v-if="isAdmin"
-          :title="inBackStage?'返回主站':'后台管理'"
-          :value="inBackStage?'main':'management'"></mz-list-item>
-        <mz-list-item title="个人中心"></mz-list-item>
-        <mz-list-item title="消息"></mz-list-item>
-        <mz-list-item title="登出"
-          value="logout"></mz-list-item>
-      </mz-list>
-    </div>
-  </mz-tooltip>
+    </template>
+  </mz-dropdown-menu>
 </template>
 
 <script lang="ts">
@@ -69,6 +56,22 @@ export default class AcgUserDropdown extends Vue {
   readonly logout!: Function
 
   isDisplayDropdown = false
+  get actionList() {
+    const list: Record<string, any> = [
+      { title: '个人中心', value: 'personal' },
+      { title: '消息', value: 'message' },
+      { title: '登出', value: 'logout' }
+    ]
+    if (this.isAdmin) {
+      list.unshift(
+        this.inBackStage
+          ? { title: '返回主站', value: 'main' }
+          : { title: '后台管理', value: 'management' }
+      )
+    }
+
+    return list
+  }
 
   onMenuClick(action: string) {
     this.isDisplayDropdown = false

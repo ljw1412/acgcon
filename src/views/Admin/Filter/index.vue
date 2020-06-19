@@ -122,8 +122,10 @@ export default class AcgAdminFilter extends Vue {
     this.list = this.listBak
   }
 
-  handleSaveSort() {
-    this.saveGroupOrder()
+  async handleSaveSort() {
+    await this.saveGroupOrder()
+    await this.fetchFilterList()
+    this.sort = false
   }
 
   handleTagGroupDelete(item: any) {

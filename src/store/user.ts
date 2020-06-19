@@ -24,7 +24,12 @@ export default {
   actions: {
     async fetchCurrentUser({ commit }) {
       const res = await $get('user/whoami')
-      if (res.role && res.role.includes('admin')) router.addRoutes(adminRoute)
+      if (
+        process.env.NODE_ENV === 'development' ||
+        (res.role && res.role.includes('admin'))
+      ) {
+        router.addRoutes(adminRoute)
+      }
       commit('setCurrentUser', res)
     },
     async logout({ commit }) {
