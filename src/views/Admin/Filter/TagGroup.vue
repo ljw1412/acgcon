@@ -43,12 +43,13 @@
       v-model="data.tags"
       tag="div"
       class="tag-group-tags"
-      :class="{'is-edit':isTagSort}"
+      :class="{'is-sort':isTagSort}"
       :draggable="isTagSort?'.tag-item':''">
       <transition-group tag="div"
         name="flip-list">
         <mz-tag v-for="tag of data.tags"
           class="tag-item"
+          v-elevation="isTagSort ? 5 : 0"
           :closable="isEdit"
           :key="tag._id"
           @close="handleDeleteTag(tag)">{{tag.name}}</mz-tag>
@@ -110,21 +111,21 @@ export default class AcgAdminTagGroup extends Vue {
   ]
 
   async deleteGroup() {
-    await this.$del(`baike/filter/${this.data._id}`)
+    await this.$del(`tag-group/${this.data._id}`)
   }
 
   async deleteTag(id: string) {
-    return this.$del(`baike/tags/${id}`, {
+    return this.$del(`tag/${id}`, {
       data: { groupId: this.data._id }
     })
   }
 
   async saveTag(name: string) {
-    return await this.$post('baike/tags', { groupId: this.data._id, name })
+    return await this.$post('tag', { groupId: this.data._id, name })
   }
 
   async saveTagOrder() {
-    return await this.$post('baike/tags/update_order', {
+    return await this.$post('tag/update_order', {
       groupId: this.data._id,
       list: this.data.tags.map((item: any) => item._id)
     })
@@ -216,7 +217,7 @@ export default class AcgAdminTagGroup extends Vue {
     margin: 0 10px 10px 0;
   }
 
-  &.is-edit {
+  &.is-sort {
     user-select: none;
     .tag-item {
       cursor: grab;

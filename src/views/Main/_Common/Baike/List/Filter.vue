@@ -48,7 +48,7 @@ export default class AcgBaikeFilter extends AcgVue {
     this.tagList = []
     this.loading = true
     try {
-      const tagList = await this.$get('baike/filter', {
+      const tagList = await this.$get('tag-group', {
         params: { acgType: this.acgType, type: this.baikeType }
       })
       this.tagList = tagList

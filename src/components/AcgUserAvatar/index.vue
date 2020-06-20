@@ -62,12 +62,8 @@ export default class AcgUserDropdown extends Vue {
       { title: '消息', value: 'message' },
       { title: '登出', value: 'logout' }
     ]
-    if (this.isAdmin) {
-      list.unshift(
-        this.inBackStage
-          ? { title: '返回主站', value: 'main' }
-          : { title: '后台管理', value: 'management' }
-      )
+    if (this.isAdmin && !this.inBackStage) {
+      list.unshift({ title: '后台管理', value: 'management' })
     }
 
     return list
@@ -83,9 +79,6 @@ export default class AcgUserDropdown extends Vue {
           break
         case 'management':
           this.$router.push({ name: 'admin' })
-          break
-        case 'main':
-          this.$router.push({ name: 'home' })
           break
       }
     })

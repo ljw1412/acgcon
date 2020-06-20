@@ -8,7 +8,13 @@
       <mz-header>
         <div class="acg-admin-header">
           <div></div>
-          <div>
+          <div class="acg-admin-header-left">
+            <mz-icon v-tooltip="'返回主站'"
+              class="is-pointer"
+              name="home-outline"
+              size="22"
+              style="margin-right:20px;"
+              @click="$router.push({ name: 'home' })"></mz-icon>
             <acg-user-avatar inner-info
               in-back-stage
               :size="44" />
@@ -29,7 +35,11 @@ import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 @Component({ components: { AcgUserAvatar } })
 export default class AcgAdmin extends Vue {
   navigations = [
-    { title: '筛选项管理', icon: 'md-pricetags', to: { name: 'adminFilter' } }
+    {
+      title: '筛选项管理',
+      icon: 'pricetags-outline',
+      to: { name: 'adminFilter' }
+    }
   ]
 
   beforeCreate() {
@@ -80,6 +90,12 @@ export default class AcgAdmin extends Vue {
   justify-content: space-between;
   height: 100%;
   padding: 0 10px;
+}
+
+.acg-admin-header-left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 :root[data-theme='dark'] {

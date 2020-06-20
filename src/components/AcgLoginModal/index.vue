@@ -2,7 +2,8 @@
   <transition name="mz-fade">
     <div v-show="visible"
       class="acg-login-modal">
-      <mz-mask :visible="true"
+      <mz-mask blur="5px"
+        :visible="true"
         :z-index="0"></mz-mask>
 
       <div class="acg-login-modal__body">
@@ -33,6 +34,7 @@
             </login-field>
           </template>
           <template #password>
+
             <login-field v-model="user.password"
               ref="passwordField"
               type="password"
@@ -51,7 +53,12 @@
                     fit="cover"
                     :src="user.avatar"></mz-image>
                 </div>
-                <div class="user-base__username">{{user.name}}</div>
+                <div class="user-base__username">
+                  <input readonly
+                    class="hidden-input"
+                    :value="user.name" />
+                  <span>{{user.name}}</span>
+                </div>
               </div>
             </login-field>
           </template>

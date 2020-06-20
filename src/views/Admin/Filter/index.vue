@@ -78,13 +78,13 @@ export default class AcgAdminFilter extends Vue {
   sort = false
 
   async fetchFilterList() {
-    this.list = await this.$get('baike/filter', {
+    this.list = await this.$get('tag-group', {
       params: { acgType: this.acgType, type: this.baikeType }
     })
   }
 
   async createFilter(name: string) {
-    return await this.$post('baike/filter', {
+    return await this.$post('tag-group', {
       name,
       acgType: this.acgType,
       type: this.baikeType
@@ -92,7 +92,7 @@ export default class AcgAdminFilter extends Vue {
   }
 
   async saveGroupOrder() {
-    await this.$post('baike/filter/update_order', {
+    await this.$post('tag-group/update_order', {
       list: this.list.map(item => item._id),
       acgType: this.acgType,
       type: this.baikeType
