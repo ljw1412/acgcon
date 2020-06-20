@@ -39,7 +39,8 @@ export default class AcgAdmin extends Vue {
       title: '筛选项管理',
       icon: 'pricetags-outline',
       to: { name: 'adminFilter' }
-    }
+    },
+    { title: '缓存管理', icon: '', to: { name: 'adminCache' } }
   ]
 
   beforeCreate() {

@@ -14,6 +14,14 @@ export default [
           import(
             /* webpackChunkName: "admin" */ '@/views/Admin/Filter/index.vue'
           )
+      },
+      {
+        path: 'cache',
+        name: 'adminCache',
+        component: () =>
+          import(
+            /* webpackChunkName: "admin" */ '@/views/Admin/Cache/index.vue'
+          )
       }
     ]
   }
