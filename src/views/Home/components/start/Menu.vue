@@ -23,15 +23,13 @@ import { Component, Vue } from 'vue-property-decorator'
 import StartTile from './Tile.vue'
 import StartEntrance from './Entrance.vue'
 import StartBigTitle from './BigTitle.vue'
-@Component({
-  components: {
-    StartTile
-  }
-})
+import StartCarousel from './Carousel.vue'
+
+@Component({ components: { StartTile } })
 export default class StartMenu extends Vue {
   columns = [
     [
-      { w: 2, h: 2 },
+      { w: 2, h: 2, component: StartCarousel },
       { w: 2, h: 1 }
     ],
     [
