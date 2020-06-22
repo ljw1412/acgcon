@@ -10,10 +10,10 @@
             :value="item.value"
             :label="item.label"></mz-option>
         </mz-select>
-        <mz-select v-model="baikeType"
+        <mz-select v-model="subType"
           style="width:100px;"
-          placeholder="百科类型">
-          <mz-option v-for="item of baikeTypeList"
+          placeholder="二级类型">
+          <mz-option v-for="item of subTypeList"
             :key="item.value"
             :value="item.value"
             :label="item.label"></mz-option>
@@ -71,15 +71,15 @@ export default class AcgAdminFilter extends Vue {
     { value: 'comic', label: '漫画' },
     { value: 'game', label: '游戏' }
   ]
-  baikeType = ''
-  baikeTypeList: Record<string, any>[] = []
+  subType = ''
+  subTypeList: Record<string, any>[] = []
   list: Record<string, any>[] = []
   listBak: Record<string, any>[] = []
   sort = false
 
   async fetchFilterList() {
     this.list = await this.$get('tag-group', {
-      params: { acgType: this.acgType, type: this.baikeType }
+      params: { acgType: this.acgType, type: this.subType }
     })
   }
 
@@ -87,7 +87,7 @@ export default class AcgAdminFilter extends Vue {
     return await this.$post('tag-group', {
       name,
       acgType: this.acgType,
-      type: this.baikeType
+      type: this.subType
     })
   }
 
@@ -95,7 +95,7 @@ export default class AcgAdminFilter extends Vue {
     await this.$post('tag-group/update_order', {
       list: this.list.map(item => item._id),
       acgType: this.acgType,
-      type: this.baikeType
+      type: this.subType
     })
   }
 
@@ -134,12 +134,12 @@ export default class AcgAdminFilter extends Vue {
 
   @Watch('acgType')
   onAcgTypeChange(val: Acgcon.Types) {
-    this.baikeTypeList = getBaikeTypesByAcgType(val)
-    this.baikeType = this.baikeTypeList[0].value
+    this.subTypeList = getBaikeTypesByAcgType(val)
+    this.subType = this.subTypeList[0].value
   }
 
-  @Watch('baikeType')
-  onBaikeType() {
+  @Watch('subType')
+  onSubTypeChange() {
     this.fetchFilterList()
   }
 

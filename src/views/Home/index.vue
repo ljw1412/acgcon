@@ -31,7 +31,7 @@ export default class Home extends Vue {
     // 如果距离上一次请求小于2小时，优先使用本地存储的背景地址。
     if (moment().diff(moment(updateTime), 'hours') > 2) {
       try {
-        const imageList = await this.$get('base/bg_bing')
+        const imageList = await this.$get('basic/bg_bing')
         url = imageList[0].url
         localStorage.setItem(
           'home-background',

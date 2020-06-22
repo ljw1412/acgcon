@@ -33,7 +33,7 @@ export default class AcgHome extends Vue {
 
   async fetchConfig() {
     try {
-      this.config = await this.$get('base/acg_base_config')
+      this.config = await this.$get('basic/acg_base_config')
     } catch (error) {
       console.error('[ACGMain]', '获取基础配置失败')
     }

@@ -1,12 +1,16 @@
 <template>
   <acg-base-layout class="acg-admin-cache">
     <template #action>
-      <mz-select v-model="type">
-        <mz-option v-for="t of typeList"
-          :key="t.value"
+      <mz-select v-model="type"
+        style="width:100px">
+        <mz-option v-for="(t,value) of typeMap"
+          :key="value"
           :label="t.label"
-          :value="t.value"></mz-option>
+          :value="value"></mz-option>
       </mz-select>
+      <mz-input v-model="keyword"
+        style="width:200px"
+        :placeholder="placeholder"></mz-input>
       <mz-button color="primary"
         @click="handleQuery">查询</mz-button>
     </template>
@@ -36,9 +40,22 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class AcgAdminCache extends Vue {
-  type = 'user'
-  typeList = [{ label: '用户', value: 'user' }]
+  type = 'all'
+  typeMap: Record<string, any> = {
+    all: { label: '全部' },
+    user: { label: '用户', placeholder: '请输入用户id' },
+    tag: { label: '标签', placeholder: '请输入{acgtype}_{type}' }
+  }
   result: string[] = []
+  keyword = ''
+
+  get placeholder() {
+    const typeData = this.typeMap[this.type]
+    if (typeData && typeData.placeholder) {
+      return typeData.placeholder
+    }
+    return '请输入缓存key'
+  }
 
   get tableData() {
     const data: any[] = [['key', '操作']]
@@ -52,7 +69,9 @@ export default class AcgAdminCache extends Vue {
   }
 
   async fetchList() {
-    return await this.$get('cache', { params: { type: this.type, count: 150 } })
+    return await this.$get('cache', {
+      params: { type: this.type, keyword: this.keyword, count: 150 }
+    })
   }
 
   async fetchValue(key: string) {
@@ -92,6 +111,7 @@ export default class AcgAdminCache extends Vue {
 <style lang="scss">
 .acg-admin-cache {
   .query-table {
+    background-color: #fff;
     th:nth-child(1) {
       width: 50%;
     }
