@@ -25,6 +25,9 @@
           outlined
           key="btn-sort"
           @click="handleSort">标签组排序</mz-button>
+        <mz-button color="warning"
+          outlined
+          @click="resetCache">重置缓存</mz-button>
       </template>
       <template v-else>
         <mz-button color="danger"
@@ -51,6 +54,8 @@
           :lg="8">
           <tag-group :data="item"
             :sort="sort"
+            :acg-type="acgType"
+            :sub-type="subType"
             @delete="handleTagGroupDelete"></tag-group>
         </mz-col>
       </transition-group>
@@ -77,26 +82,29 @@ export default class AcgAdminFilter extends Vue {
   listBak: Record<string, any>[] = []
   sort = false
 
+  get baseParams() {
+    return { acgType: this.acgType, type: this.subType }
+  }
+
   async fetchFilterList() {
-    this.list = await this.$get('tag-group', {
-      params: { acgType: this.acgType, type: this.subType }
-    })
+    this.list = await this.$get('tag-group', { params: this.baseParams })
   }
 
   async createFilter(name: string) {
-    return await this.$post('tag-group', {
-      name,
-      acgType: this.acgType,
-      type: this.subType
-    })
+    return await this.$post('tag-group', { name, ...this.baseParams })
   }
 
   async saveGroupOrder() {
     await this.$post('tag-group/update_order', {
       list: this.list.map(item => item._id),
-      acgType: this.acgType,
-      type: this.subType
+      ...this.baseParams
     })
+  }
+
+  async resetCache() {
+    await this.$post('tag-group/reset_cache', this.baseParams)
+    this.$modal.alert('重置缓存成功', '提示')
+    this.fetchFilterList()
   }
 
   async displayGroupAddModal() {

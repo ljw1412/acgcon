@@ -80,6 +80,11 @@ export default class AcgAdminTagGroup extends Vue {
   readonly data!: Record<string, any>
   @Prop(Boolean)
   readonly sort!: boolean
+  @Prop(String)
+  readonly acgType!: string
+  @Prop(String)
+  readonly subType!: string
+
   @Ref('input')
   readonly inputRef!: MzInput
 
@@ -110,24 +115,33 @@ export default class AcgAdminTagGroup extends Vue {
     }
   ]
 
+  get baseParams() {
+    return { acgType: this.acgType, type: this.subType }
+  }
+
   async deleteGroup() {
-    await this.$del(`tag-group/${this.data._id}`)
+    await this.$del(`tag-group/${this.data._id}`, { data: this.baseParams })
   }
 
   async deleteTag(id: string) {
     return this.$del(`tag/${id}`, {
-      data: { groupId: this.data._id }
+      data: { groupId: this.data._id, ...this.baseParams }
     })
   }
 
   async saveTag(name: string) {
-    return await this.$post('tag', { groupId: this.data._id, name })
+    return await this.$post('tag', {
+      name,
+      groupId: this.data._id,
+      ...this.baseParams
+    })
   }
 
   async saveTagOrder() {
     return await this.$post('tag/update_order', {
       groupId: this.data._id,
-      list: this.data.tags.map((item: any) => item._id)
+      list: this.data.tags.map((item: any) => item._id),
+      ...this.baseParams
     })
   }
 
