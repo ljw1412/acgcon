@@ -22,6 +22,14 @@ export default [
           import(
             /* webpackChunkName: "admin" */ '@/views/Admin/Cache/index.vue'
           )
+      },
+      {
+        path: 'crawler',
+        name: 'adminCrawler',
+        component: () =>
+          import(
+            /* webpackChunkName: "admin" */ '@/views/Admin/Crawler/index.vue'
+          )
       }
     ]
   }

@@ -4,6 +4,7 @@
       <div class="acg-admin-logo">ACG控后台管理</div>
       <mz-navigation :data="navigations"></mz-navigation>
     </mz-aside>
+
     <mz-layout>
       <mz-header>
         <div class="acg-admin-header">
@@ -21,6 +22,7 @@
           </div>
         </div>
       </mz-header>
+
       <mz-main>
         <router-view></router-view>
       </mz-main>
@@ -44,6 +46,11 @@ export default class AcgAdmin extends Vue {
       title: '缓存管理',
       icon: 'file-tray-stacked-outline',
       to: { name: 'adminCache' }
+    },
+    {
+      title: '爬虫管理',
+      icon: 'bug-outline',
+      to: { name: 'adminCrawler' }
     }
   ]
 
