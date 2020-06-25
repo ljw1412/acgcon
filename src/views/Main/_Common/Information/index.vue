@@ -1,25 +1,42 @@
 <template>
   <div class="acg-information">
-
-    <div style="min-height:500px;">
-      <mz-masonry v-if="!loading"
-        :gutter="10"
-        :lineCount="3"
-        mode="column-count">
-        <mz-masonry-item v-for="item of list"
-          :key="item._id">
-          <a target="_blank"
-            :href="item.url">
-            <mz-card style="height:100%;">
-              <div>
-                <h3>{{item.title}}</h3>
-                <p>{{item.desc}}</p>
-              </div>
-            </mz-card>
-          </a>
-        </mz-masonry-item>
-      </mz-masonry>
-    </div>
+    <mz-loading v-show="loading"></mz-loading>
+    <mz-row :gutter="10"
+      class="information-list"
+      style="min-height:500px;">
+      <mz-col v-for="item of list"
+        tag="a"
+        target="_blank"
+        style="margin-bottom: 10px;"
+        :lg="8"
+        :md="12"
+        :xs="24"
+        :href="item.url"
+        :key="item._id">
+        <mz-card style="height:100%;"
+          outlined
+          radius="2px">
+          <div class="information-cover">
+            <mz-image :src="item.cover"
+              width="100%"
+              height="100%"
+              fit="cover">
+              <template #error>
+                <div class="information-cover-error">图片加载失败</div>
+              </template>
+            </mz-image>
+          </div>
+          <div class="information-core">
+            <h3>{{item.title}}</h3>
+            <p class="information-info">
+              <span>来源：{{item.from}}</span>
+              <span>时间：{{item.time}}</span>
+            </p>
+            <p class="information-desc">{{item.desc}}</p>
+          </div>
+        </mz-card>
+      </mz-col>
+    </mz-row>
 
     <mz-pagination v-model="index"
       :layout="['total', '|', 'prev', 'pager', 'next']"
@@ -33,14 +50,22 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import AcgVue from '@/mixins/AcgVue'
 
+const fromMap: Record<string, any> = {
+  dmzj: '动漫之家'
+}
+
 @Component
 export default class AcgInformation extends AcgVue {
   index = -1
-  size = 20
+  size = 24
   count = 0
   list = []
   error = false
   loading = false
+
+  formatFromName(name: string) {
+    return fromMap[name] || name
+  }
 
   async fetchInformationList() {
     this.error = false
@@ -48,6 +73,10 @@ export default class AcgInformation extends AcgVue {
     try {
       const { list, count } = await this.$get('information', {
         params: { acgType: this.acgType, index: this.index, size: this.size }
+      })
+      list.forEach((item: any) => {
+        if (item.time) item.time = moment(item.time).format('YYYY-MM-DD HH:mm')
+        item.from = this.formatFromName(item.from)
       })
       this.list = list
       this.count = count
@@ -78,5 +107,60 @@ export default class AcgInformation extends AcgVue {
 <style lang="scss">
 .acg-information {
   margin-bottom: 20px;
+  .information-list {
+    display: flex;
+    flex-wrap: wrap;
+    .mz-card {
+      display: flex;
+      border-radius: 4px;
+      transition: all 0.2s;
+      &:hover {
+        transform: translateY(-5px);
+        @include elevation(10);
+      }
+      &:active {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .information-cover {
+    flex: 1 0 auto;
+    width: 40%;
+    height: 100%;
+  }
+
+  .information-cover-error {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+    font-size: 12px;
+    color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .information-core {
+    width: 60%;
+    padding: 10px;
+  }
+
+  .information-info {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 16px;
+    > span + span {
+      margin-left: 10px;
+    }
+  }
+
+  .information-desc {
+    @include multi-ellipsis(3);
+    height: 54px;
+    line-height: 18px;
+    font-size: 16px;
+    margin-top: 6px;
+  }
 }
 </style>
