@@ -1,21 +1,20 @@
 <template>
   <div class="acg-information">
     <mz-loading v-show="loading"></mz-loading>
-    <mz-row :gutter="10"
+    <mz-row :gutter="20"
       class="information-list"
       style="min-height:500px;">
       <mz-col v-for="item of list"
         tag="a"
         target="_blank"
-        style="margin-bottom: 10px;"
-        :lg="8"
+        style="margin-bottom: 20px;"
         :md="12"
         :xs="24"
         :href="item.url"
         :key="item._id">
         <mz-card style="height:100%;"
           outlined
-          radius="2px">
+          radius="4px">
           <div class="information-cover">
             <mz-image :src="item.cover"
               width="100%"
@@ -107,16 +106,22 @@ export default class AcgInformation extends AcgVue {
 <style lang="scss">
 .acg-information {
   margin-bottom: 20px;
+  overflow: hidden;
+  padding-top: 6px;
+
   .information-list {
     display: flex;
     flex-wrap: wrap;
     .mz-card {
+      position: relative;
       display: flex;
       border-radius: 4px;
       transition: all 0.2s;
+      overflow: hidden;
       &:hover {
         transform: translateY(-5px);
         @include elevation(10);
+        border-width: 0;
       }
       &:active {
         opacity: 0.6;
@@ -126,7 +131,7 @@ export default class AcgInformation extends AcgVue {
 
   .information-cover {
     flex: 1 0 auto;
-    width: 40%;
+    width: 30%;
     height: 100%;
   }
 
@@ -142,25 +147,25 @@ export default class AcgInformation extends AcgVue {
   }
 
   .information-core {
-    width: 60%;
-    padding: 10px;
+    width: 70%;
+    padding: 16px;
   }
 
   .information-info {
-    margin-top: 4px;
-    font-size: 14px;
-    line-height: 16px;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 14px;
     > span + span {
       margin-left: 10px;
     }
   }
 
   .information-desc {
-    @include multi-ellipsis(3);
-    height: 54px;
-    line-height: 18px;
-    font-size: 16px;
-    margin-top: 6px;
+    @include multi-ellipsis(4);
+    height: 80px;
+    line-height: 20px;
+    font-size: 14px;
+    margin-top: 8px;
   }
 }
 </style>
