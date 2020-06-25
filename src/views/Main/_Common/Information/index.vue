@@ -1,10 +1,26 @@
 <template>
   <div class="acg-information">
 
-    <ul style="min-height:500px">
-      <li v-for="item of list"
-        :key="item._id">{{item.title}}</li>
-    </ul>
+    <div style="min-height:500px;">
+      <mz-masonry v-if="!loading"
+        :gutter="10"
+        :lineCount="3"
+        mode="column-count">
+        <mz-masonry-item v-for="item of list"
+          :key="item._id">
+          <a target="_blank"
+            :href="item.url">
+            <mz-card style="height:100%;">
+              <div>
+                <h3>{{item.title}}</h3>
+                <p>{{item.desc}}</p>
+              </div>
+            </mz-card>
+          </a>
+        </mz-masonry-item>
+      </mz-masonry>
+    </div>
+
     <mz-pagination v-model="index"
       :layout="['total', '|', 'prev', 'pager', 'next']"
       :pageSize.sync="size"
@@ -19,7 +35,7 @@ import AcgVue from '@/mixins/AcgVue'
 
 @Component
 export default class AcgInformation extends AcgVue {
-  index = 1
+  index = -1
   size = 20
   count = 0
   list = []
@@ -42,14 +58,25 @@ export default class AcgInformation extends AcgVue {
     }
   }
 
-  @Watch('index', { immediate: true })
-  async onIndexChange() {
-    this.list = []
-    await this.$nextTick()
+  created() {
+    const p = this.$route.query.p as string
+    this.index = p ? parseInt(p) : 1
+  }
+
+  @Watch('index')
+  async onIndexChange(val: number, oldVal?: number) {
+    if (oldVal !== -1) {
+      this.list = []
+      await this.$nextTick()
+      this.$router.replace({ query: { p: this.index + '' } })
+    }
     this.fetchInformationList()
   }
 }
 </script>
 
 <style lang="scss">
+.acg-information {
+  margin-bottom: 20px;
+}
 </style>
