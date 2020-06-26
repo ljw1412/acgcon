@@ -28,9 +28,11 @@ export default class AcgNavigation extends Vue {
         <div class="acg-navigation__content flex-center-space-between">
           <nav-link links={this.navList}></nav-link>
           <div class="acg-navigation__right">
-            {this.isFixed && (
-              <acg-user-avatar size={60} inner-info></acg-user-avatar>
-            )}
+            <acg-user-avatar
+              v-show={this.isFixed}
+              size={60}
+              inner-info
+            ></acg-user-avatar>
           </div>
         </div>
       </div>

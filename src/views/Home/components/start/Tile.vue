@@ -28,6 +28,7 @@ export default class StartTile extends Vue {
         'start-tile',
         {
           'start-tile--h2': this.h === 2,
+          'start-tile--h3': this.h === 3,
           'start-tile--w2': this.w === 2,
           'is-pointer': this.pointer || this.to || this.href
         }
@@ -72,6 +73,11 @@ export default class StartTile extends Vue {
   &--h2 {
     height: 400px;
   }
+
+  &--h3 {
+    height: 608px;
+  }
+
   &--w2 {
     width: 400px;
   }

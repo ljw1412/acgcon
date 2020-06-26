@@ -24,6 +24,7 @@ import StartTile from './Tile.vue'
 import StartEntrance from './Entrance.vue'
 import StartBigTitle from './BigTitle.vue'
 import StartCarousel from './Carousel.vue'
+import StartInformation from './information.vue'
 
 @Component({ components: { StartTile } })
 export default class StartMenu extends Vue {
@@ -56,10 +57,11 @@ export default class StartMenu extends Vue {
       }
     ],
     [
-      { w: 1, h: 1 },
-      { w: 1, h: 1 },
-      { w: 2, h: 1 },
-      { w: 2, h: 1 }
+      // { w: 1, h: 1 },
+      // { w: 1, h: 1 },
+      // { w: 2, h: 1 },
+      // { w: 2, h: 1 }
+      { w: 2, h: 3, component: StartInformation }
     ],
     [
       {

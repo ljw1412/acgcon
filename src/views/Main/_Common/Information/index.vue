@@ -7,6 +7,7 @@
       <mz-col v-for="item of list"
         tag="a"
         target="_blank"
+        class="information-item"
         style="margin-bottom: 20px;"
         :md="12"
         :xs="24"
@@ -48,10 +49,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import AcgVue from '@/mixins/AcgVue'
-
-const fromMap: Record<string, any> = {
-  dmzj: '动漫之家'
-}
+import { fromMap } from '@/configs/constants'
 
 @Component
 export default class AcgInformation extends AcgVue {
