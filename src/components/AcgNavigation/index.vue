@@ -99,15 +99,15 @@ export default class AcgNavigation extends Vue {
 .mz-fixed-section.is-sticky {
   .acg-navigation {
     background-image: none;
-    background-color: #ffffff;
-    box-shadow: 0 -1px 5px rgba(#000, 0.3);
-    transition: all 0.2s;
+    background-color: $color-card-background;
+    box-shadow: 0 4px 6px $color-border-base;
+    transition: background-color 0.2s;
     &__user {
       display: block;
     }
 
     .link {
-      color: #333333;
+      color: $color-text-primary;
     }
   }
 }

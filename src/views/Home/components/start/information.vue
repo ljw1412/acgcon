@@ -52,7 +52,8 @@ export default class StartInformation extends Vue {
       transition: color 0.05s;
       &:hover {
         color: $color-primary;
-        text-shadow: 1px 1px 1px #000000;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+        font-weight: 700;
       }
       > span + span {
         margin-left: 5px;
