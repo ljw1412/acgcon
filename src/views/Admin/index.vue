@@ -11,7 +11,7 @@
           <div></div>
           <div class="acg-admin-header-left">
             <mz-icon v-tooltip="'返回主站'"
-              class="is-pointer"
+              class="home-icon is-pointer"
               name="home-outline"
               size="22"
               style="margin-right:20px;"
@@ -93,6 +93,10 @@ export default class AcgAdmin extends Vue {
   .mz-main {
     padding: 16px;
     overflow: auto;
+  }
+
+  .home-icon {
+    color: $color-text-primary;
   }
 }
 

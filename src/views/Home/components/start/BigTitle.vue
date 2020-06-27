@@ -22,6 +22,7 @@ export default class StartBigTitle extends Vue {
     padding-left: 0.5em;
     letter-spacing: 0.5em;
     line-height: 1.5em;
+    color: $color-text-primary;
   }
 }
 </style>

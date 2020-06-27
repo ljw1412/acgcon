@@ -49,9 +49,10 @@ export default class StartInformation extends Vue {
     line-height: 30px;
     a {
       color: $color-text-primary;
-      transition: color 0.1s;
+      transition: color 0.05s;
       &:hover {
         color: $color-primary;
+        text-shadow: 1px 1px 1px #000000;
       }
       > span + span {
         margin-left: 5px;
@@ -76,5 +77,11 @@ export default class StartInformation extends Vue {
 .information-from {
   flex-shrink: 0;
   font-size: 12px;
+}
+
+:root[data-theme='dark'] {
+  .start-information li > a:hover {
+    color: $color-danger;
+  }
 }
 </style>

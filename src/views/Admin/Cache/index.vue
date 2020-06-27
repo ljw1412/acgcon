@@ -111,7 +111,8 @@ export default class AcgAdminCache extends Vue {
 <style lang="scss">
 .acg-admin-cache {
   .query-table {
-    background-color: #fff;
+    color: $color-text-primary;
+    background-color: $color-card-background;
     th:nth-child(1) {
       width: 50%;
     }

@@ -65,7 +65,8 @@ export default class StartTile extends Vue {
   width: 192px;
   height: 192px;
   font-size: 16px;
-  background-color: rgba($color: #ffffff, $alpha: 0.8);
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(5px);
   &__content {
     width: 100%;
     height: 100%;
@@ -80,6 +81,12 @@ export default class StartTile extends Vue {
 
   &--w2 {
     width: 400px;
+  }
+}
+
+:root[data-theme='dark'] {
+  .start-tile {
+    background-color: rgba(0, 0, 0, 0.75);
   }
 }
 </style>
