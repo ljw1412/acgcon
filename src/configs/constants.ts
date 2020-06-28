@@ -5,5 +5,6 @@ export const acgTypeMap = {
 }
 
 export const fromMap: Record<string, any> = {
-  dmzj: '动漫之家'
+  dmzj: '动漫之家',
+  gamersky: '动漫星空'
 }

@@ -63,6 +63,7 @@ export default class AcgNavigation extends Vue {
   width: 100%;
   line-height: 30px;
   box-sizing: border-box;
+  overflow-x: auto;
 
   &__content {
     height: 100%;
