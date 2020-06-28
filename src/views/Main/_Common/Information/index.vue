@@ -1,43 +1,44 @@
 <template>
   <div class="acg-information">
-    <mz-loading v-show="loading"></mz-loading>
-    <mz-row :gutter="20"
-      class="information-list"
-      style="min-height:500px;">
-      <mz-col v-for="item of list"
-        tag="a"
-        target="_blank"
-        class="information-item"
-        style="margin-bottom: 20px;"
-        :md="12"
-        :xs="24"
-        :href="item.url"
-        :key="item._id">
-        <mz-card style="height:100%;"
-          outlined
-          radius="4px">
-          <div class="information-cover">
-            <acg-image :src="item.cover"
-              fit="cover">
-            </acg-image>
-          </div>
-          <div class="information-core">
-            <h3>{{item.title}}</h3>
-            <p class="information-info">
-              <span>来源：{{item.from}}</span>
-              <span>时间：{{item.time}}</span>
-            </p>
-            <p class="information-desc">{{item.desc}}</p>
-          </div>
-        </mz-card>
-      </mz-col>
-    </mz-row>
+    <mz-loading background="transparent"
+      :loading="loading">
+      <mz-row :gutter="20"
+        class="information-list"
+        style="min-height:500px;">
+        <mz-col v-for="item of list"
+          tag="a"
+          target="_blank"
+          class="information-item"
+          style="margin-bottom: 20px;"
+          :md="12"
+          :xs="24"
+          :href="item.url"
+          :key="item._id">
+          <mz-card style="height:100%;"
+            outlined
+            radius="4px">
+            <div class="information-cover">
+              <acg-image :src="item.cover"
+                fit="cover">
+              </acg-image>
+            </div>
+            <div class="information-core">
+              <h3>{{item.title}}</h3>
+              <p class="information-info">
+                <span>来源：{{item.from}}</span>
+                <span>时间：{{item.time}}</span>
+              </p>
+              <p class="information-desc">{{item.desc}}</p>
+            </div>
+          </mz-card>
+        </mz-col>
+      </mz-row>
 
-    <mz-pagination v-model="index"
-      :layout="['total', '|', 'prev', 'pager', 'next']"
-      :pageSize.sync="size"
-      :total="count"></mz-pagination>
-
+      <mz-pagination v-model="index"
+        :layout="['total', '|', 'prev', 'pager', 'next']"
+        :pageSize.sync="size"
+        :total="count"></mz-pagination>
+    </mz-loading>
   </div>
 </template>
 
@@ -90,6 +91,7 @@ export default class AcgInformation extends AcgVue {
       this.list = []
       await this.$nextTick()
       this.$router.replace({ query: { p: this.index + '' } })
+      window.scrollTo({ top: 258, behavior: 'smooth' })
     }
     this.fetchInformationList()
   }
