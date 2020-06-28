@@ -3,7 +3,7 @@
     <li v-for="item of list"
       :key="item._id">
       <a target="_blank"
-        class="information-content"
+        class="information-content acg-clickable"
         :title="item.title"
         :href="item.url">
         <span class="information-type">[{{item.acgTypeCN}}]</span>

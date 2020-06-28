@@ -1,15 +1,15 @@
 <template>
   <div class="acg-baike-content">
     <router-link v-for="item of list"
-      class="acg-baike-content__item"
+      class="acg-baike-content__item acg-clickable"
       target="_blank"
       :to="{name:'baikeDetail',params:{...$route.params,id:item._id}}"
       :key="item._id">
       <mz-card :elevation="0">
-        <mz-image :src="item.cover"
+        <acg-image :src="item.cover"
           fit="cover"
           position="center"
-          class="baike-cover"></mz-image>
+          class="baike-cover"></acg-image>
 
         <div class="baike-info">
           <mz-heading class="baike-info__title"
@@ -89,10 +89,13 @@ export default class AcgBaikeContent extends AcgVue {
       width: 100%;
       border-radius: 4px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-      transition: box-shadow 0.25s;
+      transition: all 0.1s;
       overflow: hidden;
       &:hover {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.24);
+      }
+      &:active {
+        transform: scale(0.95);
       }
     }
 

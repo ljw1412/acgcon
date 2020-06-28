@@ -17,14 +17,9 @@
           outlined
           radius="4px">
           <div class="information-cover">
-            <mz-image :src="item.cover"
-              width="100%"
-              height="100%"
+            <acg-image :src="item.cover"
               fit="cover">
-              <template #error>
-                <div class="information-cover-error">图片加载失败</div>
-              </template>
-            </mz-image>
+            </acg-image>
           </div>
           <div class="information-core">
             <h3>{{item.title}}</h3>
@@ -119,7 +114,6 @@ export default class AcgInformation extends AcgVue {
       &:hover {
         transform: translateY(-5px);
         @include elevation(10);
-        border-width: 0;
       }
       &:active {
         opacity: 0.6;
@@ -131,17 +125,6 @@ export default class AcgInformation extends AcgVue {
     flex: 1 0 auto;
     width: 30%;
     height: 100%;
-  }
-
-  .information-cover-error {
-    width: 100%;
-    height: 100%;
-    background: #eee;
-    font-size: 12px;
-    color: #999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .information-core {

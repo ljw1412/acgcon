@@ -1,11 +1,11 @@
 <template>
   <div class="start-header">
     <div class="start-header__left">
-      <div class="start-header__logo">ACG控</div>
+      <div class="start-header__logo clear-text">ACG控</div>
     </div>
     <div class="start-header__right">
       <div class="start-header__user">
-        <div>
+        <div class="userinfo clear-text">
           <div class="start-header__username">{{nickname}}</div>
           <div class="start-header__userinfo">
             <span class="start-header__user-level">LV.1</span>
@@ -65,6 +65,10 @@ export default class StartHeader extends Vue {
   &__avatar {
     flex-shrink: 0;
     margin-left: 8px;
+  }
+
+  .clear-text {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
   }
 }
 </style>

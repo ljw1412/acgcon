@@ -11,6 +11,7 @@ import '@/styles/global.scss'
 import controllers from '@/controllers/index'
 import AcgTitleCard from '@/components/AcgTitleCard/index.vue'
 import AcgBaseLayout from '@/components/AcgLayout/BaseLayout'
+import AcgImage from '@/components/AcgImage/index.vue'
 import draggable from 'vuedraggable'
 
 Vue.config.productionTip = false
@@ -20,6 +21,7 @@ Vue.use(manzhaiUI)
 Vue.component('draggable', draggable)
 Vue.component('AcgTitleCard', AcgTitleCard)
 Vue.component('AcgBaseLayout', AcgBaseLayout)
+Vue.component('AcgImage', AcgImage)
 
 Vue.prototype.$axios = createAxios()
 Vue.prototype.$get = get
