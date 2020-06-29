@@ -1,3 +1,9 @@
+export const acgTypeIconMap = {
+  animation: 'film',
+  comic: 'book',
+  game: 'game-controller'
+}
+
 export const acgTypeMap = {
   animation: '动画',
   comic: '漫画',
@@ -6,5 +12,6 @@ export const acgTypeMap = {
 
 export const fromMap: Record<string, any> = {
   dmzj: '动漫之家',
-  gamersky: '动漫星空'
+  gamersky: '动漫星空',
+  ali213: '游侠网'
 }

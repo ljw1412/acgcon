@@ -48,10 +48,15 @@ export default class AcgAdmin extends Vue {
       to: { name: 'adminCache' }
     },
     {
-      title: '爬虫管理',
+      title: '资讯管理',
       icon: 'bug-outline',
-      to: { name: 'adminCrawler' }
+      to: { name: 'adminInformation' }
     }
+    // {
+    //   title: '爬虫管理',
+    //   icon: 'bug-outline',
+    //   to: { name: 'adminCrawler' }
+    // }
   ]
 
   beforeCreate() {

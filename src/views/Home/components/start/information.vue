@@ -6,7 +6,10 @@
         class="information-content acg-clickable"
         :title="item.title"
         :href="item.url">
-        <span class="information-type">[{{item.acgTypeCN}}]</span>
+        <mz-icon :name="item.icon"
+          class="information-type-icon"
+          size="1.2em"></mz-icon>
+        <!-- <span class="information-type">[{{item.acgTypeCN}}]</span> -->
         <span class="information-title">{{item.title}}</span>
         <span class="information-from">{{item.fromCN}}</span>
       </a>
@@ -16,7 +19,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { acgTypeMap, fromMap } from '@/configs/constants'
+import { acgTypeMap, fromMap, acgTypeIconMap } from '@/configs/constants'
 
 @Component
 export default class StartInformation extends Vue {
@@ -27,6 +30,7 @@ export default class StartInformation extends Vue {
       params: { count: 20 }
     })
     list.forEach((item: any) => {
+      item.icon = acgTypeIconMap[item.acgType as Acgcon.Types]
       item.acgTypeCN = acgTypeMap[item.acgType as Acgcon.Types]
       item.fromCN = fromMap[item.from] || item.from
     })
@@ -67,8 +71,10 @@ export default class StartInformation extends Vue {
   align-items: center;
 }
 
-.information-type {
+.information-type,
+.information-type-icon {
   flex-shrink: 0;
+  margin-right: 3px;
 }
 .information-title {
   @include ellipsis;
@@ -78,6 +84,8 @@ export default class StartInformation extends Vue {
 .information-from {
   flex-shrink: 0;
   font-size: 12px;
+  min-width: 50px;
+  text-align: right;
 }
 
 :root[data-theme='dark'] {

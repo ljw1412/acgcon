@@ -30,6 +30,14 @@ export default [
           import(
             /* webpackChunkName: "admin" */ '@/views/Admin/Crawler/index.vue'
           )
+      },
+      {
+        path: 'information',
+        name: 'adminInformation',
+        component: () =>
+          import(
+            /* webpackChunkName: "admin" */ '@/views/Admin/Information/index.vue'
+          )
       }
     ]
   }

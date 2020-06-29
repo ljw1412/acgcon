@@ -34,9 +34,9 @@
         </mz-col>
       </mz-row>
 
-      <mz-pagination v-model="index"
+      <mz-pagination v-model="pageIndex"
         :layout="['total', '|', 'prev', 'pager', 'next']"
-        :pageSize.sync="size"
+        :pageSize.sync="pageSize"
         :total="count"></mz-pagination>
     </mz-loading>
   </div>
@@ -49,8 +49,8 @@ import { fromMap } from '@/configs/constants'
 
 @Component
 export default class AcgInformation extends AcgVue {
-  index = -1
-  size = 24
+  pageIndex = -1
+  pageSize = 24
   count = 0
   list = []
   error = false
@@ -65,7 +65,11 @@ export default class AcgInformation extends AcgVue {
     this.loading = true
     try {
       const { list, count } = await this.$get('information', {
-        params: { acgType: this.acgType, index: this.index, size: this.size }
+        params: {
+          acgType: this.acgType,
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize
+        }
       })
       list.forEach((item: any) => {
         if (item.time) item.time = moment(item.time).format('YYYY-MM-DD HH:mm')
@@ -82,15 +86,15 @@ export default class AcgInformation extends AcgVue {
 
   created() {
     const p = this.$route.query.p as string
-    this.index = p ? parseInt(p) : 1
+    this.pageIndex = p ? parseInt(p) : 1
   }
 
-  @Watch('index')
+  @Watch('pageIndex')
   async onIndexChange(val: number, oldVal?: number) {
     if (oldVal !== -1) {
       this.list = []
       await this.$nextTick()
-      this.$router.replace({ query: { p: this.index + '' } })
+      this.$router.replace({ query: { p: this.pageIndex + '' } })
       window.scrollTo({ top: 258, behavior: 'smooth' })
     }
     this.fetchInformationList()
