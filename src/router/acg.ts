@@ -43,6 +43,13 @@ export default [
     meta: { title: '百科' }
   },
   {
+    path: '/baike/editor',
+    name: 'baikeEditor',
+    component: () =>
+      import(/* webpackChunkName: "baike" */ '@~/Baike/Editor/index.vue'),
+    meta: { title: '百科编辑器' }
+  },
+  {
     path: '/search',
     name: 'search',
     component: () =>

@@ -5,7 +5,7 @@
       <!-- 导航栏 -->
       <acg-navigation fixable
         offsetTop="-60px"></acg-navigation>
-      <div class="acg-main-core"
+      <div class="acg-main-core acg-media-container"
         :data-name="currentRouterName">
         <router-view :name="currentRouterName"></router-view>
       </div>
@@ -52,14 +52,6 @@ export default class AcgHome extends Vue {
 }
 
 .acg-main-core {
-  max-width: $screen-width-lg;
   padding-top: 20px;
-  margin: 0 auto;
-}
-
-@media screen and (max-width: $screen-width-lg) {
-  .acg-main-core {
-    width: 100%;
-  }
 }
 </style>

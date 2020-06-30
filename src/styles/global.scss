@@ -46,3 +46,14 @@ html[data-fullscreen] {
 .acg-clickable:active {
   opacity: 0.7;
 }
+
+.acg-media-container {
+  max-width: $screen-width-lg;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: $screen-width-lg) {
+  .acg-media-container {
+    width: 100%;
+  }
+}
