@@ -11,7 +11,7 @@
           size="1.2em"></mz-icon>
         <!-- <span class="information-type">[{{item.acgTypeCN}}]</span> -->
         <span class="information-title">{{item.title}}</span>
-        <span class="information-from">{{item.fromCN}}</span>
+        <span class="information-origin">{{item.originCN}}</span>
       </a>
     </li>
   </ul>
@@ -19,20 +19,16 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { acgTypeMap, fromMap, acgTypeIconMap } from '@/configs/constants'
+import { acgTypeMap, acgTypeIconMap } from '@/configs/constants'
 
 @Component
 export default class StartInformation extends Vue {
   list = []
 
   async fetchList() {
-    const list = await this.$get('information/lastest', {
-      params: { count: 20 }
-    })
+    const { list } = await this.$get('information')
     list.forEach((item: any) => {
       item.icon = acgTypeIconMap[item.acgType as Acgcon.Types]
-      item.acgTypeCN = acgTypeMap[item.acgType as Acgcon.Types]
-      item.fromCN = fromMap[item.from] || item.from
     })
     this.list = list
   }
@@ -81,7 +77,7 @@ export default class StartInformation extends Vue {
   flex: 1 0 auto;
   width: 0;
 }
-.information-from {
+.information-origin {
   flex-shrink: 0;
   font-size: 12px;
   min-width: 50px;

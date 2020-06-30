@@ -10,10 +10,10 @@
           :label="item.label"></mz-option>
       </mz-select>
 
-      <mz-select v-model="from"
+      <mz-select v-model="origin"
         style="width:100px;"
         placeholder="来源">
-        <mz-option v-for="item of fromList"
+        <mz-option v-for="item of originList"
           :key="item.value"
           :value="item.value"
           :label="item.label"></mz-option>
@@ -43,8 +43,8 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 
 @Component
 export default class AdminInformation extends Vue {
-  from = ''
-  fromList = []
+  origin = ''
+  originList = []
   acgType = ''
   acgTypeList = [
     { value: '', label: '全部类型' },
@@ -64,11 +64,11 @@ export default class AdminInformation extends Vue {
   count = 0
 
   async reFindFromList() {
-    const list = await this.$get('information/list_from', {
+    const list = await this.$get('information/origins', {
       params: { acgType: this.acgType }
     })
     list.unshift({ value: '', label: '全部' })
-    this.fromList = list
+    this.originList = list
   }
 
   async reFindList() {
@@ -85,7 +85,7 @@ export default class AdminInformation extends Vue {
   @Watch('acgType')
   handleAcgTypeChange() {
     this.reFindFromList()
-    this.from = ''
+    this.origin = ''
   }
 
   async created() {

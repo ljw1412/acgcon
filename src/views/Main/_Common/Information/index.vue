@@ -14,9 +14,7 @@
           :xs="24"
           :href="item.url"
           :key="item._id">
-          <mz-card style="height:100%;"
-            outlined
-            radius="4px">
+          <mz-card outlined>
             <div class="information-cover">
               <acg-image :src="item.cover"
                 fit="cover">
@@ -25,7 +23,7 @@
             <div class="information-core">
               <h3>{{item.title}}</h3>
               <p class="information-info">
-                <span>来源：{{item.from}}</span>
+                <span>来源：{{item.originCN}}</span>
                 <span>时间：{{item.time}}</span>
               </p>
               <p class="information-desc">{{item.desc}}</p>
@@ -45,7 +43,6 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import AcgVue from '@/mixins/AcgVue'
-import { fromMap } from '@/configs/constants'
 
 @Component
 export default class AcgInformation extends AcgVue {
@@ -55,10 +52,6 @@ export default class AcgInformation extends AcgVue {
   list = []
   error = false
   loading = false
-
-  formatFromName(name: string) {
-    return fromMap[name] || name
-  }
 
   async fetchInformationList() {
     this.error = false
@@ -73,7 +66,6 @@ export default class AcgInformation extends AcgVue {
       })
       list.forEach((item: any) => {
         if (item.time) item.time = moment(item.time).format('YYYY-MM-DD HH:mm')
-        item.from = this.formatFromName(item.from)
       })
       this.list = list
       this.count = count
@@ -114,9 +106,11 @@ export default class AcgInformation extends AcgVue {
     .mz-card {
       position: relative;
       display: flex;
+      height: 100%;
       border-radius: 4px;
       transition: all 0.2s;
       overflow: hidden;
+      box-sizing: border-box;
       &:hover {
         transform: translateY(-5px);
         @include elevation(10);

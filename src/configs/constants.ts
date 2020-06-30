@@ -9,9 +9,3 @@ export const acgTypeMap = {
   comic: '漫画',
   game: '游戏'
 }
-
-export const fromMap: Record<string, any> = {
-  dmzj: '动漫之家',
-  gamersky: '动漫星空',
-  ali213: '游侠网'
-}
