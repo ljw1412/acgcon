@@ -3,7 +3,8 @@
     <template #action>
       <mz-select v-model="acgType"
         style="width:100px;"
-        placeholder="ACG类型">
+        placeholder="ACG类型"
+        @change="search">
         <mz-option v-for="item of acgTypeList"
           :key="item.value"
           :value="item.value"
@@ -12,7 +13,8 @@
 
       <mz-select v-model="origin"
         style="width:100px;"
-        placeholder="来源">
+        placeholder="来源"
+        @change="search">
         <mz-option v-for="item of originList"
           :key="item.value"
           :value="item.value"
@@ -21,7 +23,8 @@
 
       <mz-select v-model="state"
         style="width:100px;"
-        placeholder="状态">
+        placeholder="状态"
+        @change="search">
         <mz-option v-for="item of stateList"
           :key="item.value"
           :value="item.value"
@@ -29,11 +32,17 @@
       </mz-select>
     </template>
 
+    <mz-row>
+      <mz-col v-for="item of informationList"
+        :key="item._id">{{item.title}}</mz-col>
+    </mz-row>
+
     <template #bottom>
       <mz-pagination v-model="pageIndex"
         :layout="['total', '|', 'prev', 'pager', 'next']"
         :pageSize.sync="pageSize"
-        :total="count"></mz-pagination>
+        :total="count"
+        @change="reFindList"></mz-pagination>
     </template>
   </acg-base-layout>
 </template>
@@ -60,8 +69,9 @@ export default class AdminInformation extends Vue {
     { value: 1, label: '上线' }
   ]
   pageIndex = 1
-  pageSize = 20
+  pageSize = 40
   count = 0
+  informationList = []
 
   async reFindFromList() {
     const list = await this.$get('information/origins', {
@@ -75,11 +85,19 @@ export default class AdminInformation extends Vue {
     const { list, count } = await this.$get('information', {
       params: {
         acgType: this.acgType || undefined,
+        origin: this.origin || undefined,
         pageIndex: this.pageIndex,
         pageSize: this.pageSize,
-        state: this.state || undefined
+        state: this.state === '' ? undefined : this.state
       }
     })
+    this.count = count
+    this.informationList = list
+  }
+
+  search() {
+    this.pageIndex = 1
+    this.$nextTick(this.reFindList)
   }
 
   @Watch('acgType')

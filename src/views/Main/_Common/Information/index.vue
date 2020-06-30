@@ -76,11 +76,6 @@ export default class AcgInformation extends AcgVue {
     }
   }
 
-  created() {
-    const p = this.$route.query.p as string
-    this.pageIndex = p ? parseInt(p) : 1
-  }
-
   @Watch('pageIndex')
   async onIndexChange(val: number, oldVal?: number) {
     if (oldVal !== -1) {
@@ -90,6 +85,11 @@ export default class AcgInformation extends AcgVue {
       window.scrollTo({ top: 258, behavior: 'smooth' })
     }
     this.fetchInformationList()
+  }
+
+  created() {
+    const p = this.$route.query.p as string
+    this.pageIndex = p ? parseInt(p) : 1
   }
 }
 </script>
