@@ -10,7 +10,7 @@ declare global {
     }
 
     interface BaikeData {
-      _id: string | number
+      _id?: string | number
       title: string
       author: string
       cover: string
