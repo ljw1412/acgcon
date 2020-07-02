@@ -12,10 +12,16 @@
         </div>
       </div>
       <div class="basic-option">
-        <mz-input v-model="info.title"
-          placeholder="请输入标题"></mz-input>
-        <mz-input v-model="info.author"
-          placeholder="请输入作者/制作公司"></mz-input>
+        <mz-material-input v-model="info.title"
+          label="标题"
+          show-word-count
+          maxlength="50"
+          hint="最多输入50个字符"></mz-material-input>
+        <mz-material-input v-model="info.author"
+          label="作者/制作公司"
+          show-word-count
+          maxlength="20"
+          hint="最多输入20个字符"></mz-material-input>
         <textarea v-model="info.desc"
           placeholder="请输入描述"></textarea>
         <div>标签</div>
