@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import createAxios, { get, post, del } from '@/utils/api'
 import { getLogger } from '@/utils/logger'
+import * as directives from './directives'
 import manzhaiUI from 'manzhai-ui'
 import '@ljw1412/ionicons-sprite'
 
@@ -17,6 +18,10 @@ import draggable from 'vuedraggable'
 Vue.config.productionTip = false
 
 Vue.use(manzhaiUI)
+
+Object.keys(directives).forEach(key => {
+  Vue.directive(key, directives[key as keyof typeof directives])
+})
 
 Vue.component('draggable', draggable)
 Vue.component('AcgTitleCard', AcgTitleCard)

@@ -1,5 +1,6 @@
 <template>
-  <mz-layout class="acg-admin">
+  <mz-layout v-cover
+    class="acg-admin">
     <mz-aside class="acg-admin-aside">
       <div class="acg-admin-logo">ACG控后台管理</div>
       <mz-navigation :data="navigations"></mz-navigation>
@@ -58,14 +59,6 @@ export default class AcgAdmin extends Vue {
     //   to: { name: 'adminCrawler' }
     // }
   ]
-
-  beforeCreate() {
-    document.documentElement.dataset.fullscreen = ''
-  }
-
-  destroyed() {
-    delete document.documentElement.dataset.fullscreen
-  }
 }
 </script>
 

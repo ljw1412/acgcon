@@ -1,5 +1,5 @@
 <template>
-  <div class="baike-editor-core">
+  <mz-card class="baike-editor-core">
     <div class="basic-data">
       <div class="cover-uploader">
         <acg-image v-if="info.cover"
@@ -8,7 +8,7 @@
           style="text-align: center;">
           <mz-icon name="image-sharp"
             size="40"></mz-icon>
-          <div>封面上传</div>
+          <div style="font-size: 12px;">封面上传</div>
         </div>
       </div>
       <div class="basic-option">
@@ -22,10 +22,13 @@
           show-word-count
           maxlength="20"
           hint="最多输入20个字符"></mz-material-input>
-        <textarea v-model="info.desc"
-          placeholder="请输入描述"></textarea>
         <div>标签</div>
       </div>
+    </div>
+    <div class="basic-desc">
+      <h3>简介</h3>
+      <mz-textarea v-model="info.desc"
+        placeholder="请输入描述"></mz-textarea>
     </div>
     <div class="basic-info">
       <h3>基本信息</h3>
@@ -51,7 +54,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </mz-card>
 </template>
 
 <script lang="ts">
@@ -95,12 +98,14 @@ export default class AcgBaikeEditorBasic extends Vue {
     }
 
     .basic-option {
+      flex: 1 0 auto;
       > * + * {
         margin-top: 10px;
       }
     }
   }
 
+  .basic-desc,
   .basic-info {
     margin-top: 20px;
     h3 {

@@ -1,15 +1,17 @@
 <template>
-  <mz-layout class="acg-baike-editor">
+  <mz-layout v-cover
+    class="acg-baike-editor">
     <mz-header>
       <h1>百科编辑器</h1>
       <acg-user-avatar class="start-header__avatar" />
     </mz-header>
 
-    <mz-main class="editor-container">
-      <mz-card>
-        <core :info="info"></core>
-      </mz-card>
+    <mz-main>
+      <div class="editor-container">
 
+        <core :info="info"></core>
+
+      </div>
     </mz-main>
   </mz-layout>
 </template>
@@ -28,15 +30,25 @@ export default class AcgBaikeEditor extends Vue {
 
 <style lang="scss">
 .acg-baike-editor {
+  height: 100%;
+  overflow: hidden;
+
   .mz-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
     color: $color-text-primary;
+    background-color: $color-white;
+  }
+
+  .mz-main {
+    padding: 20px 0;
+    overflow-y: auto;
   }
 
   .editor-container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
   }
