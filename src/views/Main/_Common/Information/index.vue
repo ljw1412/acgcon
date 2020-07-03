@@ -3,6 +3,8 @@
     <mz-loading background="transparent"
       :loading="loading">
       <mz-row :gutter="20"
+        tag="transition-group"
+        name="mz-zoom"
         class="information-list"
         style="min-height:500px;">
         <mz-col v-for="item of list"
