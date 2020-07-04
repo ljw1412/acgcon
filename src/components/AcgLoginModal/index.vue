@@ -6,18 +6,20 @@
         :z-index="0"></mz-mask>
 
       <div class="acg-login-modal__body">
-        <span class="acg-login-modal__title">登录</span>
-        <mz-button class="acg-login-modal__close-btn"
-          flat
-          icon
-          width="60px"
-          height="60px"
-          radius="0"
-          text-color="#fff"
-          @click="$emit('visible:change',false)">
-          <mz-icon name="close"
-            size="32"></mz-icon>
-        </mz-button>
+        <template v-if="state !== 'success'">
+          <span class="acg-login-modal__title">登录</span>
+          <mz-button class="acg-login-modal__close-btn"
+            flat
+            icon
+            width="60px"
+            height="60px"
+            radius="0"
+            text-color="#fff"
+            @click="$emit('visible:change',false)">
+            <mz-icon name="close"
+              size="32"></mz-icon>
+          </mz-button>
+        </template>
 
         <mz-state :value="state">
           <template #username>
@@ -61,6 +63,17 @@
             </login-field>
           </template>
           <template #success>
+            <div class="login-success">
+              <user-card animation
+                :user="finalUser"></user-card>
+              <div style="text-align: right;">
+                <mz-button size="large"
+                  width="100px"
+                  height="40px"
+                  text-color="#fff"
+                  @click="$emit('visible:change',false)">进入</mz-button>
+              </div>
+            </div>
           </template>
         </mz-state>
       </div>
@@ -73,8 +86,9 @@
 import { Component, Vue, Model, Watch } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import LoginField from './LoginField.vue'
+import UserCard from './UserCard.vue'
 
-@Component({ components: { LoginField } })
+@Component({ components: { LoginField, UserCard } })
 export default class AcgLoginModal extends Vue {
   @Model('visible:change', Boolean)
   readonly visible!: boolean
@@ -82,6 +96,7 @@ export default class AcgLoginModal extends Vue {
   readonly fetchCurrentUser!: Function
 
   user: Record<string, string> = { name: '', password: '', avatar: '' }
+  finalUser = {}
   loading = false
   error = ''
   state = ''
@@ -135,6 +150,7 @@ export default class AcgLoginModal extends Vue {
         password: this.user.password
       })
       this.state = 'success'
+      this.finalUser = res
       this.loading = false
       this.fetchCurrentUser(res)
     } catch (error) {
@@ -210,6 +226,13 @@ export default class AcgLoginModal extends Vue {
       line-height: 60px;
       text-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.75);
     }
+  }
+
+  .login-success {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 </style>

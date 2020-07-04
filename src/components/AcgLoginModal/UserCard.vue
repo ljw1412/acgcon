@@ -103,11 +103,23 @@ export default class AcgUserCard extends Vue {
   .nickname {
     fill: #fff;
   }
+
+  text,
+  image {
+    opacity: 0;
+    animation: acg-user-card-text 1s ease-in 2s forwards;
+  }
 }
 
 @keyframes acg-user-card-dash {
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes acg-user-card-text {
+  to {
+    opacity: 1;
   }
 }
 </style>
