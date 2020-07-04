@@ -86,13 +86,6 @@ export default class AcgNavigation extends Vue {
   &__right {
     flex-shrink: 0;
   }
-
-  &__user {
-    display: none;
-    width: 60px;
-    height: 60px;
-    background-color: red;
-  }
 }
 
 .mz-fixed-section.is-sticky {
@@ -101,9 +94,6 @@ export default class AcgNavigation extends Vue {
     background-color: $color-card-background;
     box-shadow: 0 4px 6px $color-border-base;
     transition: background-color 0.2s;
-    &__user {
-      display: block;
-    }
 
     .link {
       color: $color-text-primary;

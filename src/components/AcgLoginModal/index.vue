@@ -2,8 +2,7 @@
   <transition name="mz-fade">
     <div v-show="visible"
       class="acg-login-modal">
-      <mz-mask blur="5px"
-        :visible="true"
+      <mz-mask :visible="true"
         :z-index="0"></mz-mask>
 
       <div class="acg-login-modal__body">
@@ -34,7 +33,6 @@
             </login-field>
           </template>
           <template #password>
-
             <login-field v-model="user.password"
               ref="passwordField"
               type="password"
@@ -62,7 +60,8 @@
               </div>
             </login-field>
           </template>
-          <template #success></template>
+          <template #success>
+          </template>
         </mz-state>
       </div>
     </div>
@@ -139,7 +138,7 @@ export default class AcgLoginModal extends Vue {
       this.loading = false
       this.fetchCurrentUser(res)
     } catch (error) {
-      this.setFieldError(error.data.message)
+      this.setFieldError(error.message)
     }
   }
 
@@ -171,6 +170,7 @@ export default class AcgLoginModal extends Vue {
   left: 0;
   width: 100%;
   height: 100%;
+  backdrop-filter: blur(5px);
 
   &__body {
     position: relative;
