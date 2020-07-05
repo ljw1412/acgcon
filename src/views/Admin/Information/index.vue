@@ -32,10 +32,15 @@
       </mz-select>
     </template>
 
-    <mz-row>
-      <mz-col v-for="item of informationList"
-        :key="item._id">{{item.title}}</mz-col>
-    </mz-row>
+    <mz-table-simple lined
+      header
+      :data="tableData">
+      <template #td="{item}">
+        <div v-if="item.key">
+          {{item.data[item.key]}}
+        </div>
+      </template>
+    </mz-table-simple>
 
     <template #bottom>
       <mz-pagination v-model="pageIndex"
@@ -71,7 +76,22 @@ export default class AdminInformation extends Vue {
   pageIndex = 1
   pageSize = 40
   count = 0
-  informationList = []
+  informationList: Record<string, any>[] = []
+
+  get tableData() {
+    const list: any[][] = [['类型', '标题', '来源', '时间', '状态', '操作']]
+    this.informationList.forEach(item => {
+      list.push([
+        { key: 'acgTypeCN', data: item },
+        { key: 'title', data: item },
+        { key: 'originCN', data: item },
+        { key: 'time', data: item },
+        { key: 'state', data: item },
+        { data: item }
+      ])
+    })
+    return list
+  }
 
   async reFindFromList() {
     const list = await this.$get('information/origins', {
