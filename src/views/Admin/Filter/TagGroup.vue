@@ -1,8 +1,23 @@
 <template>
   <mz-card class="acg-admin-tag-group"
     outlined>
-    <div class="tag-group-title flex-center-space-between">
-      <div>{{data.name}}</div>
+    <div class="tag-group-header flex-center-space-between">
+      <div class="tag-group-title">
+        <span style="margin-right: 4px;">{{data.name}}</span>
+        <template v-if="!isEdit">
+          <mz-tag v-if="data.multiple"
+            round
+            outlined
+            color="var(--color-text-primary)"
+            size="small">多选</mz-tag>
+        </template>
+        <template v-else>
+          <mz-switch v-model="data.multiple"
+            size="small"
+            @change="handleMultipleChange"></mz-switch>
+          <span style="font-size:14px;margin-left: 4px;">{{data.multiple?'多选':'单选'}}</span>
+        </template>
+      </div>
       <div class="tag-group-action">
         <!-- 标签组排序 -->
         <mz-icon v-if="sort"
@@ -39,6 +54,7 @@
       </div>
     </div>
 
+    <!-- 标签组下的标签列表 -->
     <draggable v-show="!sort"
       v-model="data.tags"
       tag="div"
@@ -54,6 +70,7 @@
           :key="tag._id"
           @close="handleDeleteTag(tag)">{{tag.name}}</mz-tag>
       </transition-group>
+      <!-- 新增输入框 -->
       <mz-input v-show="isEdit"
         slot="footer"
         ref="input"
@@ -123,6 +140,14 @@ export default class AcgAdminTagGroup extends Vue {
     await this.$del(`tag-group/${this.data._id}`, { data: this.baseParams })
   }
 
+  async saveGroupMultiple(state: boolean) {
+    return await this.$post('tag-group/update_multiple', {
+      state,
+      groupId: this.data._id,
+      ...this.baseParams
+    })
+  }
+
   async deleteTag(id: string) {
     return this.$del(`tag/${id}`, {
       data: { groupId: this.data._id, ...this.baseParams }
@@ -143,6 +168,18 @@ export default class AcgAdminTagGroup extends Vue {
       list: this.data.tags.map((item: any) => item._id),
       ...this.baseParams
     })
+  }
+
+  async handleMultipleChange(state: boolean) {
+    try {
+      await this.saveGroupMultiple(state)
+    } catch (error) {
+      this.data.multiple = !state
+      this.$snackbar.show({
+        content: '修改多选状态失败',
+        color: 'danger'
+      })
+    }
   }
 
   async groupDelete() {
@@ -221,8 +258,13 @@ export default class AcgAdminTagGroup extends Vue {
   height: 100%;
 }
 
-.tag-group-title {
+.tag-group-header {
   padding: 15px 10px;
+}
+
+.tag-group-title {
+  display: flex;
+  align-items: center;
 }
 
 .tag-group-tags {
