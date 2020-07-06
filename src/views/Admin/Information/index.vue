@@ -34,6 +34,7 @@
 
     <mz-table-simple lined
       header
+      class="query-table"
       :data="tableData">
       <template #td="{item}">
         <div v-if="item.key">
@@ -134,4 +135,8 @@ export default class AdminInformation extends Vue {
 </script>
 
 <style lang="scss">
+.admin-information .query-table {
+  color: var(--color-text-primary);
+  background-color: var(--color-card-background);
+}
 </style>

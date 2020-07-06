@@ -19,7 +19,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { getBlankInfo } from './helper'
-import Core from './Core.vue'
+import Core from './Core/index.vue'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 
 @Component({ components: { Core, AcgUserAvatar } })
@@ -51,6 +51,12 @@ export default class AcgBaikeEditor extends Vue {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+  }
+}
+
+:root[data-theme='dark'] {
+  .acg-baike-editor .mz-header {
+    background-color: $color-primary;
   }
 }
 </style>

@@ -33,9 +33,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import AcgVue from '@/mixins/AcgVue'
+import { namespace } from 'vuex-class'
 
 @Component
 export default class AcgBaikeContent extends AcgVue {
+  @(namespace('user').Getter('isAdmin'))
+  readonly isAdmin!: boolean
+
   list: Acgcon.BaikeData[] = [
     {
       _id: 1,

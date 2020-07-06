@@ -22,7 +22,16 @@
           show-word-count
           maxlength="20"
           hint="最多输入20个字符"></mz-material-input>
-        <div>标签</div>
+        <div>
+          <h3>标签</h3>
+          <mz-tag v-for="tag of info.tags"
+            :key="tag._id">{{tag.name}}</mz-tag>
+          <mz-tag outlined
+            v-ripple
+            color="var(--color-text-primary)"
+            class="is-pointer"
+            @click="isDisplayTagSelectModal=true">标签配置</mz-tag>
+        </div>
       </div>
     </div>
     <div class="basic-desc">
@@ -54,17 +63,25 @@
         </li>
       </ul>
     </div>
+
+    <tag-select-modal v-model="isDisplayTagSelectModal"
+      acgType="animation"
+      subType="animation"
+      :defalutValue="info.tags"
+      @save="handleTagSave"></tag-select-modal>
   </mz-card>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
+import TagSelectModal from './TagSelectModal.vue'
 
-@Component
+@Component({ components: { TagSelectModal } })
 export default class AcgBaikeEditorBasic extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   readonly info!: Acgcon.BaikeData
 
+  isDisplayTagSelectModal = false
   infoList: Record<string, any>[] = []
   basicItem = { name: '', value: '' }
 
@@ -74,6 +91,10 @@ export default class AcgBaikeEditorBasic extends Vue {
       if (!this.info.basic) this.$set(this.info, 'basic', [])
       this.info.basic!.push({ name, value })
     }
+  }
+
+  handleTagSave(tags: Acgcon.Tag[]) {
+    this.info.tags = tags
   }
 }
 </script>
@@ -98,9 +119,14 @@ export default class AcgBaikeEditorBasic extends Vue {
     }
 
     .basic-option {
+      width: 0;
       flex: 1 0 auto;
       > * + * {
         margin-top: 10px;
+      }
+      .mz-tag {
+        margin-right: 5px;
+        margin-bottom: 5px;
       }
     }
   }

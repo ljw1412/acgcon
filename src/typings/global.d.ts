@@ -60,6 +60,25 @@ declare global {
       title: string
       items: BaikeSectionItem[]
     }
+
+    interface TagGroup {
+      _id: string
+      name: string
+      acgType: string
+      type: string
+      icon: string
+      order: string
+      tags: Tag[]
+      multiple: boolean
+    }
+
+    interface Tag {
+      _id: string
+      name: string
+      order: string
+      isAll: boolean
+      checked?: boolean
+    }
   }
 
   interface Window {

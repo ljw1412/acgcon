@@ -61,14 +61,15 @@
       v-model="data.tags"
       tag="div"
       class="tag-group-tags"
+      filter=".tag-item--all"
       :class="{'is-sort':isTagSort}"
       :draggable="isTagSort?'.tag-item':''">
       <transition-group tag="div"
         name="flip-list">
         <mz-tag v-for="tag of data.tags"
-          class="tag-item"
-          v-elevation="isTagSort ? 5 : 0"
-          :closable="isEdit"
+          v-elevation="isTagSort && !tag.isAll ? 5 : 0"
+          :class="tag.isAll ? 'tag-item--all' : 'tag-item'"
+          :closable="isEdit && !tag.isAll"
           :key="tag._id"
           @close="handleDeleteTag(tag)">{{tag.name}}</mz-tag>
       </transition-group>
