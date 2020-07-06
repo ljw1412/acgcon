@@ -49,7 +49,7 @@ export default class AcgBaikeFilter extends AcgVue {
     this.loading = true
     try {
       const tagList = await this.$get('tag-group', {
-        params: { acgType: this.acgType, type: this.baikeType }
+        params: { acgType: this.acgType, type: this.subType }
       })
       this.tagList = tagList
     } catch (error) {
@@ -64,7 +64,7 @@ export default class AcgBaikeFilter extends AcgVue {
   }
 
   @Watch('acgType')
-  @Watch('baikeType')
+  @Watch('subType')
   onTypeChange() {
     this.value = {}
     this.$nextTick(this.fetchTags)

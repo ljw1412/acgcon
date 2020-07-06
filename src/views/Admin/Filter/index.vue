@@ -67,7 +67,7 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { getBaikeTypesByAcgType } from '@/configs/index'
+import { getSubTypesByAcgType } from '@/configs/index'
 import { TagGroupManager } from './action'
 import TagGroup from './TagGroup.vue'
 
@@ -137,7 +137,7 @@ export default class AcgAdminFilter extends Vue {
 
   @Watch('acgType')
   onAcgTypeChange(val: Acgcon.Types) {
-    this.subTypeList = getBaikeTypesByAcgType(val)
+    this.subTypeList = getSubTypesByAcgType(val)
     this.subType = this.subTypeList[0].value
   }
 

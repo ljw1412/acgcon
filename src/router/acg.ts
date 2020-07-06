@@ -27,7 +27,7 @@ export default [
         meta: { title: '资讯' }
       },
       {
-        path: ':acgType(animation|comic|game)/baike/:baikeType?',
+        path: ':acgType(animation|comic|game)/baike/:subType?',
         name: 'baike',
         component: () =>
           import(/* webpackChunkName: "baike" */ '@~/Baike/List/index.vue'),
@@ -36,7 +36,7 @@ export default [
     ]
   },
   {
-    path: '/baike/:acgType(animation|comic|game)/:baikeType?/detail/:id',
+    path: '/baike/:acgType(animation|comic|game)/:subType?/detail/:id',
     name: 'baikeDetail',
     component: () =>
       import(/* webpackChunkName: "baike" */ '@~/Baike/Detail/index.vue'),

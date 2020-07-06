@@ -35,22 +35,22 @@ const navMap: Record<string, Acgcon.NavigationItem[]> = {
     {
       label: '声优',
       type: 'baike',
-      to: { name: 'baike', params: { baikeType: 'va' } }
+      to: { name: 'baike', params: { subType: 'va' } }
     },
     {
       label: '角色',
       type: 'baike',
-      to: { name: 'baike', params: { baikeType: 'character' } }
+      to: { name: 'baike', params: { subType: 'character' } }
     },
     {
       label: '监督',
       type: 'baike',
-      to: { name: 'baike', params: { baikeType: 'director' } }
+      to: { name: 'baike', params: { subType: 'director' } }
     },
     {
       label: '公司',
       type: 'baike',
-      to: { name: 'baike', params: { baikeType: 'company' } }
+      to: { name: 'baike', params: { subType: 'company' } }
     }
   ],
   comic: [
@@ -62,17 +62,17 @@ const navMap: Record<string, Acgcon.NavigationItem[]> = {
     {
       label: '作者',
       type: 'baike',
-      to: { name: 'baike', params: { baikeType: 'author' } }
+      to: { name: 'baike', params: { subType: 'author' } }
     },
     {
       label: '杂志',
       type: 'baike',
-      to: { name: 'baike', params: { baikeType: 'magazine' } }
+      to: { name: 'baike', params: { subType: 'magazine' } }
     },
     {
       label: '公司',
       type: 'baike',
-      to: { name: 'baike', params: { baikeType: 'company' } }
+      to: { name: 'baike', params: { subType: 'company' } }
     }
   ],
   game: [
@@ -84,7 +84,7 @@ const navMap: Record<string, Acgcon.NavigationItem[]> = {
     {
       label: '公司',
       type: 'baike',
-      to: { name: 'baike', params: { baikeType: 'company' } }
+      to: { name: 'baike', params: { subType: 'company' } }
     }
   ]
 }
@@ -103,11 +103,11 @@ export function getNavByAcgType(
   return list.concat([...navMap.common, ...navMap[acgType]])
 }
 
-export function getBaikeTypesByAcgType(acgType: Acgcon.Types) {
+export function getSubTypesByAcgType(acgType: Acgcon.Types) {
   let navList = getNavByAcgType(acgType)
   navList = navList.filter(item => item.type === 'baike')
   return navList.map(item => {
     const params = (item.to as Location).params
-    return { label: item.label, value: params ? params.baikeType : acgType }
+    return { label: item.label, value: params ? params.subType : acgType }
   })
 }

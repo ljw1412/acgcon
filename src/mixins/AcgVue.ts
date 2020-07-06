@@ -6,7 +6,7 @@ export default class AcgVue extends Vue {
     return this.$route.params.acgType
   }
 
-  get baikeType() {
-    return this.$route.params.baikeType || this.acgType
+  get subType() {
+    return this.$route.params.subType || this.acgType
   }
 }
