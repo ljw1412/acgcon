@@ -39,6 +39,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Model, Ref, Watch } from 'vue-property-decorator'
+import { MzInput } from 'manzhai-ui/types/packages/Input'
 
 @Component
 export default class AcgLoginField extends Vue {
@@ -57,7 +58,7 @@ export default class AcgLoginField extends Vue {
   @Prop(String)
   readonly error!: string
   @Ref('input')
-  readonly inputRef!: { $refs: { input: { focus: () => void } } }
+  readonly inputRef!: MzInput
 
   get isShowError() {
     return !!this.error
@@ -73,7 +74,7 @@ export default class AcgLoginField extends Vue {
 
   focus() {
     try {
-      this.inputRef.$refs.input.focus()
+      this.inputRef.focus()
     } catch (error) {}
   }
 

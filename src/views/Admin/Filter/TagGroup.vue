@@ -1,9 +1,11 @@
 <template>
-  <mz-card class="acg-admin-tag-group"
-    outlined>
+  <mz-card outlined
+    class="acg-admin-tag-group"
+    :class="{'is-edit': isEdit}">
     <div class="tag-group-header flex-center-space-between">
       <div class="tag-group-title">
-        <span style="margin-right: 4px;">{{data.name}}</span>
+        <span class="tag-group-name"
+          @click="isEdit && $emit('rename',data)">{{data.name}}</span>
         <template v-if="!isEdit">
           <mz-tag v-if="data.multiple"
             round
@@ -14,7 +16,7 @@
         <template v-else>
           <mz-switch v-model="data.multiple"
             size="small"
-            @change="handleMultipleChange"></mz-switch>
+            @change="$emit('multiple-change', $event, data)"></mz-switch>
           <span style="font-size:14px;margin-left: 4px;">{{data.multiple?'多选':'单选'}}</span>
         </template>
       </div>
@@ -90,6 +92,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Ref } from 'vue-property-decorator'
 import { MzInput } from 'manzhai-ui/types/packages/Input'
+import { TagManager } from './action'
 
 @Component
 export default class AcgAdminTagGroup extends Vue {
@@ -105,6 +108,7 @@ export default class AcgAdminTagGroup extends Vue {
   @Ref('input')
   readonly inputRef!: MzInput
 
+  tagManager!: TagManager
   isDisplayDropdown = false
   isTagSort = false
   isEdit = false
@@ -133,66 +137,7 @@ export default class AcgAdminTagGroup extends Vue {
   ]
 
   get baseParams() {
-    return { acgType: this.acgType, type: this.subType }
-  }
-
-  async deleteGroup() {
-    await this.$del(`tag-group/${this.data._id}`, { data: this.baseParams })
-  }
-
-  async saveGroupMultiple(state: boolean) {
-    return await this.$post('tag-group/update_multiple', {
-      state,
-      groupId: this.data._id,
-      ...this.baseParams
-    })
-  }
-
-  async deleteTag(id: string) {
-    return this.$del(`tag/${id}`, {
-      data: { groupId: this.data._id, ...this.baseParams }
-    })
-  }
-
-  async saveTag(name: string) {
-    return await this.$post('tag', {
-      name,
-      groupId: this.data._id,
-      ...this.baseParams
-    })
-  }
-
-  async saveTagOrder() {
-    return await this.$post('tag/update_order', {
-      groupId: this.data._id,
-      list: this.data.tags.map((item: any) => item._id),
-      ...this.baseParams
-    })
-  }
-
-  async handleMultipleChange(state: boolean) {
-    try {
-      await this.saveGroupMultiple(state)
-    } catch (error) {
-      this.data.multiple = !state
-      this.$snackbar.show({
-        content: '修改多选状态失败',
-        color: 'danger'
-      })
-    }
-  }
-
-  async groupDelete() {
-    try {
-      await this.$modal.confirm({
-        width: '400px',
-        title: '警告',
-        content: `确认要删除标签组“${this.data.name}”吗？(此操作会删除所有该标签组下面的标签)`,
-        confirm: { color: 'danger' }
-      })
-      await this.deleteGroup()
-      this.$emit('delete', this.data)
-    } catch (error) {}
+    return { groupId: this.data._id, acgType: this.acgType, type: this.subType }
   }
 
   async handleAction(action: string) {
@@ -200,7 +145,7 @@ export default class AcgAdminTagGroup extends Vue {
     await this.$nextTick()
     switch (action) {
       case 'delete':
-        this.groupDelete()
+        this.$emit('delete', this.data)
         break
       case 'edit':
         this.isEdit = true
@@ -210,7 +155,9 @@ export default class AcgAdminTagGroup extends Vue {
         this.tagsBak = this.data.tags
         break
       case 'sort-save':
-        const result = await this.saveTagOrder()
+        const result = await this.tagManager.updateOrder(
+          this.data.tags.map((item: any) => item._id)
+        )
         this.data.tags = result
         this.isTagSort = false
         break
@@ -222,16 +169,8 @@ export default class AcgAdminTagGroup extends Vue {
   }
 
   async handleDeleteTag(tag: Record<string, any>) {
-    try {
-      await this.$modal.confirm({
-        width: '300px',
-        title: '警告',
-        content: `确认要删除标签“${tag.name}”吗？`,
-        confirm: { color: 'danger' }
-      })
-      const result = await this.deleteTag(tag._id)
-      this.data.tags = result
-    } catch (error) {}
+    const result = await this.tagManager.delete(tag)
+    result && (this.data.tags = result)
   }
 
   async handleAddTag() {
@@ -239,7 +178,7 @@ export default class AcgAdminTagGroup extends Vue {
     if (text) {
       this.isAdding = true
       try {
-        const result = await this.saveTag(text)
+        const result = await this.tagManager.create(text)
         this.data.tags = result
         this.text = ''
       } catch (error) {
@@ -249,6 +188,10 @@ export default class AcgAdminTagGroup extends Vue {
         this.inputRef.focus()
       }
     }
+  }
+
+  created() {
+    this.tagManager = new TagManager(this)
   }
 }
 </script>
@@ -265,6 +208,14 @@ export default class AcgAdminTagGroup extends Vue {
 .tag-group-title {
   display: flex;
   align-items: center;
+}
+
+.tag-group-name {
+  margin-right: 4px;
+}
+
+.acg-admin-tag-group.is-edit .tag-group-name {
+  cursor: pointer;
 }
 
 .tag-group-tags {

@@ -56,7 +56,9 @@
             :sort="sort"
             :acg-type="acgType"
             :sub-type="subType"
-            @delete="handleTagGroupDelete"></tag-group>
+            @rename="handleRename"
+            @delete="handleTagGroupDelete"
+            @multiple-change="handleMultipleChange"></tag-group>
         </mz-col>
       </transition-group>
     </draggable>
@@ -66,10 +68,12 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { getBaikeTypesByAcgType } from '@/configs/index'
+import { TagGroupManager } from './action'
 import TagGroup from './TagGroup.vue'
 
 @Component({ components: { TagGroup } })
 export default class AcgAdminFilter extends Vue {
+  tagGroupManager!: TagGroupManager
   acgType = ''
   acgTypeList = [
     { value: 'animation', label: '动画' },
@@ -87,37 +91,17 @@ export default class AcgAdminFilter extends Vue {
   }
 
   async fetchFilterList() {
-    this.list = await this.$get('tag-group', { params: this.baseParams })
-  }
-
-  async createFilter(name: string) {
-    return await this.$post('tag-group', { name, ...this.baseParams })
-  }
-
-  async saveGroupOrder() {
-    await this.$post('tag-group/update_order', {
-      list: this.list.map(item => item._id),
-      ...this.baseParams
-    })
+    this.list = await this.tagGroupManager.list()
   }
 
   async resetCache() {
-    await this.$post('tag-group/reset_cache', this.baseParams)
-    this.$modal.alert('重置缓存成功', '提示')
+    await this.tagGroupManager.resetCache()
     this.fetchFilterList()
   }
 
   async displayGroupAddModal() {
-    try {
-      const text = await this.$modal.prompt({
-        title: '新增标签组',
-        content: '请输入标签组名称',
-        rules: { test: /.{1,8}/, message: '请输入1-8个字符' }
-      })
-      const tagGroup = await this.createFilter(text as string)
-      // await this.fetchFilterList()
-      this.list.push(tagGroup)
-    } catch (error) {}
+    const tagGroup = await this.tagGroupManager.create()
+    tagGroup && this.list.push(tagGroup)
   }
 
   handleSort() {
@@ -130,14 +114,25 @@ export default class AcgAdminFilter extends Vue {
     this.list = this.listBak
   }
 
+  async handleMultipleChange(state: boolean, data: any) {
+    const success = await this.tagGroupManager.updateMultiple(data._id, state)
+    !success && (data.multiple = !state)
+  }
+
   async handleSaveSort() {
-    await this.saveGroupOrder()
+    await this.tagGroupManager.updateOrder(this.list.map(item => item._id))
     await this.fetchFilterList()
     this.sort = false
   }
 
-  handleTagGroupDelete(item: any) {
-    this.list.remove(item)
+  async handleRename(item: any) {
+    const name = await this.tagGroupManager.rename(item._id, item.name)
+    name && (item.name = name)
+  }
+
+  async handleTagGroupDelete(item: any) {
+    const success = await this.tagGroupManager.delete(item)
+    success && this.list.remove(item)
   }
 
   @Watch('acgType')
@@ -149,6 +144,10 @@ export default class AcgAdminFilter extends Vue {
   @Watch('subType')
   onSubTypeChange() {
     this.fetchFilterList()
+  }
+
+  created() {
+    this.tagGroupManager = new TagGroupManager(this)
   }
 
   mounted() {
