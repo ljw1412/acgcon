@@ -28,7 +28,7 @@
             :key="tag._id">{{tag.name}}</mz-tag>
           <mz-tag outlined
             v-ripple
-            color="var(--color-text-primary)"
+            color="var(--color-text-secondary)"
             class="is-pointer"
             @click="isDisplayTagSelectModal=true">标签配置</mz-tag>
         </div>
@@ -41,32 +41,30 @@
     </div>
     <div class="basic-info">
       <h3>基本信息</h3>
-      <ul>
-        <li v-for="(info,index) of info.basic"
-          :key="index">
-          <span>{{info.name}}</span>:
+      <mz-row style="margin-bottom: 10px;">
+        <mz-col v-for="(info,index) of info.basic"
+          :key="index"
+          :sm="12"
+          :md="8">
+          <span>{{info.name}}</span>
+          <span>:</span>
           <span>{{info.value}}</span>
-        </li>
-        <li>
-          <mz-input-group>
-            <mz-input v-model="basicItem.name"
-              shadow
-              style="width: 20%"
-              placeholder="属性名称"></mz-input>
-            <mz-input v-model="basicItem.value"
-              shadow
-              placeholder="属性值"></mz-input>
-            <mz-button color="primary"
-              shadow
-              @click="addInfoBasic">新增</mz-button>
-          </mz-input-group>
-        </li>
-      </ul>
+        </mz-col>
+      </mz-row>
+      <mz-input-group>
+        <mz-input v-model="basicText"
+          shadow
+          placeholder="格式为 属性名称:属性值，多条以”;“分隔。"
+          @keydown.native.enter="addInfoBasic"></mz-input>
+        <mz-button color="primary"
+          shadow
+          @click="addInfoBasic">添加</mz-button>
+      </mz-input-group>
     </div>
 
     <tag-select-modal v-model="isDisplayTagSelectModal"
-      acgType="animation"
-      subType="animation"
+      :acgType="$route.query.acgType"
+      :subType="$route.query.subType"
       :defalutValue="info.tags"
       @save="handleTagSave"></tag-select-modal>
   </mz-card>
@@ -83,13 +81,18 @@ export default class AcgBaikeEditorBasic extends Vue {
 
   isDisplayTagSelectModal = false
   infoList: Record<string, any>[] = []
-  basicItem = { name: '', value: '' }
+  basicText = ''
 
   addInfoBasic() {
-    const { name, value } = this.basicItem
-    if (name.trim() && value.trim()) {
-      if (!this.info.basic) this.$set(this.info, 'basic', [])
-      this.info.basic!.push({ name, value })
+    if (this.basicText.trim()) {
+      const list = this.basicText.split(';')
+      list.forEach(item => {
+        const [name = '', value = ''] = item.split(':')
+        if (name) {
+          this.info.basic!.push({ name: name.trim(), value: value.trim() })
+        }
+      })
+      this.basicText = ''
     }
   }
 

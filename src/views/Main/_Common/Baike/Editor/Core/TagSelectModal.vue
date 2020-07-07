@@ -2,7 +2,7 @@
   <mz-modal v-model="mVisible"
     divider
     outer-scroll
-    title="选择标签"
+    title="配置标签"
     width="600px"
     class="acg-baike-tag-select-modal"
     :close-on-click-mask="false">
@@ -161,7 +161,7 @@ export default class AcgBaikeTagSelectModal extends Vue {
     float: left;
     width: 70%;
     height: 100%;
-    padding: 10px;
+    padding: 6px 10px;
     box-sizing: border-box;
     .mz-tag {
       margin-right: 5px;
