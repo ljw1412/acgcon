@@ -8,9 +8,13 @@
 
     <mz-main>
       <div class="editor-container">
-
         <core :info="info"></core>
-
+        <acg-title-card style="margin-top: 20px; text-align:center;">
+          <mz-icon name="add-circle-sharp"
+            stroke="transparent"
+            size="18" />
+          <span>新增板块</span>
+        </acg-title-card>
       </div>
     </mz-main>
   </mz-layout>
