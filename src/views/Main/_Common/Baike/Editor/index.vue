@@ -8,8 +8,12 @@
 
     <mz-main>
       <div class="editor-container">
-        <core :info="info"></core>
-        <acg-title-card style="margin-top: 20px; text-align:center;">
+        <editor-core :info="info"></editor-core>
+        <editor-section v-for="(section,index) of sections"
+          :key="index"
+          :section="section"></editor-section>
+        <acg-title-card style="margin-top: 20px; text-align:center;"
+          @click.native="createSection">
           <mz-icon name="add-circle-sharp"
             stroke="transparent"
             size="18" />
@@ -22,13 +26,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { getBlankInfo } from './helper'
-import Core from './Core/index.vue'
+import { getBlankInfo, createSection } from './helper'
+import EditorCore from './Core/index.vue'
+import EditorSection from './Section/index.vue'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 
-@Component({ components: { Core, AcgUserAvatar } })
+@Component({ components: { AcgUserAvatar, EditorCore, EditorSection } })
 export default class AcgBaikeEditor extends Vue {
   info = getBlankInfo()
+  sections: Acgcon.BaikeSection[] = []
+
+  createSection() {
+    this.sections.push(createSection())
+  }
 }
 </script>
 

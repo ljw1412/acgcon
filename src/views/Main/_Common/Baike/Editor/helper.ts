@@ -9,3 +9,7 @@ export function getBlankInfo(): Acgcon.BaikeData {
     basic: []
   }
 }
+
+export function createSection(): Acgcon.BaikeSection {
+  return { title: '', items: [] }
+}
