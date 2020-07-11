@@ -37,7 +37,7 @@ export default class AcgBaikeEditor extends Vue {
   sections: Acgcon.BaikeSection[] = []
 
   createSection() {
-    this.sections.push(createSection())
+    this.sections.push(createSection('自定义板块'))
   }
 }
 </script>

@@ -1,5 +1,13 @@
 <template>
-  <mz-card class="baike-editor-core">
+  <acg-title-card class="baike-editor-core">
+    <template #title>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="acg-title-card__title">核心数据</span>
+        <mz-button color="primary"
+          style="width: 100px;">保存</mz-button>
+      </div>
+    </template>
+
     <div class="basic-data">
       <div class="cover-uploader">
         <acg-image v-if="info.cover"
@@ -54,7 +62,7 @@
       <mz-input-group>
         <mz-input v-model="basicText"
           shadow
-          placeholder="格式为 属性名称:属性值，多条以”;“分隔。"
+          placeholder="格式为 属性名称:属性值，多条以“;”分隔。"
           @keydown.native.enter="addInfoBasic"></mz-input>
         <mz-button color="primary"
           shadow
@@ -67,7 +75,7 @@
       :subType="$route.query.subType"
       :defalutValue="info.tags"
       @save="handleTagSave"></tag-select-modal>
-  </mz-card>
+  </acg-title-card>
 </template>
 
 <script lang="ts">
@@ -104,8 +112,6 @@ export default class AcgBaikeEditorBasic extends Vue {
 
 <style lang="scss">
 .baike-editor-core {
-  padding: 20px;
-
   .basic-data {
     display: flex;
     .cover-uploader {

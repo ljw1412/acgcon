@@ -25,6 +25,7 @@
             :color="tag.checked?'var(--color-success)':undefined"
             :text-color="tag.checked?'#ffffff':undefined"
             @click="handleTagClick(tag)">{{tag.name}}</mz-tag>
+          <div v-if="!tagList.length">未配置标签</div>
         </div>
         <div v-if="tagList.length"
           class="tag-list-tips mz-danger--text">

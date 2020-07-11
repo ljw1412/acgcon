@@ -10,6 +10,6 @@ export function getBlankInfo(): Acgcon.BaikeData {
   }
 }
 
-export function createSection(): Acgcon.BaikeSection {
-  return { title: '', items: [] }
+export function createSection(title: string = ''): Acgcon.BaikeSection {
+  return { title, items: [] }
 }
