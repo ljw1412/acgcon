@@ -5,22 +5,26 @@
       <h1>百科编辑器</h1>
       <acg-user-avatar class="start-header__avatar" />
     </mz-header>
+    <mz-layout>
+      <mz-aside width="80px">
+        <editor-sidebar v-model="currentSectionId"
+          @create-section="createSection"></editor-sidebar>
+      </mz-aside>
 
-    <mz-main>
-      <div class="editor-container">
-        <editor-core :info="info"></editor-core>
-        <editor-section v-for="(section,index) of sections"
-          :key="index"
-          :section="section"></editor-section>
-        <acg-title-card style="margin-top: 20px; text-align:center;"
-          @click.native="createSection">
-          <mz-icon name="add-circle-sharp"
-            stroke="transparent"
-            size="18" />
-          <span>新增板块</span>
-        </acg-title-card>
-      </div>
-    </mz-main>
+      <mz-layout>
+        <mz-main>
+          <div class="editor-container">
+            <component :is="currentSectionId==='core'?'editor-core':'editor-section'"
+              :info="info"
+              :section="currentSection"></component>
+          </div>
+        </mz-main>
+
+        <mz-footer style="height: 40px; text-align:right;">
+          <mz-button color="primary">保存</mz-button>
+        </mz-footer>
+      </mz-layout>
+    </mz-layout>
   </mz-layout>
 </template>
 
@@ -28,13 +32,21 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { getBlankInfo, createSection } from './helper'
 import EditorCore from './Core/index.vue'
+import EditorSidebar from './Sidebar.vue'
 import EditorSection from './Section/index.vue'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 
-@Component({ components: { AcgUserAvatar, EditorCore, EditorSection } })
+@Component({
+  components: { AcgUserAvatar, EditorSidebar, EditorCore, EditorSection }
+})
 export default class AcgBaikeEditor extends Vue {
+  currentSectionId = 'core'
   info = getBlankInfo()
   sections: Acgcon.BaikeSection[] = []
+
+  get currentSection() {
+    return {}
+  }
 
   createSection() {
     this.sections.push(createSection('自定义板块'))
@@ -51,9 +63,20 @@ export default class AcgBaikeEditor extends Vue {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 20px;
     color: $color-text-primary;
     background-color: $color-white;
+  }
+
+  .mz-aside,
+  .mz-footer {
+    color: $color-text-primary;
+    background-color: $color-white;
+  }
+
+  .mz-footer {
+    box-sizing: border-box;
+    padding: 4px;
   }
 
   .mz-main {

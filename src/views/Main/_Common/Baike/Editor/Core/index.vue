@@ -3,8 +3,6 @@
     <template #title>
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <span class="acg-title-card__title">核心数据</span>
-        <mz-button color="primary"
-          style="width: 100px;">保存</mz-button>
       </div>
     </template>
 
