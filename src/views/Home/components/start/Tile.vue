@@ -30,7 +30,7 @@ export default class StartTile extends Vue {
           'start-tile--h2': this.h === 2,
           'start-tile--h3': this.h === 3,
           'start-tile--w2': this.w === 2,
-          'is-pointer': this.pointer || this.to || this.href
+          'cursor-pointer': this.pointer || this.to || this.href
         }
       ],
       on: {

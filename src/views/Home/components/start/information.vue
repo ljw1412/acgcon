@@ -51,7 +51,7 @@ export default class StartInformation extends Vue {
       color: $color-text-primary;
       transition: color 0.05s;
       &:hover {
-        color: $color-primary;
+        color: $primary;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
         font-weight: 700;
       }
@@ -73,7 +73,7 @@ export default class StartInformation extends Vue {
   margin-right: 3px;
 }
 .information-title {
-  @include ellipsis;
+  @include text-truncate;
   flex: 1 0 auto;
   width: 0;
 }
@@ -86,7 +86,7 @@ export default class StartInformation extends Vue {
 
 :root[data-theme='dark'] {
   .start-information li > a:hover {
-    color: $color-danger;
+    color: $danger;
   }
 }
 </style>

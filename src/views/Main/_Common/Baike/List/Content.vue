@@ -112,13 +112,13 @@ export default class AcgBaikeContent extends AcgVue {
       box-sizing: border-box;
 
       &__title {
-        @include ellipsis;
+        @include text-truncate;
         font-weight: 500;
         margin-bottom: 4px;
       }
 
       &__tags {
-        @include ellipsis;
+        @include text-truncate;
         margin-bottom: 4px;
         font-size: 0;
         .mz-tag + .mz-tag {
@@ -127,13 +127,13 @@ export default class AcgBaikeContent extends AcgVue {
       }
 
       &__author {
-        @include ellipsis;
+        @include text-truncate;
         color: $color-text-regular;
         margin-bottom: 4px;
       }
 
       &__desc {
-        @include multi-ellipsis(6);
+        @include multi-text-truncate(6);
         color: $color-text-secondary;
       }
     }

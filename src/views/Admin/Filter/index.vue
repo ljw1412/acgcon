@@ -159,7 +159,7 @@ export default class AcgAdminFilter extends Vue {
 <style lang="scss">
 .acg-admin-filter {
   .tag-group.is-ghost .acg-admin-tag-group {
-    box-shadow: 0 0 10px $color-primary;
+    box-shadow: 0 0 10px $primary;
     opacity: 0.5;
   }
 }

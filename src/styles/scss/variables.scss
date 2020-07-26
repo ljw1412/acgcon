@@ -1,3 +1,8 @@
+// 覆盖默认important
+$enable-important-utilities: false;
+// 使用css-variables
+$enable-css-variables: true;
+
 $screen-width-sm: 864px;
 $screen-width-md: 1200px;
 $screen-width-lg: 1600px;

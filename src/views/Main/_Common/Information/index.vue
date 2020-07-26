@@ -146,7 +146,7 @@ export default class AcgInformation extends AcgVue {
   .information-desc {
     $line-height: 20px;
     $line: 3;
-    @include multi-ellipsis($line);
+    @include multi-text-truncate($line);
     height: $line * $line-height;
     line-height: $line-height;
     font-size: 14px;

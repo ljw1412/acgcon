@@ -35,7 +35,7 @@
           <mz-tag outlined
             v-ripple
             color="var(--color-text-secondary)"
-            class="is-pointer"
+            class="cursor-pointer"
             @click="isDisplayTagSelectModal=true">标签配置</mz-tag>
         </div>
       </div>

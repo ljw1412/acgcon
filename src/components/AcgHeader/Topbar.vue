@@ -1,6 +1,6 @@
 <template>
   <div class="acg-topbar">
-    <div class="acg-topbar__content flex-center-space-between">
+    <div class="acg-topbar__content d-flex align-items-center justify-content-between">
       <nav-link :links="links"></nav-link>
       <nav-user-center></nav-user-center>
     </div>

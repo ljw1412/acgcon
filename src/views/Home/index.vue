@@ -1,5 +1,5 @@
 <template>
-  <div class="home not-user-select">
+  <div class="home user-select-none">
     <div class="bg"
       :style="{'background-image':`url('${backgroundUrl}')`}"></div>
     <div class="start">

@@ -118,7 +118,7 @@ export default class AcgLoginField extends Vue {
     box-sizing: border-box;
     transform: translateY(100%);
     text-align: center;
-    color: $color-danger;
+    color: $danger;
     padding: 5px;
     font-weight: 500;
     text-shadow: 1px 1px 1px #000;

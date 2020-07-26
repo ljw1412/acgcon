@@ -9,7 +9,6 @@
         <template v-if="state !== 'success'">
           <span class="acg-login-modal__title">登录</span>
           <mz-button class="acg-login-modal__close-btn"
-            flat
             icon
             width="60px"
             height="60px"

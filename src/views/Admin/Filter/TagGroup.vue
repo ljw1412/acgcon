@@ -2,7 +2,7 @@
   <mz-card outlined
     class="acg-admin-tag-group"
     :class="{'is-edit': isEdit}">
-    <div class="tag-group-header flex-center-space-between">
+    <div class="tag-group-header d-flex align-items-center justify-content-between">
       <div class="tag-group-title">
         <span class="tag-group-name"
           @click="isEdit && $emit('rename',data)">{{data.name}}</span>
@@ -249,7 +249,7 @@ export default class AcgAdminTagGroup extends Vue {
 }
 
 .tag-group-delete {
-  color: $color-danger !important;
+  color: $danger !important;
   .mz-list-item__title {
     color: inherit;
   }

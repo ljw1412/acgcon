@@ -1,9 +1,9 @@
 <template>
   <mz-carousel class="start-carousel">
-    <mz-carousel-item style="background-color:#6200ea;"></mz-carousel-item>
-    <mz-carousel-item style="background-color:var(--color-success)"></mz-carousel-item>
-    <mz-carousel-item style="background-color:var(--color-warning)"></mz-carousel-item>
-    <mz-carousel-item style="background-color:var(--color-danger)"></mz-carousel-item>
+    <mz-carousel-item class="bg-indigo"></mz-carousel-item>
+    <mz-carousel-item class="bg-success"></mz-carousel-item>
+    <mz-carousel-item class="bg-warning"></mz-carousel-item>
+    <mz-carousel-item class="bg-danger"></mz-carousel-item>
 
     <template #indicator="{item, pageIndex, length}">
       <div class="start-carousel-info">

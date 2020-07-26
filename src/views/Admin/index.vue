@@ -12,7 +12,7 @@
           <div></div>
           <div class="acg-admin-header-left">
             <mz-icon v-tooltip="'返回主站'"
-              class="home-icon is-pointer"
+              class="home-icon cursor-pointer"
               name="home-outline"
               size="22"
               style="margin-right:20px;"
@@ -71,8 +71,8 @@ export default class AcgAdmin extends Vue {
   .mz-header,
   .mz-aside {
     position: relative;
-    background-color: $color-white;
-    box-shadow: 0 0 5px $color-border-base;
+    background-color: $white;
+    box-shadow: 0 0 5px $border-color;
   }
 
   .mz-aside {
@@ -116,7 +116,7 @@ export default class AcgAdmin extends Vue {
   .acg-admin {
     .mz-header,
     .mz-aside {
-      background-color: $color-primary;
+      background-color: $primary;
     }
   }
 }

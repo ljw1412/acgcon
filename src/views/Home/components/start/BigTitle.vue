@@ -1,5 +1,5 @@
 <template>
-  <div class="big-title flex-double-center">
+  <div class="big-title d-flex align-items-center justify-content-center">
     <span v-html="html"></span>
   </div>
 </template>

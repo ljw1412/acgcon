@@ -1501,6 +1501,11 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+animate.css@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-4.1.0.tgz#dec2aabe4babfc6f6777f9a5cccd132838729b50"
+  integrity sha512-0aVcfWDeU9ykV6vjn1P67ZSs01jxoUQZCGaYbkk0SIIelIG8kUdLrIkua1+VabHfTtsSivDRMMn0ILPvZum2gw==
+
 ansi-colors@^3.0.0:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
@@ -5406,12 +5411,13 @@ make-dir@^3.0.2:
   dependencies:
     semver "^6.0.0"
 
-manzhai-ui@^0.2.21:
-  version "0.2.21"
-  resolved "https://registry.yarnpkg.com/manzhai-ui/-/manzhai-ui-0.2.21.tgz#af80e8b80ed82dfd3c7fdac00cefac0c84768789"
-  integrity sha512-Jdm/s+JrlYSDfLPovvJb6D3f6WHYaM/dEntgYpKuE34T8CO1AoV/iWuHsK6DDBjahh0csX4VQVdHUTqXekN3sA==
+manzhai-ui@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/manzhai-ui/-/manzhai-ui-0.3.1.tgz#533e2d3564b09c8d0c9c5b91353ec4cfa7f963c3"
+  integrity sha512-FTOWslEVuFNAZQOSiBDjGhUL6zTOFNdosNtGa+05zvRNqBkJZ7UXj6F8LLjrU/IXRESbg6nioIajjIoXBknDOw==
   dependencies:
     "@types/file-saver" "^2.0.1"
+    animate.css "^4.1.0"
     color "^3.1.2"
     core-js "^3.6.4"
     file-saver "^2.0.2"

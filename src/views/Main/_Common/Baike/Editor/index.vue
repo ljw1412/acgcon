@@ -65,13 +65,13 @@ export default class AcgBaikeEditor extends Vue {
     align-items: center;
     padding: 0 20px;
     color: $color-text-primary;
-    background-color: $color-white;
+    background-color: $white;
   }
 
   .mz-aside,
   .mz-footer {
     color: $color-text-primary;
-    background-color: $color-white;
+    background-color: $white;
   }
 
   .mz-footer {
@@ -93,7 +93,7 @@ export default class AcgBaikeEditor extends Vue {
 
 :root[data-theme='dark'] {
   .acg-baike-editor .mz-header {
-    background-color: $color-primary;
+    background-color: $primary;
   }
 }
 </style>

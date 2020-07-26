@@ -61,7 +61,7 @@ export default class AcgTitleCard extends Vue {
     line-height: 24px;
     font-weight: 400;
     color: $color-text-primary;
-    text-shadow: 0 0 16px $color-primary;
+    text-shadow: 0 0 16px $primary;
     padding: 0 8px;
   }
 

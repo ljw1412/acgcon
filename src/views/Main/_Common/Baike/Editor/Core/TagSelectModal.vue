@@ -144,7 +144,7 @@ export default class AcgBaikeTagSelectModal extends Vue {
     width: 30%;
     height: 100%;
     box-sizing: border-box;
-    border-right: 1px solid $color-border-base;
+    border-right: 1px solid $border-color;
     overflow-y: auto;
     li {
       @include foreground;
@@ -154,7 +154,7 @@ export default class AcgBaikeTagSelectModal extends Vue {
       &.active {
         @include foreground-active;
         font-weight: 700;
-        color: $color-primary;
+        color: $primary;
       }
     }
   }
@@ -185,7 +185,7 @@ export default class AcgBaikeTagSelectModal extends Vue {
 
 .tag-select-modal-result {
   padding-top: 5px;
-  border-top: 1px solid $color-border-base;
+  border-top: 1px solid $border-color;
   line-height: 32px;
   min-height: 32px;
   .mz-tag {
@@ -196,7 +196,7 @@ export default class AcgBaikeTagSelectModal extends Vue {
 
 :root[data-theme='dark'] {
   .tag-select-modal-container .type-list > li.active {
-    color: $color-white;
+    color: $white;
   }
 }
 </style>

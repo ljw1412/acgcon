@@ -1,2 +1,7 @@
-@import './var.scss';
-@import '~manzhai-ui/src/styles/scss/core.scss';
+@import 'variables.scss';
+
+@import '~manzhai-ui/src/styles/variables.scss';
+
+$color-text-primary: $gray-900;
+$color-text-secondary: $gray-800;
+$color-text-regular: $gray-700;

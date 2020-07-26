@@ -25,7 +25,7 @@ export default class AcgNavigation extends Vue {
   renderNavigation() {
     return (
       <div class="acg-navigation">
-        <div class="acg-navigation__content acg-media-container flex-center-space-between">
+        <div class="acg-navigation__content acg-media-container d-flex align-items-center justify-content-between">
           <nav-link links={this.navList}></nav-link>
           <div class="acg-navigation__right">
             <acg-user-avatar
@@ -91,8 +91,8 @@ export default class AcgNavigation extends Vue {
 .mz-fixed-section.is-sticky {
   .acg-navigation {
     background-image: none;
-    background-color: $color-card-background;
-    box-shadow: 0 4px 6px $color-border-base;
+    background-color: $card-bg;
+    box-shadow: 0 4px 6px $border-color;
     transition: background-color 0.2s;
 
     .link {
