@@ -31,7 +31,7 @@
     </mz-input-group>
     <transition name="mz-zoom">
       <div v-show="isShowError"
-        class="acg-login-field__error">{{error}}</div>
+        class="acg-login-field__error text-danger text-center w-100 p-5 fs-20">{{error}}</div>
     </transition>
     <slot name="bottom"></slot>
   </div>
@@ -114,12 +114,10 @@ export default class AcgLoginField extends Vue {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 100%;
     box-sizing: border-box;
     transform: translateY(100%);
     text-align: center;
-    color: $danger;
-    padding: 5px;
+    padding-right: 65px;
     font-weight: 500;
     text-shadow: 1px 1px 1px #000;
   }

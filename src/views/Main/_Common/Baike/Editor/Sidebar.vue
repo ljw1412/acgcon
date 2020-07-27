@@ -1,5 +1,5 @@
 <template>
-  <div class="baike-editor-sidebar">
+  <div class="baike-editor-sidebar bg-card">
     <mz-scrollbar :always="false"
       bar-size="4px"
       class="baike-editor-sidebar__scroll-view">
@@ -15,7 +15,7 @@
         </mz-list-item>
       </mz-list>
     </mz-scrollbar>
-    <div class="baike-editor-sidebar-footer"
+    <div class="baike-editor-sidebar-footer text-white"
       v-ripple
       @click="addSection">新增模块</div>
   </div>

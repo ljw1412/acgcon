@@ -1,6 +1,6 @@
 <template>
-  <div class="top-logo">
-    <div class="top-logo__title">ACG控</div>
+  <div class="top-logo user-select-none text-white d-flex">
+    <div class="top-logo__title mr-10">ACG控</div>
     <div>
       <div class="top-logo__sub-title">{{current.title}}</div>
       <div class="top-logo__text">{{current.text}}</div>
@@ -31,14 +31,10 @@ export default class TopLogo extends Vue {
 
 <style lang="scss">
 .top-logo {
-  user-select: none;
-  color: #ffffff;
-  display: flex;
   text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
   &__title {
     font-size: 60px;
     line-height: 60px;
-    margin-right: 10px;
   }
   &__sub-title {
     font-size: 40px;

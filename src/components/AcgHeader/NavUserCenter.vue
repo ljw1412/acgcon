@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-user-center">
+  <div class="nav-user-center flex-shrink-0">
     <acg-user-avatar inner-info
       radius="50%"
       :size="36" />
@@ -15,8 +15,4 @@ export default class NavUserCenter extends Vue {}
 </script>
 
 <style lang="scss">
-.nav-user-center {
-  color: #fff;
-  flex-shrink: 0;
-}
 </style>

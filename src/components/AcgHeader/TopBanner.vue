@@ -1,11 +1,11 @@
 <template>
-  <div class="top-banner"
+  <div class="top-banner w-100 h-100"
     :style="{backgroundImage:`url(${bgUrl})`}">
-    <div class="top-banner__content">
+    <div class="top-banner__content d-flex flex-column align-items-center">
       <top-logo></top-logo>
       <top-search></top-search>
     </div>
-    <div class="top-banner__bottom-shade"></div>
+    <div class="top-banner__bottom-shade w-100"></div>
   </div>
 </template>
 
@@ -22,17 +22,12 @@ export default class TopBanner extends Vue {
 
 <style lang="scss">
 .top-banner {
-  width: 100%;
-  height: 100%;
   background-color: $black-background-color;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 
   &__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding-top: 80px;
     .top-search {
       margin-top: 20px;
@@ -43,7 +38,6 @@ export default class TopBanner extends Vue {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 100%;
     height: 140px;
     z-index: 1;
     background: linear-gradient(180deg, rgba(22, 22, 26, 0), #16161a 100%);

@@ -6,7 +6,8 @@
       <acg-user-avatar class="start-header__avatar" />
     </mz-header>
     <mz-layout>
-      <mz-aside width="80px">
+      <mz-aside class="text-primary"
+        width="80px">
         <editor-sidebar v-model="currentSectionId"
           @create-section="createSection"></editor-sidebar>
       </mz-aside>
@@ -20,7 +21,8 @@
           </div>
         </mz-main>
 
-        <mz-footer style="height: 40px; text-align:right;">
+        <mz-footer class="bg-card text-primary"
+          style="height: 40px; text-align:right;">
           <mz-button color="primary">保存</mz-button>
         </mz-footer>
       </mz-layout>
@@ -64,12 +66,6 @@ export default class AcgBaikeEditor extends Vue {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    color: $color-text-primary;
-    background-color: $white;
-  }
-
-  .mz-aside,
-  .mz-footer {
     color: $color-text-primary;
     background-color: $white;
   }

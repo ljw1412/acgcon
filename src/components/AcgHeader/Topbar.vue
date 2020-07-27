@@ -1,5 +1,5 @@
 <template>
-  <div class="acg-topbar">
+  <div class="acg-topbar position-absolute w-100 px-15 py-12">
     <div class="acg-topbar__content d-flex align-items-center justify-content-between">
       <nav-link :links="links"></nav-link>
       <nav-user-center></nav-user-center>
@@ -23,11 +23,7 @@ export default class AcgTopbar extends Vue {
 
 <style lang="scss">
 .acg-topbar {
-  position: absolute;
-  width: 100%;
   height: 60px;
-  z-index: 1;
-  padding: 12px 15px;
 
   &__content {
     line-height: 36px;

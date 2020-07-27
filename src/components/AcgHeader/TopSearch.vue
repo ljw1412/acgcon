@@ -1,6 +1,8 @@
 <template>
   <div class="top-search">
-
+    <mz-input v-model="value"
+      size="large"
+      shadow></mz-input>
   </div>
 </template>
 
@@ -17,7 +19,6 @@ export default class NavSearch extends Vue {
   width: calc(100% - 40px);
   max-width: 500px;
   height: 36px;
-  background-color: #fff;
   transition: width 0.3s;
 }
 </style>
