@@ -238,13 +238,7 @@ export default class AcgAdminTagGroup extends Vue {
   font-size: 0;
   .mz-icon {
     font-size: 22px;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.8;
-    }
-    &:active {
-      opacity: 0.5;
-    }
+    @include clickable;
   }
 }
 

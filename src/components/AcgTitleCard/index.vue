@@ -16,7 +16,7 @@ export default class AcgTitleCard extends Vue {
     const useTitle = !!this.title
 
     const data: VNodeData = {
-      class: 'acg-title-card__header',
+      class: 'acg-title-card__header flex-shrink-0 mb-8',
       props: {
         level: 4,
         title: this.title,
@@ -29,7 +29,9 @@ export default class AcgTitleCard extends Vue {
     return (
       <mz-heading {...data}>
         {this.$slots.title || (
-          <span class="acg-title-card__title">{this.title}</span>
+          <span class="acg-title-card__title lh-24 px-8 font-weight-normal">
+            {this.title}
+          </span>
         )}
       </mz-heading>
     )
@@ -37,7 +39,7 @@ export default class AcgTitleCard extends Vue {
 
   render(h: CreateElement) {
     return (
-      <div class="acg-title-card">
+      <div class="acg-title-card position-relative d-flex flex-column">
         {this.renderHeader()}
         <mz-card {...{ props: this.card }}>{this.$slots.default}</mz-card>
       </div>
@@ -48,21 +50,9 @@ export default class AcgTitleCard extends Vue {
 
 <style lang="scss">
 .acg-title-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-
-  &__header {
-    flex-shrink: 0;
-    margin-bottom: 8px;
-  }
-
   &__title {
-    line-height: 24px;
-    font-weight: 400;
     color: $color-text-primary;
     text-shadow: 0 0 16px $primary;
-    padding: 0 8px;
   }
 
   > .mz-card {

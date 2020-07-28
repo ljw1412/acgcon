@@ -1,16 +1,16 @@
 <template>
   <mz-layout v-cover
-    class="acg-admin">
+    class="acg-admin h-100 overflow-hidden">
     <mz-aside class="acg-admin-aside">
-      <div class="acg-admin-logo">ACG控后台管理</div>
+      <div class="acg-admin-logo user-select-none text-center fs-24">ACG控后台管理</div>
       <mz-navigation :data="navigations"></mz-navigation>
     </mz-aside>
 
     <mz-layout>
       <mz-header>
-        <div class="acg-admin-header">
+        <div class="acg-admin-header h-100 px-10 d-flex align-items-center justify-content-between">
           <div></div>
-          <div class="acg-admin-header-left">
+          <div class="acg-admin-header-right d-flex align-items-center justify-content-between">
             <mz-icon v-tooltip="'返回主站'"
               class="home-icon cursor-pointer"
               name="home-outline"
@@ -24,7 +24,7 @@
         </div>
       </mz-header>
 
-      <mz-main>
+      <mz-main class="p-16 overflow-hidden">
         <router-view></router-view>
       </mz-main>
     </mz-layout>
@@ -65,9 +65,6 @@ export default class AcgAdmin extends Vue {
 <style lang="scss">
 @import '@admin/var.scss';
 .acg-admin {
-  height: 100%;
-  overflow: hidden;
-
   .mz-header,
   .mz-aside {
     position: relative;
@@ -79,37 +76,15 @@ export default class AcgAdmin extends Vue {
     z-index: 100;
 
     .acg-admin-logo {
-      user-select: none;
       height: $topbar-height;
-      font-size: 24px;
       line-height: $topbar-height;
-      text-align: center;
       color: $color-text-primary;
     }
-  }
-
-  .mz-main {
-    padding: 16px;
-    overflow: auto;
   }
 
   .home-icon {
     color: $color-text-primary;
   }
-}
-
-.acg-admin-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  padding: 0 10px;
-}
-
-.acg-admin-header-left {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 :root[data-theme='dark'] {

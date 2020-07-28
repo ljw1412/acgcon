@@ -24,8 +24,8 @@ export default class AcgNavigation extends Vue {
 
   renderNavigation() {
     return (
-      <div class="acg-navigation">
-        <div class="acg-navigation__content acg-media-container d-flex align-items-center justify-content-between">
+      <div class="acg-navigation w-100 lh-30">
+        <div class="acg-navigation__content acg-media-container d-flex align-items-center justify-content-between h-100">
           <nav-link links={this.navList}></nav-link>
           <div class="acg-navigation__right">
             <acg-user-avatar
@@ -60,13 +60,10 @@ export default class AcgNavigation extends Vue {
 <style lang="scss">
 .acg-navigation {
   height: 60px;
-  width: 100%;
-  line-height: 30px;
   box-sizing: border-box;
   overflow-x: auto;
 
   &__content {
-    height: 100%;
     .nav-link-ul {
       padding: 0 12px;
       .nav-link-item--active::after {
