@@ -24,7 +24,7 @@
         </div>
       </mz-header>
 
-      <mz-main class="p-16 overflow-hidden">
+      <mz-main class="p-16 overflow-auto">
         <router-view></router-view>
       </mz-main>
     </mz-layout>
