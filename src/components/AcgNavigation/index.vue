@@ -73,7 +73,7 @@ export default class AcgNavigation extends Vue {
         left: 0;
         height: 2px;
         width: 100%;
-        background-color: var(--color-primary);
+        background-color: $primary;
       }
     }
     .link {

@@ -5,7 +5,8 @@
     title="配置标签"
     width="600px"
     class="acg-baike-tag-select-modal"
-    :close-on-click-mask="false">
+    :close-on-click-mask="false"
+    :content-style="{padding: 0}">
     <div class="tag-select-modal-container clearfix">
       <mz-list v-model="currentType"
         size="medium"
@@ -22,7 +23,7 @@
         <div class="tag-list">
           <mz-tag v-for="tag of tagList"
             :key="tag._id"
-            :color="tag.checked?'var(--color-success)':undefined"
+            :color="tag.checked?'#43A047':undefined"
             :text-color="tag.checked?'#ffffff':undefined"
             @click="handleTagClick(tag)">{{tag.name}}</mz-tag>
           <div v-if="!tagList.length">未配置标签</div>
@@ -33,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="tag-select-modal-result">
+    <div class="tag-select-modal-result px-8">
       已选择:
       <mz-tag v-for="tag of selectTagList"
         size="medium"
@@ -184,7 +185,6 @@ export default class AcgBaikeTagSelectModal extends Vue {
 }
 
 .tag-select-modal-result {
-  padding-top: 5px;
   border-top: 1px solid $border-color;
   line-height: 32px;
   min-height: 32px;
