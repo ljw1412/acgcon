@@ -5,8 +5,14 @@ import user from './user'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    title: ''
+  },
+  mutations: {
+    setTitle(state, title: string) {
+      state.title = title
+    }
+  },
   actions: {},
   modules: { user }
 })

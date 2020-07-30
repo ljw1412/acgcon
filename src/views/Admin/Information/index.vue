@@ -37,7 +37,8 @@
       class="query-table"
       :data="tableData">
       <template #td="{item}">
-        <div v-if="item.key">
+        <div v-if="item.key"
+          class="text-gray-900">
           {{item.data[item.key]}}
         </div>
       </template>

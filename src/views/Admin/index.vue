@@ -9,7 +9,10 @@
     <mz-layout>
       <mz-header>
         <div class="acg-admin-header h-100 px-10 d-flex align-items-center justify-content-between">
-          <div></div>
+          <div>
+            <span v-text="title"
+              class="ml-8 fs-18 text-gray-900"></span>
+          </div>
           <div class="acg-admin-header-right d-flex align-items-center justify-content-between">
             <mz-icon v-tooltip="'返回主站'"
               class="home-icon cursor-pointer"
@@ -34,31 +37,14 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
+import navigations from './navigations'
+import { State } from 'vuex-class'
 
 @Component({ components: { AcgUserAvatar } })
 export default class AcgAdmin extends Vue {
-  navigations = [
-    {
-      title: '筛选项管理',
-      icon: 'pricetags-outline',
-      to: { name: 'adminFilter' }
-    },
-    {
-      title: '缓存管理',
-      icon: 'file-tray-stacked-outline',
-      to: { name: 'adminCache' }
-    },
-    {
-      title: '资讯管理',
-      icon: 'bug-outline',
-      to: { name: 'adminInformation' }
-    }
-    // {
-    //   title: '爬虫管理',
-    //   icon: 'bug-outline',
-    //   to: { name: 'adminCrawler' }
-    // }
-  ]
+  @State readonly title!: string
+
+  navigations = navigations
 }
 </script>
 

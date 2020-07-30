@@ -1,9 +1,11 @@
 import VueRouter, { NavigationGuard } from 'vue-router'
+import store from '@/store/index'
 
 const nameMap: Record<string, any> = {
   animation: '动画控',
   comic: '漫画控',
-  game: '游戏控'
+  game: '游戏控',
+  admin: 'ACG控后台管理'
 }
 
 function setTitle(title = '', type: string) {
@@ -11,11 +13,14 @@ function setTitle(title = '', type: string) {
   if (title) {
     mTitle = title + ' - ' + mTitle
   }
+  store.commit('setTitle', title)
   document.title = mTitle
 }
 
 const beforeEach: NavigationGuard = (to, from, next) => {
-  setTitle(to.meta.title, to.params.acgType)
+  let type = to.params.acgType
+  if (to.path.startsWith('/admin/')) type = 'admin'
+  setTitle(to.meta.title, type)
   next()
 }
 

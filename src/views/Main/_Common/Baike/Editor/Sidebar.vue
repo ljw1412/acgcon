@@ -15,7 +15,7 @@
         </mz-list-item>
       </mz-list>
     </mz-scrollbar>
-    <div class="baike-editor-sidebar-footer text-white"
+    <div class="baike-editor-sidebar-footer user-select-none"
       v-ripple
       @click="addSection">新增模块</div>
   </div>
@@ -40,23 +40,26 @@ export default class AcgBaikeEditorSidebar extends Vue {
   navigation = [{ title: '核心数据', icon: 'earth-outline', value: 'core' }]
 
   addSection() {
-    this.navigation.push({
+    const newSection = {
       title: '自定义模块',
       icon: 'cube-outline',
       value: Math.random() + ''
-    })
-    this.$emit('create-section')
+    }
+    this.navigation.push(newSection)
+    this.$emit('create-section', newSection)
   }
 }
 </script>
 
 <style lang="scss">
+$create-block-height: 40px;
+
 .baike-editor-sidebar {
   position: relative;
   height: 100%;
 
   &__scroll-view {
-    height: calc(100% - 24px);
+    height: calc(100% - #{$create-block-height});
   }
 }
 
@@ -70,9 +73,16 @@ export default class AcgBaikeEditorSidebar extends Vue {
 .baike-editor-sidebar-footer {
   cursor: pointer;
   width: 100%;
-  height: 24px;
+  height: $create-block-height;
+  line-height: $create-block-height;
   font-size: 14px;
-  line-height: 24px;
   text-align: center;
+  color: $primary;
+}
+
+@include theme-root(dark) {
+  .baike-editor-sidebar-footer {
+    color: $white;
+  }
 }
 </style>

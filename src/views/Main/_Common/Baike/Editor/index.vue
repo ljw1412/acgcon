@@ -50,8 +50,9 @@ export default class AcgBaikeEditor extends Vue {
     return {}
   }
 
-  createSection() {
+  createSection(section: Record<string, any>) {
     this.sections.push(createSection('自定义板块'))
+    this.currentSectionId = section.value
   }
 }
 </script>
