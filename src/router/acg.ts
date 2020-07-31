@@ -46,7 +46,7 @@ export default [
     path: '/baike/editor',
     name: 'baikeEditor',
     component: () =>
-      import(/* webpackChunkName: "baike" */ '@~/Baike/Editor/index.vue'),
+      import(/* webpackChunkName: "baike" */ '@~/Baike/Editor2/index.vue'),
     meta: { title: '百科编辑器' }
   },
   {
