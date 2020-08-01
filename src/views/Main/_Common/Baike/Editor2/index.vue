@@ -9,7 +9,10 @@
     </mz-header>
     <mz-layout class="h-100">
       <mz-aside v-elevation="1"
-        width="64px"></mz-aside>
+        width="64px"
+        class="bg-card">
+        <editor-menu v-model="value"></editor-menu>
+      </mz-aside>
       <mz-main></mz-main>
     </mz-layout>
   </mz-layout>
@@ -18,23 +21,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
+import EditorMenu from './Menu.vue'
 
-@Component({ components: { AcgUserAvatar } })
-export default class AcgBaikeEditor extends Vue {}
+@Component({ components: { AcgUserAvatar, EditorMenu } })
+export default class AcgBaikeEditor extends Vue {
+  value = 'core'
+}
 </script>
 
 <style lang="scss">
-#acg-baike-editor {
-  .mz-aside {
-    background-color: $white;
-  }
-}
-
-@include theme-root(dark) {
-  #acg-baike-editor {
-    .mz-aside {
-      background-color: $primary;
-    }
-  }
-}
 </style>
