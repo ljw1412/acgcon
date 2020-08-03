@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { Component, Vue, Model } from 'vue-property-decorator'
-import { MenuItem } from './helper'
+import menuList from './menu'
 
 @Component
 export default class AcgEditorMenu extends Vue {
@@ -35,9 +35,7 @@ export default class AcgEditorMenu extends Vue {
     this.$emit('change:value', value)
   }
 
-  menuList: MenuItem[] = [
-    { title: '核心数据', icon: 'earth-outline', value: 'core' }
-  ]
+  menuList = menuList
 }
 </script>
 
