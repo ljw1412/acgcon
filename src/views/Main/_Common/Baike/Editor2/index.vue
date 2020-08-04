@@ -2,17 +2,20 @@
   <mz-layout v-cover
     id="acg-baike-editor"
     class="h-100 overflow-hidden">
+
     <mz-header v-elevation="1"
       class="position-relative d-flex align-items-center justify-content-between bg-primary px-14">
       <h1 class="text-white">百科编辑器</h1>
       <acg-user-avatar class="start-header__avatar" />
     </mz-header>
+
     <mz-layout class="h-100">
       <mz-aside v-elevation="1"
         width="64px"
         class="bg-card">
         <editor-menu v-model="value"></editor-menu>
       </mz-aside>
+
       <mz-main class="overflow-auto">
         <mz-fixed-section sticky
           placeholder
@@ -21,8 +24,10 @@
           <span class="section-title fs-20 lh-20">{{title}}</span>
           <mz-button color="primary">保存</mz-button>
         </mz-fixed-section>
-        <div class="px-24 py-16"
-          style="height:1000px"></div>
+
+        <div class="mx-24 my-16 p-16">
+          <editor-core v-if="value === 'core'"></editor-core>
+        </div>
       </mz-main>
     </mz-layout>
   </mz-layout>
@@ -32,11 +37,14 @@
 import { Component, Vue } from 'vue-property-decorator'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 import EditorMenu from './Menu.vue'
+import EditorCore from './Core/index.vue'
 import menuList from './menu'
+import { getBlankInfo } from './helper'
 
-@Component({ components: { AcgUserAvatar, EditorMenu } })
+@Component({ components: { AcgUserAvatar, EditorMenu, EditorCore } })
 export default class AcgBaikeEditor extends Vue {
   value = 'core'
+  info = getBlankInfo()
 
   get title() {
     const item = menuList.find(i => i.value === this.value) || { title: '' }

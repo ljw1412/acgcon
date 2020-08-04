@@ -3,3 +3,15 @@ export interface MenuItem {
   icon: string
   value: string
 }
+
+export function getBlankInfo(): Acgcon.BaikeData {
+  return {
+    _id: undefined,
+    title: '',
+    author: '',
+    cover: '',
+    desc: '',
+    tags: [],
+    basic: []
+  }
+}
