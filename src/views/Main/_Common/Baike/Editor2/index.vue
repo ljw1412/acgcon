@@ -26,7 +26,8 @@
         </mz-fixed-section>
 
         <div class="mx-24 my-16 p-16">
-          <editor-core v-if="value === 'core'"></editor-core>
+          <editor-core v-if="value === 'core'"
+            :info="info"></editor-core>
         </div>
       </mz-main>
     </mz-layout>
