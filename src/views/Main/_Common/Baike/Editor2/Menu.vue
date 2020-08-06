@@ -19,13 +19,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Model } from 'vue-property-decorator'
-import menuList from './menu'
+import { Component, Vue, Model, Prop } from 'vue-property-decorator'
+import { MenuItem } from './helper'
 
 @Component
 export default class AcgEditorMenu extends Vue {
   @Model('change:value', String)
   readonly value!: string
+  @Prop({ type: Array, default: () => [] })
+  readonly menuList!: MenuItem[]
 
   get mValue() {
     return this.value
@@ -34,8 +36,6 @@ export default class AcgEditorMenu extends Vue {
   set mValue(value: string) {
     this.$emit('change:value', value)
   }
-
-  menuList = menuList
 }
 </script>
 

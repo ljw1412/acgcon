@@ -15,3 +15,7 @@ export function getBlankInfo(): Acgcon.BaikeData {
     basic: []
   }
 }
+
+export function getBaseMenu(): MenuItem[] {
+  return [{ title: '核心数据', icon: 'earth-outline', value: 'core' }]
+}

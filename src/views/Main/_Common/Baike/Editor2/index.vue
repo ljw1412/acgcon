@@ -13,7 +13,8 @@
       <mz-aside v-elevation="1"
         width="64px"
         class="bg-card">
-        <editor-menu v-model="value"></editor-menu>
+        <editor-menu v-model="value"
+          :menu-list="menuList"></editor-menu>
       </mz-aside>
 
       <mz-main class="overflow-auto">
@@ -39,17 +40,17 @@ import { Component, Vue } from 'vue-property-decorator'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 import EditorMenu from './Menu.vue'
 import EditorCore from './Core/index.vue'
-import menuList from './menu'
-import { getBlankInfo } from './helper'
+import { getBlankInfo, getBaseMenu } from './helper'
 
 @Component({ components: { AcgUserAvatar, EditorMenu, EditorCore } })
 export default class AcgBaikeEditor extends Vue {
   value = 'core'
   info = getBlankInfo()
+  menuList = getBaseMenu()
 
   get title() {
-    const item = menuList.find(i => i.value === this.value) || { title: '' }
-    return item.title
+    const item = this.menuList.find(i => i.value === this.value)
+    return item ? item.title : ''
   }
 }
 </script>

@@ -29,6 +29,7 @@
         :defalutValue="info.tags"
         @save="handleTagSave"></tag-select-modal>
     </div>
+    <div class="bg-card mt-20"></div>
   </div>
 </template>
 
