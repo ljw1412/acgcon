@@ -14,7 +14,8 @@
         width="64px"
         class="bg-card">
         <editor-menu v-model="value"
-          :menu-list="menuList"></editor-menu>
+          :menu-list="menuList"
+          @create-section="createSection"></editor-menu>
       </mz-aside>
 
       <mz-main class="overflow-auto">
@@ -40,7 +41,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 import EditorMenu from './Menu.vue'
 import EditorCore from './Core/index.vue'
-import { getBlankInfo, getBaseMenu } from './helper'
+import { getBlankInfo, getBaseMenu, MenuItem } from './helper'
 
 @Component({ components: { AcgUserAvatar, EditorMenu, EditorCore } })
 export default class AcgBaikeEditor extends Vue {
@@ -51,6 +52,12 @@ export default class AcgBaikeEditor extends Vue {
   get title() {
     const item = this.menuList.find(i => i.value === this.value)
     return item ? item.title : ''
+  }
+
+  createSection(section: MenuItem) {
+    console.log(section)
+
+    this.menuList.push(section)
   }
 }
 </script>

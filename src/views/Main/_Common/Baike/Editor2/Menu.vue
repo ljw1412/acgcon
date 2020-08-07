@@ -15,6 +15,15 @@
         </div>
       </mz-list-item>
     </mz-list>
+
+    <mz-list-item v-tooltip.arrow.right="'新增板块'"
+      clickable
+      @click="addSection">
+      <div class="menu-item d-flex align-items-center justify-content-center">
+        <mz-icon name="add-circle-outline"
+          size="30"></mz-icon>
+      </div>
+    </mz-list-item>
   </mz-scrollbar>
 </template>
 
@@ -35,6 +44,15 @@ export default class AcgEditorMenu extends Vue {
 
   set mValue(value: string) {
     this.$emit('change:value', value)
+  }
+
+  addSection() {
+    const newSection = {
+      title: '自定义模块',
+      icon: 'cube-outline',
+      value: Math.random() + ''
+    }
+    this.$emit('create-section', newSection)
   }
 }
 </script>
