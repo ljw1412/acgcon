@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { Component, Vue, Model, Prop } from 'vue-property-decorator'
-import { MenuItem } from './helper'
+import { MenuItem, createSection } from './helper'
 
 @Component
 export default class AcgEditorMenu extends Vue {
@@ -47,11 +47,7 @@ export default class AcgEditorMenu extends Vue {
   }
 
   addSection() {
-    const newSection = {
-      title: '自定义模块',
-      icon: 'cube-outline',
-      value: Math.random() + ''
-    }
+    const newSection = createSection()
     this.$emit('create-section', newSection)
   }
 }

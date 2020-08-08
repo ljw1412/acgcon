@@ -1,96 +1,77 @@
 <template>
   <mz-layout v-cover
-    class="acg-baike-editor">
-    <mz-header>
-      <h1>百科编辑器</h1>
+    id="acg-baike-editor"
+    class="h-100 overflow-hidden">
+
+    <mz-header v-elevation="1"
+      class="position-relative d-flex align-items-center justify-content-between bg-primary px-14">
+      <h1 class="text-white">百科编辑器</h1>
       <acg-user-avatar class="start-header__avatar" />
     </mz-header>
-    <mz-layout>
-      <mz-aside class="text-primary"
-        width="80px">
-        <editor-sidebar v-model="currentSectionId"
-          @create-section="createSection"></editor-sidebar>
+
+    <mz-layout class="h-100">
+      <mz-aside v-elevation="1"
+        width="64px"
+        class="bg-card">
+        <editor-menu v-model="value"
+          :menu-list="menuList"
+          @create-section="createSection"></editor-menu>
       </mz-aside>
 
-      <mz-layout>
-        <mz-main>
-          <div class="editor-container">
-            <component :is="currentSectionId==='core'?'editor-core':'editor-section'"
-              :info="info"
-              :section="currentSection"></component>
-          </div>
-        </mz-main>
+      <mz-main class="overflow-auto"
+        id="baike-editor-content">
+        <editor-header :title="title"
+          :editable="value !== 'core'"
+          @title-update="handleTitleUpdate"></editor-header>
 
-        <mz-footer class="bg-card text-primary"
-          style="height: 40px; text-align:right;">
-          <mz-button color="primary">保存</mz-button>
-        </mz-footer>
-      </mz-layout>
+        <div class="mx-24 my-16 p-16">
+          <editor-core v-if="value === 'core'"
+            :info="info"></editor-core>
+        </div>
+      </mz-main>
     </mz-layout>
   </mz-layout>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { getBlankInfo, createSection } from './helper'
-import EditorCore from './Core/index.vue'
-import EditorSidebar from './Sidebar.vue'
-import EditorSection from './Section/index.vue'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
+import EditorMenu from './Menu.vue'
+import EditorHeader from './Header.vue'
+import EditorCore from './Core/index.vue'
+import { getBlankInfo, getBaseMenu, MenuItem } from './helper'
 
 @Component({
-  components: { AcgUserAvatar, EditorSidebar, EditorCore, EditorSection }
+  components: { AcgUserAvatar, EditorMenu, EditorHeader, EditorCore }
 })
 export default class AcgBaikeEditor extends Vue {
-  currentSectionId = 'core'
+  value = 'core'
   info = getBlankInfo()
-  sections: Acgcon.BaikeSection[] = []
+  menuList = getBaseMenu()
 
   get currentSection() {
-    return {}
+    return this.menuList.find(i => i.value === this.value)
   }
 
-  createSection(section: Record<string, any>) {
-    this.sections.push(createSection('自定义板块'))
-    this.currentSectionId = section.value
+  get title() {
+    return this.currentSection ? this.currentSection.title : ''
+  }
+
+  createSection(section: MenuItem) {
+    this.menuList.push(section)
+    this.value = section.value
+  }
+
+  handleTitleUpdate(title: string) {
+    if (this.currentSection) {
+      this.currentSection.title = title
+    }
   }
 }
 </script>
 
 <style lang="scss">
-.acg-baike-editor {
-  height: 100%;
-  overflow: hidden;
-
-  .mz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    color: $color-text-primary;
-    background-color: $white;
-  }
-
-  .mz-footer {
-    box-sizing: border-box;
-    padding: 4px;
-  }
-
-  .mz-main {
-    padding: 20px 0;
-    overflow-y: auto;
-  }
-
-  .editor-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-}
-
-:root[data-theme='dark'] {
-  .acg-baike-editor .mz-header {
-    background-color: $primary;
-  }
+#acg-baike-editor {
+  color: $color-text-primary;
 }
 </style>
