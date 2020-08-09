@@ -35,8 +35,16 @@
         @click="handleTitleClick">{{title}}</span>
     </div>
 
-    <mz-button color="primary"
-      @click="handleSaveClick">保存</mz-button>
+    <div>
+      <mz-button v-if="removable"
+        color="danger"
+        class="mr-10"
+        outlined
+        @click="handleRemoveClick">删除</mz-button>
+      <mz-button color="primary"
+        outlined
+        @click="handleSaveClick">保存</mz-button>
+    </div>
   </mz-fixed-section>
 </template>
 
@@ -49,6 +57,8 @@ export default class ClassName extends Vue {
   readonly title!: string
   @Prop(Boolean)
   readonly editable!: boolean
+  @Prop(Boolean)
+  readonly removable!: boolean
   @Ref('input')
   readonly inputRef!: HTMLInputElement
 
@@ -75,6 +85,10 @@ export default class ClassName extends Vue {
   handleCancelTitle() {
     this.isEdit = false
     this.hover = false
+  }
+
+  handleRemoveClick() {
+    this.$emit('remove')
   }
 
   handleSaveClick() {

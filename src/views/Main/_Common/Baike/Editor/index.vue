@@ -22,7 +22,10 @@
         id="baike-editor-content">
         <editor-header :title="title"
           :editable="value !== 'core'"
-          @title-update="handleTitleUpdate"></editor-header>
+          :removable="value !== 'core'"
+          @title-update="handleTitleUpdate"
+          @save="handleSectionSave"
+          @remove="handleSectionRemove"></editor-header>
 
         <div class="mx-24 my-16 p-16">
           <editor-core v-if="value === 'core'"
@@ -65,6 +68,15 @@ export default class AcgBaikeEditor extends Vue {
   handleTitleUpdate(title: string) {
     if (this.currentSection) {
       this.currentSection.title = title
+    }
+  }
+
+  handleSectionSave() {}
+
+  handleSectionRemove() {
+    if (this.currentSection) {
+      this.menuList.remove(this.currentSection)
+      this.value = 'core'
     }
   }
 }
