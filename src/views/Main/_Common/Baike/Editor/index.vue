@@ -30,6 +30,7 @@
         <div class="mx-24 my-16 p-16">
           <editor-core v-if="value === 'core'"
             :info="info"></editor-core>
+          <editor-section v-else></editor-section>
         </div>
       </mz-main>
     </mz-layout>
@@ -42,10 +43,17 @@ import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 import EditorMenu from './Menu.vue'
 import EditorHeader from './Header.vue'
 import EditorCore from './Core/index.vue'
+import EditorSection from './Section/index.vue'
 import { getBlankInfo, getBaseMenu, MenuItem } from './helper'
 
 @Component({
-  components: { AcgUserAvatar, EditorMenu, EditorHeader, EditorCore }
+  components: {
+    AcgUserAvatar,
+    EditorMenu,
+    EditorHeader,
+    EditorCore,
+    EditorSection
+  }
 })
 export default class AcgBaikeEditor extends Vue {
   value = 'core'
