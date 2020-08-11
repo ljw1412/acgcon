@@ -33,5 +33,5 @@ export default class AcgBaikeEditorActions extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 </style>

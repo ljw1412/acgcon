@@ -93,5 +93,9 @@ export default class AcgBaikeEditor extends Vue {
 <style lang="scss">
 #acg-baike-editor {
   color: $color-text-primary;
+
+  .mz-aside {
+    z-index: 150;
+  }
 }
 </style>

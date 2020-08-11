@@ -1,15 +1,18 @@
 <template>
   <div class="baike-editor-section">
-
-    <editor-actions @insert="handleInsert"></editor-actions>
+    <editor-outline></editor-outline>
+    <div class="baike-editor-section-content">
+      <editor-actions @insert="handleInsert"></editor-actions>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import EditorActions from './Actions.vue'
+import EditorOutline from './Outline.vue'
 
-@Component({ components: { EditorActions } })
+@Component({ components: { EditorOutline, EditorActions } })
 export default class AcgBaikeEditorSection extends Vue {
   handleInsert(type: string) {
     console.log(type)
@@ -18,4 +21,7 @@ export default class AcgBaikeEditorSection extends Vue {
 </script>
 
 <style lang="scss">
+.baike-editor-section {
+  padding-right: 160px;
+}
 </style>

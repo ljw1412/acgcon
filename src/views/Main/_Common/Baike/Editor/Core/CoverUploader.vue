@@ -23,5 +23,5 @@ export default class AcgBaikeEditorCoverUploader extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 </style>

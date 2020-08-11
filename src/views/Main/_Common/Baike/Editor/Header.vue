@@ -105,7 +105,7 @@ export default class ClassName extends Vue {
     align-items: center;
     justify-content: space-between;
     backdrop-filter: blur(5px);
-    z-index: 900;
+    z-index: 100;
   }
 
   .section-title-field {
