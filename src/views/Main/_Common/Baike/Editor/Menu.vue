@@ -18,7 +18,7 @@
 
     <mz-list-item v-tooltip.arrow.right="'新增板块'"
       clickable
-      @click="addModule">
+      @click="addSection">
       <div class="menu-item d-flex align-items-center justify-content-center">
         <mz-icon name="add-circle-outline"
           size="30"></mz-icon>
@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { Component, Vue, Model, Prop } from 'vue-property-decorator'
-import { MenuItem, createModule } from './helper'
+import { MenuItem, createSection } from './helper'
 
 @Component
 export default class AcgEditorMenu extends Vue {
@@ -46,9 +46,9 @@ export default class AcgEditorMenu extends Vue {
     this.$emit('change:value', value)
   }
 
-  addModule() {
-    const newModule = createModule()
-    this.$emit('create-module', newModule)
+  addSection() {
+    const newSection = createSection()
+    this.$emit('create-section', newSection)
   }
 }
 </script>

@@ -15,7 +15,7 @@
         class="bg-card">
         <editor-menu v-model="value"
           :menu-list="menuList"
-          @create-module="createModule"></editor-menu>
+          @create-section="createSection"></editor-menu>
       </mz-aside>
 
       <mz-main class="overflow-auto"
@@ -43,7 +43,7 @@ import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 import EditorMenu from './Menu.vue'
 import EditorHeader from './Header.vue'
 import EditorCore from './Core/index.vue'
-import EditorSection from './Module/index.vue'
+import EditorSection from './Section/index.vue'
 import { getBlankInfo, getBaseMenu, MenuItem } from './helper'
 
 @Component({
@@ -60,30 +60,30 @@ export default class AcgBaikeEditor extends Vue {
   info = getBlankInfo()
   menuList = getBaseMenu()
 
-  get currentModule() {
+  get currentSection() {
     return this.menuList.find(i => i.value === this.value)
   }
 
   get title() {
-    return this.currentModule ? this.currentModule.title : ''
+    return this.currentSection ? this.currentSection.title : ''
   }
 
-  createModule(module: MenuItem) {
-    this.menuList.push(module)
-    this.value = module.value
+  createSection(section: MenuItem) {
+    this.menuList.push(section)
+    this.value = section.value
   }
 
   handleTitleUpdate(title: string) {
-    if (this.currentModule) {
-      this.currentModule.title = title
+    if (this.currentSection) {
+      this.currentSection.title = title
     }
   }
 
   handleSectionSave() {}
 
   handleSectionRemove() {
-    if (this.currentModule) {
-      this.menuList.remove(this.currentModule)
+    if (this.currentSection) {
+      this.menuList.remove(this.currentSection)
       this.value = 'core'
     }
   }

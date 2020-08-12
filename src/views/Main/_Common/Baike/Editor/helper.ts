@@ -20,7 +20,7 @@ export function getBaseMenu(): MenuItem[] {
   return [{ title: '核心数据', icon: 'earth-outline', value: 'core' }]
 }
 
-export function createModule() {
+export function createSection() {
   return {
     title: '自定义模块',
     icon: 'cube-outline',
