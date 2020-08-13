@@ -24,6 +24,20 @@ export function createSection() {
   return {
     title: '自定义模块',
     icon: 'cube-outline',
-    value: Math.random() + ''
+    value: Math.random() + '',
+    items: []
+  }
+}
+
+export function createSectionItem(type: string) {
+  switch (type) {
+    case 'left-right':
+      return { type, left: {}, right: {} }
+    case 'text':
+    case 'image':
+    case 'html':
+      return { type, data: '', style: '' }
+    case 'table':
+      return { type, data: [] }
   }
 }
