@@ -15,7 +15,7 @@ import EditorOutline from './Outline.vue'
 @Component({ components: { EditorOutline, EditorActions } })
 export default class AcgBaikeEditorSection extends Vue {
   handleInsert(type: string) {
-    console.log(type)
+    this.$emit('insert', type)
   }
 }
 </script>
