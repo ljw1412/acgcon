@@ -16,16 +16,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { sectionItemTypeList } from '../helper'
 
 @Component
 export default class BaikeEditorActions extends Vue {
-  actionList = [
-    { title: '文字', icon: 'text-outline', type: 'text' },
-    { title: '图片', icon: 'image-outline', type: 'image' },
-    { title: '左右布局', icon: 'book-outline', type: 'left-right' },
-    { title: '表格', icon: 'grid-outline', type: 'table' },
-    { title: 'HTML', icon: 'code-working-outline', type: 'html' }
-  ]
+  actionList = sectionItemTypeList
 
   get actionWidth() {
     return 100 / this.actionList.length + '%'

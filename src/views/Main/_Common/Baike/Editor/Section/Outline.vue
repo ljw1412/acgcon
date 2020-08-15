@@ -5,14 +5,18 @@
       <div class="title py-3">{{title}}</div>
       <div v-for="(item,index) of outlineList"
         class="pl-16 py-3"
-        :key="index">{{item.type}}</div>
+        :key="index">
+        <mz-icon :name="item.icon"
+          class="mr-5"></mz-icon>
+        <span>{{item.desc}}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { MenuItem, typeNameMap } from '../helper'
+import { MenuItem, typeIconMap, typeNameMap } from '../helper'
 
 @Component
 export default class BaikeEditorOutline extends Vue {
@@ -29,8 +33,26 @@ export default class BaikeEditorOutline extends Vue {
 
   get outlineList() {
     return this.items.map(item => {
-      return { type: this.getTypeName(item.type), item }
+      const data: Record<string, any> = {
+        item,
+        type: item.type,
+        icon: this.getTypeIcon(item.type)
+      }
+
+      if (item.type === 'left-right') {
+        data.desc = '左右布局'
+      } else if (item.type === 'text') {
+        data.desc = item.data.trim().substr(0, 4) + '...'
+      } else {
+        data.desc = this.getTypeName(item.type)
+      }
+
+      return data
     })
+  }
+
+  getTypeIcon(type: keyof Acgcon.BaikeSectionItemTypeMap) {
+    return typeIconMap[type] || ''
   }
 
   getTypeName(type: keyof Acgcon.BaikeSectionItemTypeMap) {

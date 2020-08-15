@@ -6,12 +6,12 @@
         :key="index"
         v-bind="item"
         @click="handleSectionItemClick(item)"></section-item>
-      <editor-actions @insert="handleInsert"></editor-actions>
-      <editor-create-section-modal v-model="isDisplayCreateModal"
-        :type="currentType"
-        :is-edit="isEdit"
-        @save="handleSectionSave"></editor-create-section-modal>
     </div>
+    <editor-actions @insert="handleInsert"></editor-actions>
+    <editor-create-section-modal v-model="isDisplayCreateModal"
+      :type="currentType"
+      :is-edit="isEdit"
+      @save="handleSectionSave"></editor-create-section-modal>
   </div>
 </template>
 
@@ -67,6 +67,11 @@ export default class BaikeEditorSection extends Vue {
 }
 
 .baike-editor-section-content {
+  > * {
+    margin-bottom: 5px;
+    padding: 5px;
+  }
+
   > .acg-baike-text {
     position: relative;
     &:hover {
