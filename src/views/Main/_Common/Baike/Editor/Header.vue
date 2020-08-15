@@ -52,7 +52,7 @@
 import { Component, Vue, Prop, Watch, Ref } from 'vue-property-decorator'
 
 @Component
-export default class ClassName extends Vue {
+export default class BaikeEditorHeader extends Vue {
   @Prop(String)
   readonly title!: string
   @Prop(Boolean)

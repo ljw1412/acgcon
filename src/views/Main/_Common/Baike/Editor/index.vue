@@ -1,6 +1,6 @@
 <template>
   <mz-layout v-cover
-    id="acg-baike-editor"
+    id="baike-editor"
     class="h-100 overflow-hidden">
 
     <mz-header v-elevation="1"
@@ -30,7 +30,9 @@
         <div class="mx-24 my-16 p-16">
           <editor-core v-if="value === 'core'"
             :info="info"></editor-core>
-          <editor-section v-else></editor-section>
+          <editor-section v-else
+            :section="currentSection"
+            @section-save="handleSaveSectionItem"></editor-section>
         </div>
       </mz-main>
     </mz-layout>
@@ -55,7 +57,7 @@ import { getBlankInfo, getBaseMenu, MenuItem } from './helper'
     EditorSection
   }
 })
-export default class AcgBaikeEditor extends Vue {
+export default class BaikeEditor extends Vue {
   value = 'core'
   info = getBlankInfo()
   menuList = getBaseMenu()
@@ -79,6 +81,13 @@ export default class AcgBaikeEditor extends Vue {
     }
   }
 
+  handleSaveSectionItem(item: Acgcon.BaikeSectionItem) {
+    console.log(item)
+    if (this.currentSection && this.currentSection.items) {
+      this.currentSection.items.push(item)
+    }
+  }
+
   handleSectionSave() {}
 
   handleSectionRemove() {
@@ -91,7 +100,7 @@ export default class AcgBaikeEditor extends Vue {
 </script>
 
 <style lang="scss">
-#acg-baike-editor {
+#baike-editor {
   color: $color-text-primary;
 
   .mz-aside {

@@ -1,5 +1,5 @@
 <template>
-  <mz-row class="acg-baike-editor-actions">
+  <mz-row class="baike-editor-actions">
     <mz-col v-for="action of actionList"
       class="lh-22 py-8 d-flex align-items-center justify-content-center border cursor-pointer user-select-none"
       v-ripple
@@ -18,7 +18,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class AcgBaikeEditorActions extends Vue {
+export default class BaikeEditorActions extends Vue {
   actionList = [
     { title: '文字', icon: 'text-outline', type: 'text' },
     { title: '图片', icon: 'image-outline', type: 'image' },

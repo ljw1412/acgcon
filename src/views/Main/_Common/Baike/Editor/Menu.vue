@@ -1,5 +1,5 @@
 <template>
-  <mz-scrollbar id="acg-editor-menu"
+  <mz-scrollbar id="baike-editor-menu"
     class="h-100"
     bar-size="4px"
     :always="false">
@@ -32,7 +32,7 @@ import { Component, Vue, Model, Prop } from 'vue-property-decorator'
 import { MenuItem, createSection } from './helper'
 
 @Component
-export default class AcgEditorMenu extends Vue {
+export default class BaikeEditorMenu extends Vue {
   @Model('change:value', String)
   readonly value!: string
   @Prop({ type: Array, default: () => [] })
@@ -54,7 +54,7 @@ export default class AcgEditorMenu extends Vue {
 </script>
 
 <style lang="scss">
-#acg-editor-menu {
+#baike-editor-menu {
   .menu-item {
     width: 100%;
     height: 64px;

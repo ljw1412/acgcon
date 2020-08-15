@@ -2,6 +2,7 @@ export interface MenuItem {
   title: string
   icon: string
   value: string
+  items?: Acgcon.BaikeSectionItem[]
 }
 
 export function getBlankInfo(): Acgcon.BaikeData {
@@ -20,7 +21,7 @@ export function getBaseMenu(): MenuItem[] {
   return [{ title: '核心数据', icon: 'earth-outline', value: 'core' }]
 }
 
-export function createSection() {
+export function createSection(): MenuItem {
   return {
     title: '自定义模块',
     icon: 'cube-outline',
@@ -29,15 +30,10 @@ export function createSection() {
   }
 }
 
-export function createSectionItem(type: string) {
-  switch (type) {
-    case 'left-right':
-      return { type, left: {}, right: {} }
-    case 'text':
-    case 'image':
-    case 'html':
-      return { type, data: '', style: '' }
-    case 'table':
-      return { type, data: [] }
-  }
+export const typeNameMap = {
+  text: '文字',
+  image: '图片',
+  'left-right': '左右布局',
+  table: '表格',
+  html: 'HTML'
 }
