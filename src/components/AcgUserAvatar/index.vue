@@ -72,13 +72,16 @@ export default class AcgUserDropdown extends Vue {
   onMenuClick(action: string) {
     this.isDisplayDropdown = false
     this.$nextTick(() => {
+      const resolve = this.$router.resolve.bind(this.$router)
       switch (action) {
         case 'logout':
           this.logout()
           if (this.inBackStage) this.$router.push({ name: 'home' })
           break
         case 'management':
-          this.$router.push({ name: 'admin' })
+          // this.$router.push({ name: 'admin' })
+          const { href } = resolve({ name: 'admin' })
+          window.open(href)
           break
       }
     })

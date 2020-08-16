@@ -89,7 +89,11 @@ export default class AcgAdminCache extends Vue {
   async handleShowCache(key: string) {
     let data = await this.fetchValue(key)
     if (typeof data === 'object') {
-      data = JSON.stringify(data)
+      data = this.$createElement(
+        'pre',
+        { style: 'white-space: pre-wrap;' },
+        JSON.stringify(data, null, 2)
+      )
     }
     await this.$modal.alert(data, key)
   }
