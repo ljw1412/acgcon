@@ -63,10 +63,10 @@ export default class BaikeEditorOutline extends Vue {
 
 <style lang="scss">
 .baike-editor-outline {
-  right: 0;
-  top: 128px;
+  left: 64px;
+  top: 64px;
   height: 100%;
-  width: 160px;
+  width: 220px;
   background-color: $card-bg;
 }
 </style>

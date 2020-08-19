@@ -63,7 +63,7 @@ export default class BaikeEditorSection extends Vue {
 
 <style lang="scss">
 .baike-editor-section {
-  padding-right: 160px;
+  padding-left: 220px;
 }
 
 .baike-editor-section-content {

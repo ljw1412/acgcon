@@ -21,6 +21,7 @@
       <mz-main class="overflow-auto"
         id="baike-editor-content">
         <editor-header :title="title"
+          :has-outline="value !== 'core'"
           :editable="value !== 'core'"
           :removable="value !== 'core'"
           @title-update="handleTitleUpdate"

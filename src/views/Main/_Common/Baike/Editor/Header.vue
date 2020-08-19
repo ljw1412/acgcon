@@ -2,7 +2,8 @@
   <mz-fixed-section sticky
     placeholder
     container="#baike-editor-content"
-    class="editor-header">
+    class="editor-header"
+    :class="{'has-outline': hasOutline}">
     <div class="section-title d-flex align-items-center"
       v-hover="{
           enter: () => hover = true,
@@ -59,6 +60,8 @@ export default class BaikeEditorHeader extends Vue {
   readonly editable!: boolean
   @Prop(Boolean)
   readonly removable!: boolean
+  @Prop(Boolean)
+  readonly hasOutline!: boolean
   @Ref('input')
   readonly inputRef!: HTMLInputElement
 
@@ -99,6 +102,10 @@ export default class BaikeEditorHeader extends Vue {
 
 <style lang="scss">
 .editor-header {
+  &.has-outline {
+    padding-left: 220px;
+  }
+
   > .mz-fixed-section {
     padding: 16px 20px;
     display: flex;
