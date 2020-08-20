@@ -11,8 +11,7 @@
 
     <mz-layout class="h-100">
       <mz-aside v-elevation="1"
-        width="64px"
-        class="bg-card">
+        width="64px">
         <editor-menu v-model="value"
           :menu-list="menuList"
           @create-section="createSection"></editor-menu>
@@ -106,6 +105,13 @@ export default class BaikeEditor extends Vue {
 
   .mz-aside {
     z-index: 150;
+    background-color: $white;
+  }
+}
+
+@include theme-root(dark) {
+  #baike-editor .mz-aside {
+    background-color: $primary;
   }
 }
 </style>

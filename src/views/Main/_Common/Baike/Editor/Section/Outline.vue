@@ -2,9 +2,9 @@
   <div class="baike-editor-outline position-fixed">
     <div class="text-center py-10 border-bottom">大纲</div>
     <div class="tree px-10 fs-14">
-      <div class="title py-3">{{title}}</div>
+      <div class="title py-8">{{title}}</div>
       <div v-for="(item,index) of outlineList"
-        class="pl-16 py-3"
+        class="tree-item pl-16 py-5"
         :key="index">
         <mz-icon :name="item.icon"
           class="mr-5"></mz-icon>
@@ -42,7 +42,7 @@ export default class BaikeEditorOutline extends Vue {
       if (item.type === 'left-right') {
         data.desc = '左右布局'
       } else if (item.type === 'text') {
-        data.desc = item.data.trim().substr(0, 4) + '...'
+        data.desc = item.data.trim().substr(0, 8) + '...'
       } else {
         data.desc = this.getTypeName(item.type)
       }
@@ -68,5 +68,13 @@ export default class BaikeEditorOutline extends Vue {
   height: 100%;
   width: 220px;
   background-color: $card-bg;
+
+  .tree-item {
+    cursor: pointer;
+    position: relative;
+    &:hover {
+      @include foreground;
+    }
+  }
 }
 </style>
