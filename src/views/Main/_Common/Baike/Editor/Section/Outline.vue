@@ -1,17 +1,28 @@
 <template>
-  <div class="baike-editor-outline position-fixed">
-    <div class="text-center py-10 border-bottom">大纲</div>
-    <div class="tree px-10 fs-14">
-      <div class="title py-8">{{title}}</div>
-      <div v-for="(item,index) of outlineList"
-        class="tree-item pl-16 py-5"
-        :key="index">
-        <mz-icon :name="item.icon"
-          class="mr-5"></mz-icon>
-        <span>{{item.desc}}</span>
+  <div class="baike-editor-outline-wrapper">
+    <mz-button icon
+      class="btn-fold position-fixed"
+      @click="$emit('update:isFold',!isFold)">
+      <mz-icon name="list-outline"
+        size="20"></mz-icon>
+    </mz-button>
+
+    <div v-show="!isFold"
+      class="baike-editor-outline position-fixed">
+      <div class="outline-header text-center py-10 border-bottom">大纲</div>
+      <div class="tree px-10 fs-14">
+        <div class="title py-8">{{title}}</div>
+        <div v-for="(item,index) of outlineList"
+          class="tree-item pl-16 py-5"
+          :key="index">
+          <mz-icon :name="item.icon"
+            class="mr-5"></mz-icon>
+          <span>{{item.desc}}</span>
+        </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script lang="ts">
@@ -22,6 +33,8 @@ import { MenuItem, typeIconMap, typeNameMap } from '../helper'
 export default class BaikeEditorOutline extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   readonly section!: MenuItem
+  @Prop(Boolean)
+  readonly isFold!: boolean
 
   get title() {
     return this.section.title || 'ROOT'
@@ -62,6 +75,14 @@ export default class BaikeEditorOutline extends Vue {
 </script>
 
 <style lang="scss">
+.baike-editor-outline-wrapper {
+  .btn-fold {
+    left: 64px + 5;
+    top: 64px + 5;
+    z-index: 1;
+  }
+}
+
 .baike-editor-outline {
   left: 64px;
   top: 64px;

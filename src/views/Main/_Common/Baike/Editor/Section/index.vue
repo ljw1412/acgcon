@@ -1,6 +1,9 @@
 <template>
-  <div class="baike-editor-section">
-    <editor-outline :section="section"></editor-outline>
+  <div class="baike-editor-section"
+    :class="{'is-fold':isOutlineFold}">
+    <editor-outline :section="section"
+      :is-fold.sync="isOutlineFold"></editor-outline>
+
     <div class="baike-editor-section-content">
       <section-item v-for="(item,index) of items"
         :key="index"
@@ -37,6 +40,7 @@ export default class BaikeEditorSection extends Vue {
 
   isDisplayCreateModal = false
   isEdit = false
+  isOutlineFold = false
   currentType = ''
 
   get items() {
@@ -64,6 +68,9 @@ export default class BaikeEditorSection extends Vue {
 <style lang="scss">
 .baike-editor-section {
   padding-left: 220px;
+  &.is-fold {
+    padding-left: 0;
+  }
 }
 
 .baike-editor-section-content {
