@@ -79,7 +79,8 @@ export default class BaikeEditorSection extends Vue {
     padding: 5px;
   }
 
-  > .acg-baike-text {
+  > .acg-baike-text,
+  > .acg-baike-html {
     position: relative;
     &:hover {
       @include foreground;
