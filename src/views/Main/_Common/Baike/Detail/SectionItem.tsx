@@ -1,4 +1,5 @@
-import Vue, { RenderContext, CreateElement, VNodeData } from 'vue'
+import './SectionItem.scss'
+import Vue, { RenderContext, CreateElement } from 'vue'
 import { parseStyleText } from '@/utils/vue-helper'
 import { only } from '@/utils/object'
 
