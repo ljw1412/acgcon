@@ -46,7 +46,8 @@ import EditorMenu from './Menu.vue'
 import EditorHeader from './Header.vue'
 import EditorCore from './Core/index.vue'
 import EditorSection from './Section/index.vue'
-import { getBlankInfo, getBaseMenu, MenuItem } from './helper'
+import { getBlankInfo, getBaseMenu } from './helper'
+import { baikeInfo, baikeSections } from '../../../../../configs/mock'
 
 @Component({
   components: {
@@ -70,9 +71,9 @@ export default class BaikeEditor extends Vue {
     return this.currentSection ? this.currentSection.title : ''
   }
 
-  createSection(section: MenuItem) {
+  createSection(section: Acgcon.BaikeSection) {
     this.menuList.push(section)
-    this.value = section.value
+    this.value = section.value!
   }
 
   handleTitleUpdate(title: string) {
@@ -94,6 +95,13 @@ export default class BaikeEditor extends Vue {
     if (this.currentSection) {
       this.menuList.remove(this.currentSection)
       this.value = 'core'
+    }
+  }
+
+  created() {
+    if (this.$route.query.mock == '1') {
+      this.info = baikeInfo
+      this.menuList.push(...baikeSections)
     }
   }
 }

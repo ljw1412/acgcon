@@ -24,7 +24,6 @@ import EditorActions from './Actions.vue'
 import EditorOutline from './Outline.vue'
 import EditorCreateSectionModal from './CreateSectionModal/index.vue'
 import SectionItem from '../../Detail/SectionItem'
-import { MenuItem } from '../helper'
 
 @Component({
   components: {
@@ -36,7 +35,7 @@ import { MenuItem } from '../helper'
 })
 export default class BaikeEditorSection extends Vue {
   @Prop({ type: Object, default: () => ({}) })
-  readonly section!: MenuItem
+  readonly section!: Acgcon.BaikeSection
 
   isDisplayCreateModal = false
   isEdit = false

@@ -27,12 +27,12 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { MenuItem, typeIconMap, typeNameMap } from '../helper'
+import { typeIconMap, typeNameMap } from '../helper'
 
 @Component
 export default class BaikeEditorOutline extends Vue {
   @Prop({ type: Object, default: () => ({}) })
-  readonly section!: MenuItem
+  readonly section!: Acgcon.BaikeSection
   @Prop(Boolean)
   readonly isFold!: boolean
 

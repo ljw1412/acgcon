@@ -1,10 +1,3 @@
-export interface MenuItem {
-  title: string
-  icon: string
-  value: string
-  items?: Acgcon.BaikeSectionItem[]
-}
-
 export function getBlankInfo(): Acgcon.BaikeData {
   return {
     _id: undefined,
@@ -17,15 +10,15 @@ export function getBlankInfo(): Acgcon.BaikeData {
   }
 }
 
-export function getBaseMenu(): MenuItem[] {
+export function getBaseMenu(): Acgcon.BaikeSection[] {
   return [{ title: '核心数据', icon: 'earth-outline', value: 'core' }]
 }
 
-export function createSection(): MenuItem {
+export function createSection(): Acgcon.BaikeSection {
   return {
     title: '自定义模块',
     icon: 'cube-outline',
-    value: Math.random() + '',
+    value: 'new_' + Math.random(),
     items: []
   }
 }

@@ -29,14 +29,14 @@
 
 <script lang="ts">
 import { Component, Vue, Model, Prop } from 'vue-property-decorator'
-import { MenuItem, createSection } from './helper'
+import { createSection } from './helper'
 
 @Component
 export default class BaikeEditorMenu extends Vue {
   @Model('change:value', String)
   readonly value!: string
   @Prop({ type: Array, default: () => [] })
-  readonly menuList!: MenuItem[]
+  readonly menuList!: Acgcon.BaikeSection[]
 
   get mValue() {
     return this.value
