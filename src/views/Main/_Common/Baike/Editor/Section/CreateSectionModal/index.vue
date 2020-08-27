@@ -11,6 +11,16 @@
         placeholder="请输入文字内容"></mz-textarea>
     </template>
 
+    <template v-if="type === 'image'">
+      <p class="mb-6">
+        <span>您可以上传图片：</span>
+        <mz-button color="primary">上传图片</mz-button>
+      </p>
+      <p class="mt-4 mb-6">或者直接输入图片的地址：</p>
+      <mz-input v-model="data"
+        placeholder="请输入图片地址"></mz-input>
+    </template>
+
     <template #footer>
       <mz-button color="primary"
         :class="{'not-save': !allowSave}"
