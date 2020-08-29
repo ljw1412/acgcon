@@ -10,10 +10,24 @@
     <div v-show="!isFold"
       class="baike-editor-outline position-fixed">
       <div class="outline-header text-center py-10 border-bottom">大纲</div>
-      <div class="tree px-10 fs-14">
-        <div class="title py-8">{{title}}</div>
+      <div class="tree fs-14">
+        <!-- 模块根节点 -->
+        <div v-hover="{
+            enter: () => { $emit('active-change', 'all') },
+            leave: () => { $emit('active-change', null) }
+          }"
+          class="tree-item title px-10 py-8">
+          <mz-icon :name="section.icon"
+            class="mr-5"></mz-icon>
+          <span>{{title}}</span>
+        </div>
+        <!-- 模块子节点 -->
         <div v-for="(item,index) of outlineList"
-          class="tree-item pl-16 py-5"
+          v-hover="{
+            enter: () => { $emit('active-change', item.item) },
+            leave: () => { $emit('active-change', null) }
+          }"
+          class="tree-item ml-10 pl-10 pr-6 py-5"
           :key="index">
           <mz-icon :name="item.icon"
             class="mr-5"></mz-icon>

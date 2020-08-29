@@ -8,7 +8,7 @@
       v-hover="{
           enter: () => hover = true,
           leave: () => hover = false
-        }">
+      }">
       <mz-icon v-show="editable && hover || isEdit"
         size="20"
         name="pencil-sharp"
@@ -33,6 +33,7 @@
       <!-- 普通状态 -->
       <span v-else
         class="fs-20 lh-20 cursor-pointer"
+        style="min-width: 100px; min-height: 20px;"
         @click="handleTitleClick">{{title}}</span>
     </div>
 

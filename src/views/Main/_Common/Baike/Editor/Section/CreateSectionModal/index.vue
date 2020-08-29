@@ -75,7 +75,7 @@ export default class BaikeEditorCreateSectionModal extends Vue {
   }
 
   get allowSave() {
-    return this.isTextarea && this.data.trim().length
+    return this.data.trim().length
   }
 
   clearData() {
