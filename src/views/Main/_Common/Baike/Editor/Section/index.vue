@@ -7,6 +7,7 @@
       @active-change="handleSectionItemActive"></editor-outline>
     <!-- 模块内容 -->
     <div class="baike-editor-section-content">
+      <editor-content-empty :empty="!items.length"></editor-content-empty>
       <section-item v-for="(item,index) of items"
         :key="index"
         :item="item"
@@ -27,6 +28,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import EditorActions from './Actions.vue'
 import EditorOutline from './Outline.vue'
+import EditorContentEmpty from './ContentEmpty.vue'
 import EditorCreateSectionModal from './CreateSectionModal/index.vue'
 import SectionItem from './SectionItem.vue'
 
@@ -34,6 +36,7 @@ import SectionItem from './SectionItem.vue'
   components: {
     EditorOutline,
     EditorActions,
+    EditorContentEmpty,
     EditorCreateSectionModal,
     SectionItem
   }

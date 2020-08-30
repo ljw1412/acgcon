@@ -7,8 +7,8 @@
       <mz-list-item v-for="item of menuList"
         v-tooltip.arrow.right="item.title"
         class="cursor-pointer"
-        :key="item.value"
-        :value="item.value">
+        :key="item._id"
+        :value="item._id">
         <div class="menu-item d-flex align-items-center justify-content-center">
           <mz-icon :name="item.icon"
             size="30"></mz-icon>

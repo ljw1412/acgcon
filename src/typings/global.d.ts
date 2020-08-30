@@ -58,7 +58,6 @@ declare global {
 
     interface BaikeSection {
       _id?: string
-      value?: string
       icon?: string
       title: string
       items?: BaikeSectionItem[]

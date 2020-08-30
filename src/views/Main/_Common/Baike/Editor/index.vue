@@ -64,7 +64,7 @@ export default class BaikeEditor extends Vue {
   menuList = getBaseMenu()
 
   get currentSection() {
-    return this.menuList.find(i => i.value === this.value)
+    return this.menuList.find(i => i._id === this.value)
   }
 
   get title() {
@@ -73,7 +73,7 @@ export default class BaikeEditor extends Vue {
 
   createSection(section: Acgcon.BaikeSection) {
     this.menuList.push(section)
-    this.value = section.value!
+    this.value = section._id!
   }
 
   handleTitleUpdate(title: string) {

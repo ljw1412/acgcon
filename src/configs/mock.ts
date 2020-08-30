@@ -38,6 +38,8 @@ export const baikeInfo: Acgcon.BaikeData = {
 
 export const baikeSections: Acgcon.BaikeSection[] = [
   {
+    _id: '0',
+    icon: 'cube-outline',
     title: '作品背景',
     items: [
       {
@@ -58,6 +60,8 @@ export const baikeSections: Acgcon.BaikeSection[] = [
     ]
   },
   {
+    _id: '1',
+    icon: 'cube-outline',
     title: '人物介绍',
     items: [
       {
@@ -74,6 +78,8 @@ export const baikeSections: Acgcon.BaikeSection[] = [
     ]
   },
   {
+    _id: '2',
+    icon: 'cube-outline',
     title: 'table',
     items: [
       {

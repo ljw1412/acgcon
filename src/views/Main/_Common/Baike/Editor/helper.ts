@@ -11,14 +11,14 @@ export function getBlankInfo(): Acgcon.BaikeData {
 }
 
 export function getBaseMenu(): Acgcon.BaikeSection[] {
-  return [{ title: '核心数据', icon: 'earth-outline', value: 'core' }]
+  return [{ title: '核心数据', icon: 'earth-outline', _id: 'core' }]
 }
 
 export function createSection(): Acgcon.BaikeSection {
   return {
+    _id: 'new_' + Math.random(),
     title: '自定义模块',
     icon: 'cube-outline',
-    value: 'new_' + Math.random(),
     items: []
   }
 }

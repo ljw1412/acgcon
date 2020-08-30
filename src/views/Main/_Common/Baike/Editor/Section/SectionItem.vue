@@ -44,6 +44,7 @@ $section-helper-theme: $success;
     line-height: 14px;
     padding: 2px 4px;
     background-color: $section-helper-theme;
+    z-index: 1;
   }
 
   &::before {
