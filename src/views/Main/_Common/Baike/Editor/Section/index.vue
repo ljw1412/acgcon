@@ -7,7 +7,13 @@
       @active-change="handleSectionItemActive"></editor-outline>
     <!-- 模块内容 -->
     <div class="baike-editor-section-content">
-      <editor-content-empty :empty="!items.length"></editor-content-empty>
+      <editor-content-empty :empty="!items.length">
+        <editor-type-dropdown-menu @action="handleInsertAction">
+          <mz-button class="mt-10"
+            color="primary">新增元素</mz-button>
+        </editor-type-dropdown-menu>
+      </editor-content-empty>
+
       <section-item v-for="(item,index) of items"
         :key="index"
         :item="item"
@@ -29,6 +35,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 import EditorActions from './Actions.vue'
 import EditorOutline from './Outline.vue'
 import EditorContentEmpty from './ContentEmpty.vue'
+import EditorTypeDropdownMenu from './TypeDropdownMenu.vue'
 import EditorCreateSectionModal from './CreateSectionModal/index.vue'
 import SectionItem from './SectionItem.vue'
 
@@ -37,6 +44,7 @@ import SectionItem from './SectionItem.vue'
     EditorOutline,
     EditorActions,
     EditorContentEmpty,
+    EditorTypeDropdownMenu,
     EditorCreateSectionModal,
     SectionItem
   }
@@ -59,6 +67,19 @@ export default class BaikeEditorSection extends Vue {
     this.currentType = type
     this.isEdit = false
     this.isDisplayCreateModal = true
+  }
+
+  handleInsertAction(type: string, item: any) {
+    const sectionItem: Record<string, any> = { type, style: '' }
+    if (type === 'left-right') {
+      sectionItem.left = {}
+      sectionItem.right = {}
+    } else if (type === 'table') {
+      sectionItem.data = []
+    } else {
+      sectionItem.data = ''
+    }
+    this.$emit('section-save', sectionItem)
   }
 
   handleSectionItemClick(item: Acgcon.BaikeSectionItem) {

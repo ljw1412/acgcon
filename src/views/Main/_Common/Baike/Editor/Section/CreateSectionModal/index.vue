@@ -31,11 +31,10 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Model, Watch, Ref } from 'vue-property-decorator'
-import SectionItemEditor from './SectionItemEditor.vue'
 import { typeNameMap } from '../../helper'
 import MzTextarea from 'manzhai-ui/types/packages/Textarea'
 
-@Component({ components: { SectionItemEditor } })
+@Component
 export default class BaikeEditorCreateSectionModal extends Vue {
   @Model('visible:change', Boolean)
   readonly visible!: boolean

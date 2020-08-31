@@ -2,6 +2,7 @@
   <div v-show="empty"
     class="baike-editor-content-empty">
     <div class="text">该模块还没有内容</div>
+    <slot></slot>
   </div>
 </template>
 
