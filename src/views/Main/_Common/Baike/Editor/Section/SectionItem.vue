@@ -1,7 +1,11 @@
 <template>
   <div class="editor-section-item"
     :class="{ 'is-active': active }">
-    <div class="section-type user-select-none">{{type}}</div>
+    <div class="section-item-type user-select-none">{{type}}</div>
+    <div v-if="item.type!=='left-right' && !item.data"
+      class="section-item-placeholder text-gray-500">
+      <em>&lt;请点击编辑{{type}}内容&gt;</em>
+    </div>
     <section-item v-bind="item"></section-item>
   </div>
 </template>
@@ -35,7 +39,7 @@ $section-helper-theme: $success;
   font-size: 16px;
   min-height: 22px;
 
-  .section-type {
+  .section-item-type {
     position: absolute;
     top: 0;
     right: 0;
@@ -56,7 +60,7 @@ $section-helper-theme: $success;
     @include foreground;
     border-color: $section-helper-theme;
 
-    .section-type {
+    .section-item-type {
       display: block;
     }
   }
