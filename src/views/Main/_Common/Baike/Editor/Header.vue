@@ -16,22 +16,24 @@
       <!-- 编辑状态 -->
       <span v-if="isEdit"
         class="section-title-field d-flex align-items-center">
-        <input v-model="mTitle"
+        <mz-input v-model="mTitle"
           ref="input"
-          class="mr-6 fs-20 lh-20" />
+          size="large"
+          class="mr-6 fs-20"></mz-input>
         <mz-icon v-tooltip="'更新'"
           size="24"
           name="checkmark-circle-outline"
-          class="cursor-pointer text-success"
+          class="cursor-pointer text-success flex-shrink-0"
           @click="handleUpdateTitle"></mz-icon>
         <mz-icon v-tooltip="'取消'"
           size="24"
           name="close-circle-outline"
-          class="cursor-pointer text-danger"
+          class="cursor-pointer text-danger flex-shrink-0"
           @click="handleCancelTitle"></mz-icon>
       </span>
       <!-- 普通状态 -->
       <span v-else
+        v-tooltip.bottom.arrow=" editable ? '点击编辑标题' : '' "
         class="fs-20 lh-20 cursor-pointer"
         style="min-width: 100px; min-height: 20px;"
         @click="handleTitleClick">{{title}}</span>
@@ -117,11 +119,6 @@ export default class BaikeEditorHeader extends Vue {
   }
 
   .section-title-field {
-    > input {
-      border: none;
-      color: $color-text-primary;
-      background-color: transparent;
-    }
     > .mz-icon {
       @include clickable();
     }
