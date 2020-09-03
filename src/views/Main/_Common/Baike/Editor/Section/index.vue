@@ -15,7 +15,7 @@
       </editor-content-empty>
 
       <section-item v-for="(item,index) of items"
-        :key="index"
+        :key="item._id || index"
         :item="item"
         :active="activedSectionItem === 'all' || item === activedSectionItem"
         @click="handleSectionItemClick(item)"></section-item>

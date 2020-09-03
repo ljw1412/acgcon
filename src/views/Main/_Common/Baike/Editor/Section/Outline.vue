@@ -28,7 +28,7 @@
             leave: () => { $emit('active-change', null) }
           }"
           class="tree-item ml-10 pl-10 pr-6 py-5"
-          :key="index">
+          :key="item._id || index">
           <mz-icon :name="item.icon"
             class="mr-5"></mz-icon>
           <span>{{item.desc}}</span>
@@ -61,6 +61,7 @@ export default class BaikeEditorOutline extends Vue {
   get outlineList() {
     return this.items.map(item => {
       const data: Record<string, any> = {
+        _id: item._id,
         item,
         type: item.type,
         icon: this.getTypeIcon(item.type)

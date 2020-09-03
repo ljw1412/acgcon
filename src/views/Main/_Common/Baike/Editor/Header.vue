@@ -18,7 +18,7 @@
         class="section-title-field d-flex align-items-center">
         <mz-input v-model="mTitle"
           ref="input"
-          size="large"
+          size="medium"
           class="mr-6 fs-20"></mz-input>
         <mz-icon v-tooltip="'更新'"
           size="24"
@@ -93,8 +93,15 @@ export default class BaikeEditorHeader extends Vue {
     this.hover = false
   }
 
-  handleRemoveClick() {
-    this.$emit('remove')
+  async handleRemoveClick() {
+    try {
+      await this.$modal.confirm({
+        title: '删除确认',
+        content: `确认删除模块[${this.title}]?`,
+        confirm: { color: 'danger' }
+      })
+      this.$emit('remove')
+    } catch (error) {}
   }
 
   handleSaveClick() {

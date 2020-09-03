@@ -20,23 +20,27 @@ declare global {
     }
 
     interface BaikeSectionText {
+      _id: string
       type: 'html' | 'text'
       data: string
       style?: string
     }
 
     interface BaikeSectionImage {
+      _id: string
       type: 'image'
       data: string
       style?: string
     }
 
     interface BaikeSectionTable {
+      _id: string
       type: 'table'
       data: any[]
       style?: string
     }
     interface BaikeSectionLeftRight {
+      _id: string
       type: 'left-right'
       left: BaikeSectionItem
       right: BaikeSectionItem
