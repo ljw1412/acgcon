@@ -2,7 +2,7 @@
   <div class="editor-section-item"
     :class="{ 'is-active': active }">
     <div class="section-item-type user-select-none">{{type}}</div>
-    <div v-if="item.type!=='left-right' && !item.data"
+    <div v-if="item.type!=='left-right' && (!item.data || !item.data.length)"
       class="section-item-placeholder text-gray-500">
       <em>&lt;请点击编辑{{type}}内容&gt;</em>
     </div>
@@ -33,7 +33,6 @@ $section-helper-theme: $success;
 
 .editor-section-item {
   position: relative;
-  margin-bottom: 5px;
   padding: 5px;
   border: 1px dashed transparent;
   font-size: 16px;

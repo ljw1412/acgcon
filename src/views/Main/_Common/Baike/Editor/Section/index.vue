@@ -14,14 +14,20 @@
         </editor-type-dropdown-menu>
       </editor-content-empty>
 
-      <section-item v-for="(item,index) of items"
-        :key="item._id || index"
-        :item="item"
-        :active="activedSectionItem === 'all' || item === activedSectionItem"
-        @click="handleSectionItemClick(item)"></section-item>
+      <template v-for="(item,index) of items">
+        <section-item :key="item._id || index"
+          :item="item"
+          :active="activedSectionItem === 'all' || item === activedSectionItem"
+          @click="handleSectionItemClick(item)"></section-item>
+        <editor-type-dropdown-menu :key="`line-${item._id || index}`"
+          @action="handleInsertAction">
+          <template #default="{active}">
+            <editor-insert-line :active="active"></editor-insert-line>
+          </template>
+        </editor-type-dropdown-menu>
+      </template>
+
     </div>
-    <!-- 模块操作栏 -->
-    <editor-actions @insert="handleInsert"></editor-actions>
     <!-- 模块创建弹窗 -->
     <editor-create-section-modal v-model="isDisplayCreateModal"
       :type="currentType"
@@ -32,8 +38,8 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import EditorActions from './Actions.vue'
 import EditorOutline from './Outline.vue'
+import EditorInsertLine from './InsertLine.vue'
 import EditorContentEmpty from './ContentEmpty.vue'
 import EditorTypeDropdownMenu from './TypeDropdownMenu.vue'
 import EditorCreateSectionModal from './CreateSectionModal/index.vue'
@@ -42,7 +48,7 @@ import SectionItem from './SectionItem.vue'
 @Component({
   components: {
     EditorOutline,
-    EditorActions,
+    EditorInsertLine,
     EditorContentEmpty,
     EditorTypeDropdownMenu,
     EditorCreateSectionModal,
