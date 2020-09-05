@@ -1,9 +1,8 @@
 <template>
-  <div class="baike-editor-section"
-    :class="{'is-fold':isOutlineFold}">
+  <div class="baike-editor-section">
     <!-- 大纲 -->
     <editor-outline :section="section"
-      :is-fold.sync="isOutlineFold"
+      :is-fold.sync="isFold"
       @active-change="handleSectionItemActive"></editor-outline>
     <!-- 模块内容 -->
     <div class="baike-editor-section-content">
@@ -19,12 +18,10 @@
           :item="item"
           :active="activedSectionItem === 'all' || item === activedSectionItem"
           @click="handleSectionItemClick(item)"></section-item>
-        <editor-type-dropdown-menu :key="`line-${item._id || index}`"
-          @action="handleInsertAction">
-          <template #default="{active}">
-            <editor-insert-line :active="active"></editor-insert-line>
-          </template>
-        </editor-type-dropdown-menu>
+
+        <editor-insert-line :key="`line-${item._id || index}`"
+          :index="index + 1"
+          @action="handleInsertAction"></editor-insert-line>
       </template>
 
     </div>
@@ -58,12 +55,21 @@ import SectionItem from './SectionItem.vue'
 export default class BaikeEditorSection extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   readonly section!: Acgcon.BaikeSection
+  @Prop(Boolean)
+  readonly isOutlineFold!:boolean
 
   isDisplayCreateModal = false
   isEdit = false
-  isOutlineFold = false
   currentType = ''
   activedSectionItem: 'all' | Acgcon.BaikeSectionItem | null = null
+
+  get isFold(){
+    return this.isOutlineFold
+  }
+
+  set isFold(val:boolean){
+    this.$emit('update:isOutlineFold',val)
+  }
 
   get items() {
     return this.section.items || []
@@ -75,7 +81,7 @@ export default class BaikeEditorSection extends Vue {
     this.isDisplayCreateModal = true
   }
 
-  handleInsertAction(type: string, item: any) {
+  handleInsertAction(type: string, item: any, index: number) {
     const sectionItem: Record<string, any> = { type, style: '' }
     if (type === 'left-right') {
       sectionItem.left = {}
@@ -85,7 +91,7 @@ export default class BaikeEditorSection extends Vue {
     } else {
       sectionItem.data = ''
     }
-    this.$emit('section-save', sectionItem)
+    this.$emit('section-save', sectionItem, index)
   }
 
   handleSectionItemClick(item: Acgcon.BaikeSectionItem) {
@@ -105,10 +111,4 @@ export default class BaikeEditorSection extends Vue {
 </script>
 
 <style lang="scss">
-.baike-editor-section {
-  padding-left: 220px;
-  &.is-fold {
-    padding-left: 0;
-  }
-}
 </style>

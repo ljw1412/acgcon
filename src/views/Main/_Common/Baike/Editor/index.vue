@@ -18,9 +18,9 @@
       </mz-aside>
 
       <mz-main class="overflow-auto"
-        id="baike-editor-content">
+        id="baike-editor-content"
+        :style="value!=='core' && !isOutlineFold ? 'margin-left: 220px;' : ''">
         <editor-header :title="title"
-          :has-outline="value !== 'core'"
           :editable="value !== 'core'"
           :removable="value !== 'core'"
           @title-update="handleTitleUpdate"
@@ -32,6 +32,7 @@
             :info="info"></editor-core>
           <editor-section v-else
             :section="currentSection"
+            :is-outline-fold.sync="isOutlineFold"
             @section-save="handleSaveSectionItem"></editor-section>
         </div>
       </mz-main>
@@ -62,6 +63,7 @@ export default class BaikeEditor extends Vue {
   value = 'core'
   info = getBlankInfo()
   menuList = getBaseMenu()
+  isOutlineFold = false
 
   get currentSection() {
     return this.menuList.find(i => i._id === this.value)
@@ -82,10 +84,14 @@ export default class BaikeEditor extends Vue {
     }
   }
 
-  handleSaveSectionItem(item: Acgcon.BaikeSectionItem) {
-    console.log(item)
+  handleSaveSectionItem(item: Acgcon.BaikeSectionItem, index?: number) {
+    console.log(item, index)
     if (this.currentSection && this.currentSection.items) {
-      this.currentSection.items.push(item)
+      if (index === undefined) {
+        this.currentSection.items.push(item)
+      } else {
+        this.currentSection.items.splice(index, 0, item)
+      }
     }
   }
 
