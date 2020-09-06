@@ -33,7 +33,7 @@
           <editor-section v-else
             :section="currentSection"
             :is-outline-fold.sync="isOutlineFold"
-            @section-save="handleSaveSectionItem"></editor-section>
+            @section-insert="handleInsertSectionItem"></editor-section>
         </div>
       </mz-main>
     </mz-layout>
@@ -84,7 +84,7 @@ export default class BaikeEditor extends Vue {
     }
   }
 
-  handleSaveSectionItem(item: Acgcon.BaikeSectionItem, index?: number) {
+  handleInsertSectionItem(item: Acgcon.BaikeSectionItem, index?: number) {
     console.log(item, index)
     if (this.currentSection && this.currentSection.items) {
       if (index === undefined) {

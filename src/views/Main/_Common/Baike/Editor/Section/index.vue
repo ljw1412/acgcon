@@ -17,7 +17,7 @@
         <section-item :key="item._id || index"
           :item="item"
           :active="activedSectionItem === 'all' || item === activedSectionItem"
-          @click="handleSectionItemClick(item)"></section-item>
+          @click.native="handleSectionItemClick(item)"></section-item>
 
         <editor-insert-line :key="`line-${item._id || index}`"
           :index="index + 1"
@@ -27,9 +27,7 @@
     </div>
     <!-- 模块创建弹窗 -->
     <editor-create-section-modal v-model="isDisplayCreateModal"
-      :type="currentType"
-      :is-edit="isEdit"
-      @save="handleSectionSave"></editor-create-section-modal>
+      :section="currentSectionItem"></editor-create-section-modal>
   </div>
 </template>
 
@@ -56,29 +54,22 @@ export default class BaikeEditorSection extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   readonly section!: Acgcon.BaikeSection
   @Prop(Boolean)
-  readonly isOutlineFold!:boolean
+  readonly isOutlineFold!: boolean
 
   isDisplayCreateModal = false
-  isEdit = false
-  currentType = ''
+  currentSectionItem: Acgcon.BaikeSectionItem | {} = {}
   activedSectionItem: 'all' | Acgcon.BaikeSectionItem | null = null
 
-  get isFold(){
+  get isFold() {
     return this.isOutlineFold
   }
 
-  set isFold(val:boolean){
-    this.$emit('update:isOutlineFold',val)
+  set isFold(val: boolean) {
+    this.$emit('update:isOutlineFold', val)
   }
 
   get items() {
     return this.section.items || []
-  }
-
-  handleInsert(type: string) {
-    this.currentType = type
-    this.isEdit = false
-    this.isDisplayCreateModal = true
   }
 
   handleInsertAction(type: string, item: any, index: number) {
@@ -91,17 +82,13 @@ export default class BaikeEditorSection extends Vue {
     } else {
       sectionItem.data = ''
     }
-    this.$emit('section-save', sectionItem, index)
+    this.$emit('section-insert', sectionItem, index)
   }
 
   handleSectionItemClick(item: Acgcon.BaikeSectionItem) {
-    this.currentType = item.type
-    this.isEdit = true
-    // TODO 去修改
-  }
-
-  handleSectionSave(data: Acgcon.BaikeSectionItem) {
-    this.$emit('section-save', data)
+    this.currentSectionItem = item
+    this.isDisplayCreateModal = true
+    console.log(item)
   }
 
   handleSectionItemActive(data: any) {

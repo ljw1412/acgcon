@@ -2,16 +2,18 @@
   <mz-modal v-model="mVisible"
     closeable
     class="baike-editor-create-section-modal"
-    :title="title"
+    title="编辑"
+    width="800px"
     :close-on-click-mask="false">
 
     <template v-if="isTextarea">
       <mz-textarea v-model="data"
         ref="textarea"
+        rows="10"
         placeholder="请输入文字内容"></mz-textarea>
     </template>
 
-    <template v-if="type === 'image'">
+    <template v-if="section.type === 'image'">
       <p class="mb-6">
         <span>您可以上传图片：</span>
         <mz-button color="primary">上传图片</mz-button>
@@ -24,7 +26,7 @@
     <template #footer>
       <mz-button color="primary"
         :class="{'not-save': !allowSave}"
-        @click="handleSave">{{operationName}}</mz-button>
+        @click="handleSave">保存</mz-button>
     </template>
   </mz-modal>
 </template>
@@ -38,14 +40,12 @@ import MzTextarea from 'manzhai-ui/types/packages/Textarea'
 export default class BaikeEditorCreateSectionModal extends Vue {
   @Model('visible:change', Boolean)
   readonly visible!: boolean
-  @Prop(String)
-  readonly type!: keyof Acgcon.BaikeSectionItemTypeMap
-  @Prop(Boolean)
-  readonly isEdit!: boolean
+  @Prop({ type: Object, default: () => ({}) })
+  readonly section!: Acgcon.BaikeSectionItem
   @Ref('textarea')
   readonly textareaRef!: MzTextarea
 
-  data = ''
+  data: any = ''
   style = ''
   double = { left: {}, right: {} }
 
@@ -57,20 +57,12 @@ export default class BaikeEditorCreateSectionModal extends Vue {
     this.$emit('visible:change', visible)
   }
 
-  get operationName() {
-    return this.isEdit ? '更新' : '插入'
-  }
-
-  get title() {
-    return this.operationName + (typeNameMap[this.type] || '')
-  }
-
   get isTextarea() {
-    return ['text', 'html'].includes(this.type)
+    return ['text', 'html'].includes(this.section.type)
   }
 
   get isHTML() {
-    return this.type === 'html'
+    return this.section.type === 'html'
   }
 
   get allowSave() {
@@ -92,13 +84,21 @@ export default class BaikeEditorCreateSectionModal extends Vue {
       this.$snackbar.show({ color: 'danger', content: '存在不合法的内容' })
       return
     }
-    this.$emit('save', { type: this.type, data: this.data, style: this.style })
+    if (this.section.type !== 'left-right') {
+      this.section.data = this.data
+      this.section.style = this.style
+    }
     this.mVisible = false
   }
 
   @Watch('visible')
   onVisibleChange(visible: boolean) {
-    if (!visible) {
+    if (visible) {
+      if (this.section.type !== 'left-right' && this.section.data) {
+        this.data = this.section.data
+        this.style = this.section.style || ''
+      }
+    } else {
       this.clearData()
     }
   }
