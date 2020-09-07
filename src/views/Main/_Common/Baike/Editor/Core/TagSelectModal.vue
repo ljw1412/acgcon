@@ -53,7 +53,7 @@
 import { Component, Vue, Prop, Model, Watch } from 'vue-property-decorator'
 
 @Component
-export default class AcgBaikeTagSelectModal extends Vue {
+export default class BaikeTagSelectModal extends Vue {
   @Model('visible:change', Boolean)
   readonly visible!: boolean
   @Prop(String)

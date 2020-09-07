@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-card px-10 py-10">
+  <div class="bg-card p-10">
     <div class="cover-uploader cursor-pointer flex-shrink-0 d-flex justify-content-center align-items-center">
       <acg-image v-if="cover"
         :src="cover"></acg-image>
@@ -17,7 +17,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component
-export default class AcgBaikeEditorCoverUploader extends Vue {
+export default class BaikeEditorCoverUploader extends Vue {
   @Prop(String)
   readonly cover!: string
 }

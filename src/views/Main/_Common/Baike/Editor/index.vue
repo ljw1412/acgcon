@@ -21,8 +21,8 @@
         id="baike-editor-content"
         :style="value!=='core' && !isOutlineFold ? 'margin-left: 220px;' : ''">
         <editor-header :title="title"
-          :editable="value !== 'core'"
-          :removable="value !== 'core'"
+          :editable="!isCore"
+          :removable="!isCore"
           @title-update="handleTitleUpdate"
           @save="handleSectionSave"
           @remove="handleSectionRemove"></editor-header>
@@ -49,6 +49,7 @@ import EditorCore from './Core/index.vue'
 import EditorSection from './Section/index.vue'
 import { getBlankInfo, getBaseMenu } from './helper'
 import { baikeInfo, baikeSections } from '../../../../../configs/mock'
+import { State } from 'vuex-class'
 
 @Component({
   components: {
@@ -60,6 +61,9 @@ import { baikeInfo, baikeSections } from '../../../../../configs/mock'
   }
 })
 export default class BaikeEditor extends Vue {
+  @State('user')
+  readonly user!: any
+
   value = 'core'
   info = getBlankInfo()
   menuList = getBaseMenu()
@@ -71,6 +75,29 @@ export default class BaikeEditor extends Vue {
 
   get title() {
     return this.currentSection ? this.currentSection.title : ''
+  }
+
+  get isCore() {
+    return this.value === 'core'
+  }
+
+  async fetchBaike(id: string) {
+    const result = await this.$get(`baike/${id}`)
+    this.info = result
+  }
+
+  async saveCore() {
+    const info = {
+      ...this.info,
+      tags: (this.info.tags || []).map(tag => tag._id),
+      creator: this.user._id
+    }
+    if (info._id) {
+    } else {
+      const result = await this.$post('baike', info)
+      this.info._id = result._id
+      this.$router.replace({ query: { ...this.$route.query, id: result._id } })
+    }
   }
 
   createSection(section: Acgcon.BaikeSection) {
@@ -95,7 +122,11 @@ export default class BaikeEditor extends Vue {
     }
   }
 
-  handleSectionSave() {}
+  handleSectionSave() {
+    if (this.isCore) {
+      this.saveCore()
+    }
+  }
 
   handleSectionRemove() {
     if (this.currentSection) {
@@ -108,6 +139,10 @@ export default class BaikeEditor extends Vue {
     if (this.$route.query.mock == '1') {
       this.info = baikeInfo
       this.menuList.push(...baikeSections)
+    }
+
+    if (this.$route.query.id) {
+      this.fetchBaike(this.$route.query.id as string)
     }
   }
 }

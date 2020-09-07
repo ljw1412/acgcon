@@ -1,6 +1,6 @@
 <template>
   <div class="baike-editor-core">
-    <div class="d-flex">
+    <div class="d-flex mb-20">
       <cover-uploader :cover="info.cover"></cover-uploader>
       <div class="bg-card ml-20 w-100 p-20">
         <mz-material-input v-model="info.title"
@@ -29,7 +29,8 @@
         :defalutValue="info.tags"
         @save="handleTagSave"></tag-select-modal>
     </div>
-    <div class="bg-card mt-20"></div>
+
+    <description v-model="info.desc"></description>
   </div>
 </template>
 
@@ -37,9 +38,10 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import CoverUploader from './CoverUploader.vue'
 import TagSelectModal from './TagSelectModal.vue'
+import Description from './Description.vue'
 
-@Component({ components: { CoverUploader, TagSelectModal } })
-export default class AcgBaikeEditorCore extends Vue {
+@Component({ components: { CoverUploader, TagSelectModal, Description } })
+export default class BaikeEditorCore extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   readonly info!: Acgcon.BaikeData
 

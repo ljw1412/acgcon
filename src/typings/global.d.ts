@@ -15,7 +15,7 @@ declare global {
       author: string
       cover: string
       desc: string
-      tags?: { name: string; color?: string; textColor?: string }[]
+      tags?: { _id: string; name: string; color?: string; textColor?: string }[]
       basic?: { name: string; value: string }[]
     }
 
