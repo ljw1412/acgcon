@@ -87,7 +87,7 @@ export default class AcgAdminFilter extends Vue {
   sort = false
 
   get baseParams() {
-    return { acgType: this.acgType, type: this.subType }
+    return { acgType: this.acgType, subType: this.subType }
   }
 
   async fetchFilterList() {

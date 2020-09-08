@@ -67,7 +67,7 @@ export default class BaikeTagSelectModal extends Vue {
   list: Acgcon.TagGroup[] = []
 
   get baseParams() {
-    return { acgType: this.acgType, type: this.subType }
+    return { acgType: this.acgType, subType: this.subType }
   }
 
   get mVisible() {

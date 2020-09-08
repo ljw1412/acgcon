@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-card p-10">
+  <div class="baike-editor-cover bg-card p-10">
     <div class="cover-uploader cursor-pointer flex-shrink-0 d-flex justify-content-center align-items-center">
       <acg-image v-if="cover"
         :src="cover"></acg-image>
@@ -24,4 +24,10 @@ export default class BaikeEditorCoverUploader extends Vue {
 </script>
 
 <style lang="scss">
+.baike-editor-cover .cover-uploader {
+  width: 195px;
+  height: 260px;
+  background-color: #eee;
+  color: #999999;
+}
 </style>

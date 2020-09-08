@@ -138,7 +138,11 @@ export default class AcgAdminTagGroup extends Vue {
   ]
 
   get baseParams() {
-    return { groupId: this.data._id, acgType: this.acgType, type: this.subType }
+    return {
+      groupId: this.data._id,
+      acgType: this.acgType,
+      subType: this.subType
+    }
   }
 
   async handleAction(action: string) {

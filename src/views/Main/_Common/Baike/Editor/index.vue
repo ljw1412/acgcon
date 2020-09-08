@@ -83,14 +83,22 @@ export default class BaikeEditor extends Vue {
 
   async fetchBaike(id: string) {
     const result = await this.$get(`baike/${id}`)
-    this.info = result
+    if (result) {
+      this.info = result
+    } else {
+      const query = { ...this.$route.query }
+      delete query.id
+      this.$router.replace({ query })
+    }
   }
 
   async saveCore() {
     const info = {
       ...this.info,
       tags: (this.info.tags || []).map(tag => tag._id),
-      creator: this.user._id
+      creator: this.user._id,
+      acgType: this.$route.query.acgType,
+      subType: this.$route.query.subType
     }
     if (info._id) {
       await this.$put(`baike/${info._id}`, info)
