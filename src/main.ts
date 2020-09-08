@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import createAxios, { get, post, del } from '@/utils/api'
+import createAxios, { get, post, del, put } from '@/utils/api'
 import { getLogger } from '@/utils/logger'
 import * as directives from './directives'
 import manzhaiUI from 'manzhai-ui'
@@ -32,6 +32,7 @@ Vue.prototype.$axios = createAxios()
 Vue.prototype.$get = get
 Vue.prototype.$post = post
 Vue.prototype.$del = del
+Vue.prototype.$put = put
 Vue.prototype.$getAcgLogger = getLogger
 Vue.prototype.$acg = controllers
 

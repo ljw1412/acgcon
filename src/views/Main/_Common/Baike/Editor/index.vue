@@ -93,6 +93,7 @@ export default class BaikeEditor extends Vue {
       creator: this.user._id
     }
     if (info._id) {
+      await this.$put(`baike/${info._id}`, info)
     } else {
       const result = await this.$post('baike', info)
       this.info._id = result._id

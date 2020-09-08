@@ -13,6 +13,10 @@ axios.defaults.timeout = 20000
 axios.defaults.withCredentials = true
 
 const createAxios = (config?: AxiosRequestConfig) => {
+  config = Object.assign(
+    { xsrfCookieName: 'csrfToken', xsrfHeaderName: 'X-CSRF-Token' },
+    config
+  )
   const instance = axios.create(config)
   return instance
 }
@@ -61,10 +65,7 @@ export async function post(
   config?: AxiosRequestConfig
 ) {
   try {
-    const response = await createAxios({
-      xsrfCookieName: 'csrfToken',
-      xsrfHeaderName: 'X-CSRF-Token'
-    }).post(url, data, config)
+    const response = await createAxios().post(url, data, config)
     return response.data
   } catch (error) {
     betterError(error)
@@ -75,10 +76,22 @@ export async function post(
 
 export async function del(url: string, config?: AxiosRequestConfig) {
   try {
-    const response = await createAxios({
-      xsrfCookieName: 'csrfToken',
-      xsrfHeaderName: 'X-CSRF-Token'
-    }).delete(url, config)
+    const response = await createAxios().delete(url, config)
+    return response.data
+  } catch (error) {
+    betterError(error)
+    printError(error)
+    return Promise.reject(error)
+  }
+}
+
+export async function put(
+  url: string,
+  data?: any,
+  config?: AxiosRequestConfig
+) {
+  try {
+    const response = await createAxios().put(url, data, config)
     return response.data
   } catch (error) {
     betterError(error)

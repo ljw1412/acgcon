@@ -16,7 +16,8 @@
       </mz-list-item>
     </mz-list>
 
-    <mz-list-item v-tooltip.arrow.right="'新增板块'"
+    <mz-list-item v-if="$route.query.id"
+      v-tooltip.arrow.right="'新增板块'"
       clickable
       @click="addSection">
       <div class="menu-item d-flex align-items-center justify-content-center">

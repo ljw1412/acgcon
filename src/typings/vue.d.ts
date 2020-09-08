@@ -10,6 +10,7 @@ declare module 'vue/types/vue' {
       data?: any,
       config?: AxiosRequestConfig
     ) => Promise<any>
+    $put: (url: string, data?: any, config?: AxiosRequestConfig) => Promise<any>
     $del: (url: string, config?: AxiosRequestConfig) => Promise<any>
     $getAcgLogger: (
       name: string
