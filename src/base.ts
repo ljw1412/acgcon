@@ -4,12 +4,21 @@ import '@ljw1412/ionicons-sprite'
 import manzhaiUI from 'manzhai-ui'
 
 import * as directives from './directives'
+import controllers from '@/controllers/index'
 
-import draggable from 'vuedraggable'
+import Draggable from 'vuedraggable'
+import AcgBaseLayout from '@/components/AcgBaseLayout/BaseLayout'
+import AcgImage from '@/components/AcgImage/index.vue'
+import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 
 const plugins = [manzhaiUI]
-const components: Record<string, VueConstructor> = { Draggable: draggable }
-const prototypes: Record<string, any> = {}
+const components: Record<string, VueConstructor> = {
+  Draggable,
+  AcgImage,
+  AcgBaseLayout,
+  AcgUserAvatar
+}
+const prototypes: Record<string, any> = { $acg: controllers }
 
 function installPlugins(Vue: VueConstructor) {
   plugins.forEach(plugin => Vue.use(plugin))

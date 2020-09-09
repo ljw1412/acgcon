@@ -1,0 +1,20 @@
+.acg-base-layout {
+  position: relative;
+
+  &__action {
+    > * {
+      margin-right: 16px;
+      margin-bottom: 16px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &:not(.is-dense) {
+    .acg-base-layout__top,
+    .acg-base-layout__default {
+      margin-bottom: 16px;
+    }
+  }
+}
