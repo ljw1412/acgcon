@@ -7,18 +7,14 @@
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
     "types": ["webpack-env"],
     "paths": {
-      "@/*": ["src/*"],
-      "@a/*": ["src/views/Main/Animation"],
-      "@c/*": ["src/views/Main/Comic"],
-      "@g/*": ["src/views/Main/Game"],
-      "@~": ["src/views/Main/_Common"],
-      "@admin": ["src/views/Admin"]
+      "@/*": ["src/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },

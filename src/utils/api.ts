@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosError } from 'axios'
+import axios, { AxiosRequestConfig, AxiosError, Method } from 'axios'
 
 interface BetterAxiosError extends AxiosError {
   originalMessage: string
@@ -8,18 +8,13 @@ const ERROR_MESSAGE_MAP: Record<string, string> = {
   'Network Error': '网络错误'
 }
 
-axios.defaults.baseURL = `${location.protocol}//${location.hostname}:7001/`
-axios.defaults.timeout = 20000
-axios.defaults.withCredentials = true
-
-const createAxios = (config?: AxiosRequestConfig) => {
-  config = Object.assign(
-    { xsrfCookieName: 'csrfToken', xsrfHeaderName: 'X-CSRF-Token' },
-    config
-  )
-  const instance = axios.create(config)
-  return instance
-}
+export const instance = axios.create({
+  baseURL: `${location.protocol}//${location.hostname}:7001/`,
+  timeout: 60000,
+  withCredentials: true,
+  xsrfCookieName: 'csrfToken',
+  xsrfHeaderName: 'X-CSRF-Token'
+})
 
 function betterError(error: BetterAxiosError) {
   // 保留旧报错消息
@@ -48,56 +43,33 @@ function printError(error: BetterAxiosError) {
   console.groupEnd()
 }
 
-export async function get(url: string, config?: AxiosRequestConfig) {
-  try {
-    const response = await createAxios().get(url, config)
-    return response.data
-  } catch (error) {
-    betterError(error)
-    printError(error)
-    return Promise.reject(error)
+function request(method: Method) {
+  return async function(
+    url: string,
+    data?: any,
+    config: AxiosRequestConfig = {}
+  ) {
+    const baseConfig: AxiosRequestConfig = { method, url }
+
+    if (data) {
+      const useData = ['PUT', 'POST', 'PATCH'].includes(method.toUpperCase())
+      baseConfig[useData ? 'data' : 'params'] = data
+    }
+
+    try {
+      const response = await instance.request(Object.assign(baseConfig, config))
+      return response.data
+    } catch (error) {
+      betterError(error)
+      printError(error)
+      return Promise.reject(error)
+    }
   }
 }
 
-export async function post(
-  url: string,
-  data?: any,
-  config?: AxiosRequestConfig
-) {
-  try {
-    const response = await createAxios().post(url, data, config)
-    return response.data
-  } catch (error) {
-    betterError(error)
-    printError(error)
-    return Promise.reject(error)
-  }
-}
+export const get = request('get')
+export const put = request('put')
+export const post = request('post')
+export const del = request('delete')
 
-export async function del(url: string, config?: AxiosRequestConfig) {
-  try {
-    const response = await createAxios().delete(url, config)
-    return response.data
-  } catch (error) {
-    betterError(error)
-    printError(error)
-    return Promise.reject(error)
-  }
-}
-
-export async function put(
-  url: string,
-  data?: any,
-  config?: AxiosRequestConfig
-) {
-  try {
-    const response = await createAxios().put(url, data, config)
-    return response.data
-  } catch (error) {
-    betterError(error)
-    printError(error)
-    return Promise.reject(error)
-  }
-}
-
-export default createAxios
+export default { instance, get, put, post, del }

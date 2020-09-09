@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { namespace, Action } from 'vuex-class'
+import { namespace } from 'vuex-class'
 
 @Component
 export default class App extends Vue {
@@ -19,6 +19,4 @@ export default class App extends Vue {
 }
 </script>
 
-
-<style lang="scss">
-</style>
+<style lang="scss"></style>

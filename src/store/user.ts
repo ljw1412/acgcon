@@ -1,7 +1,5 @@
-import { get as $get, post as $post } from '../utils/api'
 import { StoreOptions } from 'vuex'
-import router from '@/router/index'
-import adminRoute from '@/router/admin'
+import { whoami, logout } from '@/services/user'
 
 export default {
   namespaced: true,
@@ -23,19 +21,18 @@ export default {
   },
   actions: {
     async fetchCurrentUser({ commit }) {
-      const res = await $get('user/whoami')
-      if (
-        process.env.NODE_ENV === 'development' ||
-        (res.role && res.role.includes('admin'))
-      ) {
-        router.addRoutes(adminRoute)
-      }
+      const res = await whoami()
+      // if (
+      //   process.env.NODE_ENV === 'development' ||
+      //   (res.role && res.role.includes('admin'))
+      // ) {
+      //   router.addRoutes(adminRoute)
+      // }
       commit('setCurrentUser', res)
     },
     async logout({ commit }) {
-      const res = await $post('user/logout')
+      await logout()
       commit('clear')
     }
-  },
-  modules: {}
+  }
 } as StoreOptions<Record<string, any>>

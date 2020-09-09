@@ -1,21 +1,20 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import admin from './admin'
-import acg from './acg'
-import bindEvents from './_event'
+import acgRoutes from './acg'
+import baikeRoutes from './baike'
+import addListener from './_listener'
 
 Vue.use(VueRouter)
 
-const routes: RouteConfig[] = [
+const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'home',
     component: () =>
       import(/* webpackChunkName: "home" */ '@/views/Home/index.vue')
   },
-  // TODO: 鉴权, router.addRoutes 动态加载
-  // ...admin,
-  ...acg
+  ...acgRoutes,
+  ...baikeRoutes
 ]
 
 const router = new VueRouter({
@@ -24,6 +23,6 @@ const router = new VueRouter({
   routes
 })
 
-bindEvents(router)
+addListener(router)
 
 export default router
