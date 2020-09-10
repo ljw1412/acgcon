@@ -19,7 +19,7 @@ function setTitle(title = '', type: string) {
 
 const beforeEach: NavigationGuard = (to, from, next) => {
   let type = to.params.acgType
-  if (to.path.startsWith('/admin/')) type = 'admin'
+  if (to.path.startsWith('/admin')) type = 'admin'
   setTitle(to.meta.title, type)
   next()
 }

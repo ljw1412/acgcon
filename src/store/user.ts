@@ -1,5 +1,7 @@
 import { StoreOptions } from 'vuex'
 import { whoami, logout } from '@/services/user'
+import router from '@/router/index'
+import adminRoutes from '@/router/admin'
 
 export default {
   namespaced: true,
@@ -22,12 +24,12 @@ export default {
   actions: {
     async fetchCurrentUser({ commit }) {
       const res = await whoami()
-      // if (
-      //   process.env.NODE_ENV === 'development' ||
-      //   (res.role && res.role.includes('admin'))
-      // ) {
-      //   router.addRoutes(adminRoute)
-      // }
+      if (
+        process.env.NODE_ENV === 'development' ||
+        (res.role && res.role.includes('admin'))
+      ) {
+        router.addRoutes(adminRoutes)
+      }
       commit('setCurrentUser', res)
     },
     async logout({ commit }) {

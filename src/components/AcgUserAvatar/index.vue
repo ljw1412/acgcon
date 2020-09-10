@@ -76,11 +76,13 @@ export default class AcgUserDropdown extends Vue {
       switch (action) {
         case 'logout':
           this.logout()
-          if (this.inBackStage) this.$router.push({ name: 'home' })
+          if (this.inBackStage) this.$router.push({ name: 'Home' })
           break
         case 'management': {
           // this.$router.push({ name: 'admin' })
-          const { href } = resolve({ name: 'admin' })
+          console.log(resolve({ name: 'AdminWrapper' }))
+
+          const { href } = resolve({ name: 'AdminWrapper' })
           window.open(href)
           break
         }

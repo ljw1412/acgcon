@@ -27,7 +27,6 @@ export default class AcgHomeHeader extends Vue {
 .acg-home-header {
   padding-top: 64px;
   padding-bottom: 48px;
-  max-width: $screen-width-lg;
 
   .title {
     font-size: 40px;
