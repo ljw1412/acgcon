@@ -11,7 +11,7 @@
           @click="$router.push({ name: 'Home' })"></mz-icon>
       </mz-button>
 
-      <span class="text-gray-900">ACG控管理</span>
+      <span class="text-gray-900 fs-22">ACG控管理</span>
       <span v-text="title"></span>
     </div>
     <div class="d-flex justify-content-between align-items-center">

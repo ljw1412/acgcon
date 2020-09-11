@@ -5,7 +5,9 @@
       <admin-header></admin-header>
     </mz-header>
     <mz-layout>
-      <mz-aside class="border-right"></mz-aside>
+      <mz-aside class="border-right">
+        <admin-navigation></admin-navigation>
+      </mz-aside>
       <mz-main class="p-16 overflow-auto">
         <router-view></router-view>
       </mz-main>
@@ -16,8 +18,9 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import AdminHeader from './Header.vue'
+import AdminNavigation from './Navigation.vue'
 
-@Component({ components: { AdminHeader } })
+@Component({ components: { AdminHeader, AdminNavigation } })
 export default class AcgAdmin extends Vue {}
 </script>
 
