@@ -26,7 +26,13 @@ export default {
   },
   actions: {
     async fetchCurrentUser({ commit }) {
-      const res = isDev ? LOCAL_USER : await whoami()
+      let res: Record<string, any> = {}
+      try {
+        res = await whoami()
+      } catch (error) {
+        if (isDev) res = LOCAL_USER
+      }
+
       if (res.role && res.role.includes('admin')) {
         router.addRoutes(adminRoutes)
       }
