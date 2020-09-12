@@ -1,7 +1,10 @@
 import { StoreOptions } from 'vuex'
 import { whoami, logout } from '@/services/user'
-import router from '@/router/index'
-import adminRoutes from '@/router/admin'
+import router from '@/routers/index'
+import adminRoutes from '@/routers/admin'
+import LOCAL_USER from '@/mocks/user'
+
+const isDev = process.env.NODE_ENV === 'development'
 
 export default {
   namespaced: true,
@@ -23,11 +26,8 @@ export default {
   },
   actions: {
     async fetchCurrentUser({ commit }) {
-      const res = await whoami()
-      if (
-        process.env.NODE_ENV === 'development' ||
-        (res.role && res.role.includes('admin'))
-      ) {
+      const res = isDev ? LOCAL_USER : await whoami()
+      if (res.role && res.role.includes('admin')) {
         router.addRoutes(adminRoutes)
       }
       commit('setCurrentUser', res)

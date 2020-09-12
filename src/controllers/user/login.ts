@@ -1,5 +1,5 @@
 import AcgLoginModal from '@/components/AcgLoginModal/index.vue'
-import store from '@/store/index'
+import store from '@/stores/index'
 
 let instance: any
 

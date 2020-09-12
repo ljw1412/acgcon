@@ -1,5 +1,5 @@
 import VueRouter, { NavigationGuard } from 'vue-router'
-import store from '@/store/index'
+import store from '@/stores/index'
 
 const nameMap: Record<string, any> = {
   animation: '动画控',
