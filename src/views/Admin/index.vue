@@ -36,6 +36,12 @@ export default class AcgAdmin extends Vue {}
   .mz-aside {
     background-color: #fff;
   }
+
+  [class$='-query'] {
+    > * + * {
+      margin-left: 10px;
+    }
+  }
 }
 
 :root[data-theme='dark'] {

@@ -43,9 +43,4 @@ export default class AdminCacheQuery extends Vue {
 </script>
 
 <style lang="scss">
-.admin-cache-query {
-  > * + * {
-    margin-left: 10px;
-  }
-}
 </style>
