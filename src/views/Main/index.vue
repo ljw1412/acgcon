@@ -1,7 +1,5 @@
 <template>
-  <div class="acg-admin-filter">
-    <div></div>
-    <div></div>
+  <div class="acg-main">
   </div>
 </template>
 
@@ -9,7 +7,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class AcgAdminFilter extends Vue {}
+export default class AcgMain extends Vue {}
 </script>
 
 <style lang="scss">

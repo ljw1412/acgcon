@@ -8,7 +8,7 @@
       <mz-aside class="border-right">
         <admin-navigation></admin-navigation>
       </mz-aside>
-      <mz-main class="p-16 overflow-auto">
+      <mz-main class="position-relative p-16 overflow-auto">
         <router-view></router-view>
       </mz-main>
     </mz-layout>

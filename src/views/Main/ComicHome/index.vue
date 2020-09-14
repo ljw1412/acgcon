@@ -1,15 +1,11 @@
 <template>
-  <div class="acg-admin-filter">
-    <div></div>
-    <div></div>
-  </div>
+  <div class="comic-home"></div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-
 @Component
-export default class AcgAdminFilter extends Vue {}
+export default class ComicHome extends Vue {}
 </script>
 
 <style lang="scss">

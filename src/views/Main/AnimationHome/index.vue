@@ -1,15 +1,11 @@
 <template>
-  <div class="acg-admin-filter">
-    <div></div>
-    <div></div>
-  </div>
+  <div class="animation-home"></div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-
 @Component
-export default class AcgAdminFilter extends Vue {}
+export default class AnimationHome extends Vue {}
 </script>
 
 <style lang="scss">
