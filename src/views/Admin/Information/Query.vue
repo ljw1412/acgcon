@@ -35,18 +35,14 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { fetchInformationOrigins } from '@/services/information'
+import { getAcgTypeList } from '@/helpers/acg'
 
 @Component
 export default class AdminInformationQuery extends Vue {
   origin = ''
   originList = []
   acgType = ''
-  acgTypeList = [
-    { value: '', label: '全部类型' },
-    { value: 'animation', label: '动画' },
-    { value: 'comic', label: '漫画' },
-    { value: 'game', label: '游戏' }
-  ]
+  acgTypeList = getAcgTypeList(true)
   state = ''
   stateList = [
     { value: '', label: '全部状态' },

@@ -9,7 +9,7 @@ export default [
     children: [
       {
         path: ':acgType(animation|comic|game)',
-        name: 'subHome',
+        name: 'SubHome',
         components: {
           animation: () =>
             import(
