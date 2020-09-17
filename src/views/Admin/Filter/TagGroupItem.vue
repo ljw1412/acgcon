@@ -21,6 +21,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import TagGroupAction from './TagGroupAction'
 import TagGroupGrid from './TagGroupGrid.vue'
+import { updateTagOrder } from '../../../services/tag'
 
 @Component({ components: { TagGroupGrid, TagGroupAction } })
 export default class AdminFilterTagGroupItem extends Vue {
@@ -34,7 +35,13 @@ export default class AdminFilterTagGroupItem extends Vue {
     return this.state === 'group-sort'
   }
 
-  handleAction(action: string) {
+  get baseParams() {
+    const { _id: groupId, acgType, subType } = this.data
+    return { groupId, acgType, subType }
+  }
+
+  async handleAction(action: string) {
+    const { data } = this
     if (action === 'edit') {
       this.state = 'edit'
     } else if (action === 'sort') {
@@ -43,9 +50,12 @@ export default class AdminFilterTagGroupItem extends Vue {
     } else if (action === 'edit-end') {
       this.state = 'normal'
     } else if (action === 'tag-sort-cancel') {
-      this.data.tags = this.tagsBak
+      data.tags = this.tagsBak
       this.state = 'normal'
     } else if (action === 'tag-sort-save') {
+      // 保存标签排序
+      const list = data.tags.map((item: any) => item._id)
+      await updateTagOrder({ ...this.baseParams, list })
       this.state = 'normal'
     }
     console.log(action)

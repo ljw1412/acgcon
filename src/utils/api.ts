@@ -43,6 +43,10 @@ function printError(error: BetterAxiosError) {
   console.groupEnd()
 }
 
+function isUseData(method: Method) {
+  return ['PUT', 'POST', 'PATCH', 'DELETE'].includes(method.toUpperCase())
+}
+
 function request(method: Method) {
   return async function(
     url: string,
@@ -52,7 +56,7 @@ function request(method: Method) {
     const baseConfig: AxiosRequestConfig = { method, url }
 
     if (data) {
-      const useData = ['PUT', 'POST', 'PATCH'].includes(method.toUpperCase())
+      const useData = isUseData(method)
       baseConfig[useData ? 'data' : 'params'] = data
     }
 
