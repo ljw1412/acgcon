@@ -1,17 +1,22 @@
 <template>
   <div class="admin-filter-tag-group-item bg-card rounded-sm">
-    <div class="header d-flex align-items-center justify-content-between border-bottom px-16">
-      <div class="title py-16 lh-22">
+    <div class="header d-flex align-items-center justify-content-between px-16"
+      :class="{'border-bottom': !isGroupOrder}">
+      <!-- 标题 -->
+      <div class="title d-flex align-items-center py-16 lh-22">
+        <div v-if="data.multiple"
+          class="mr-4">[多选]</div>
         <div class="font-weight-bold">{{data.name}}</div>
       </div>
+      <!-- 操作 -->
       <div>
-        <tag-group-action :state="state"
+        <tag-group-action :state="finalState"
           @action="handleAction"></tag-group-action>
       </div>
     </div>
-    <div v-show="!isGroupSort"
+    <div v-show="!isGroupOrder"
       class="content p-16">
-      <tag-group-grid :state="state"
+      <tag-group-grid :state="finalState"
         :data="data"></tag-group-grid>
     </div>
   </div>
@@ -21,18 +26,21 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import TagGroupAction from './TagGroupAction'
 import TagGroupGrid from './TagGroupGrid.vue'
-import { updateTagOrder } from '../../../services/tag'
+import { updateTagOrder } from '@/services/tag'
+import { namespace } from 'vuex-class'
 
 @Component({ components: { TagGroupGrid, TagGroupAction } })
 export default class AdminFilterTagGroupItem extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   readonly data!: Record<string, any>
+  @(namespace('admin').State)
+  readonly isGroupOrder!: boolean
 
   state = 'normal'
   tagsBak = []
 
-  get isGroupSort() {
-    return this.state === 'group-sort'
+  get finalState() {
+    return this.isGroupOrder ? 'group-sort' : this.state
   }
 
   get baseParams() {

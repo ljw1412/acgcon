@@ -42,7 +42,7 @@ const stateIconMap = {
     {
       tips: '',
       name: 'reorder-three',
-      class: 'tag-group-reorder',
+      class: 'tag-group-reorder cursor-grab',
       action: ''
     }
   ],
@@ -98,7 +98,7 @@ export default class AdminFilterTagGroupAction extends Vue {
       <mz-icon
         v-tooltip={icon.tips}
         name={icon.name}
-        class={[icon.class, 'acg-clickable']}
+        class={[icon.class, { 'acg-clickable': this.state !== 'group-sort' }]}
         size="22"
         on-click={this.handleAction.bind(this, icon.action)}></mz-icon>
     ))

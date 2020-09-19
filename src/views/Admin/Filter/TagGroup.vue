@@ -1,15 +1,20 @@
 <template>
-  <div class="admin-filter-tag-group text-gray-900">
+  <draggable v-model="mList"
+    class="admin-filter-tag-group text-gray-900"
+    group="tag-group"
+    handle=".tag-group-reorder"
+    ghost-class="is-ghost">
     <transition-group tag="mz-row"
       name="flip-list">
       <mz-col v-for="item of list"
+        class="tag-group"
         :key="item._id"
         :md="12"
         :lg="8">
         <tag-group-item :data="item"></tag-group-item>
       </mz-col>
     </transition-group>
-  </div>
+  </draggable>
 </template>
 
 <script lang="ts">
@@ -43,6 +48,10 @@ export default class AdminFilterTagGroup extends Vue {
       padding-right: 5px;
       margin-bottom: 10px;
     }
+  }
+
+  .tag-group.is-ghost {
+    opacity: 0.5;
   }
 }
 </style>

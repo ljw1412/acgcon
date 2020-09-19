@@ -3,6 +3,7 @@ import { get, post, del, put } from '@/utils/api'
 const API = {
   TAG: 'tag',
   TAG_GROUP: 'tag-group',
+  TAG_GROUP_ORDER_UPDATE: 'tag-group/update_order',
   TAG_ORDER_UPDATE: 'tag/update_order'
 }
 
@@ -11,21 +12,30 @@ export function fetchTagGroupList(acgType: string, subType: string) {
 }
 
 interface BaseTagOption {
-  groupId: string
   acgType: string
   subType: string
 }
 
-interface UpdateTagOrderOption extends BaseTagOption {
+interface UpdateTagGroupOrderOption extends BaseTagOption {
   list: string[]
+}
+
+interface UpdateTagOrderOption extends BaseTagOption {
+  groupId: string
+  list: string[]
+}
+
+interface DeleteTagOption extends BaseTagOption {
+  groupId: string
+  id: string
+}
+
+export function updateTagGroupOrder(opt: UpdateTagGroupOrderOption) {
+  return post(API.TAG_GROUP_ORDER_UPDATE, opt)
 }
 
 export function updateTagOrder(opt: UpdateTagOrderOption) {
   return post(API.TAG_ORDER_UPDATE, opt)
-}
-
-interface DeleteTagOption extends BaseTagOption {
-  id: string
 }
 
 export function deleteTag(opt: DeleteTagOption) {

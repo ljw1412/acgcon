@@ -19,6 +19,15 @@
 
     <mz-button color="primary"
       key="btn-new">新增标签组</mz-button>
+
+    <mz-button v-if="isGroupOrder"
+      color="danger"
+      @click="$emit('action', 'sort-cancel')">取消排序</mz-button>
+
+    <mz-button :color="isGroupOrder?'success':'warning'"
+      @click="$emit('action', 'sort', !isGroupOrder)">
+      {{isGroupOrder?'保存排序':'标签组排序'}}
+    </mz-button>
   </div>
 </template>
 
@@ -26,9 +35,13 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { getAcgTypeList } from '@/helpers/acg'
 import { getSubTypesByAcgType } from '@/helpers/navigation'
+import { namespace } from 'vuex-class'
 
 @Component
 export default class AdminFilterQuery extends Vue {
+  @(namespace('admin').State)
+  readonly isGroupOrder!: boolean
+
   acgType = ''
   acgTypeList = getAcgTypeList()
   subType = ''
