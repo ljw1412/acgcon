@@ -1,12 +1,14 @@
 <template>
-  <div class="admin-filter-tag-group-item bg-card rounded-sm">
+  <div class="admin-filter-tag-group-item bg-card rounded-sm h-100">
     <div class="header d-flex align-items-center justify-content-between px-16"
       :class="{'border-bottom': !isGroupOrder}">
       <!-- 标题 -->
       <div class="title d-flex align-items-center py-16 lh-22">
         <div v-if="data.multiple"
-          class="mr-4">[多选]</div>
-        <div class="font-weight-bold">{{data.name}}</div>
+          class="mr-4 text-success">[多选]</div>
+        <div class="font-weight-bold"
+          :class="{'cursor-pointer':finalState === 'edit'}"
+          @click="handleTitleClick">{{data.name}}</div>
       </div>
       <!-- 操作 -->
       <div>
@@ -26,7 +28,8 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import TagGroupAction from './TagGroupAction'
 import TagGroupGrid from './TagGroupGrid.vue'
-import { updateTagOrder } from '@/services/tag'
+import { updateTagOrder, renameTagGroup } from '@/services/tag'
+import { groupNamePrompt } from './_helper'
 import { namespace } from 'vuex-class'
 
 @Component({ components: { TagGroupGrid, TagGroupAction } })
@@ -67,6 +70,25 @@ export default class AdminFilterTagGroupItem extends Vue {
       this.state = 'normal'
     }
     console.log(action)
+  }
+
+  async handleTitleClick() {
+    if (this.finalState === 'edit') {
+      try {
+        const newName = await groupNamePrompt(this.data.name)
+        const { nModified } = await renameTagGroup({
+          name: newName,
+          ...this.baseParams
+        })
+        if (nModified === 0) {
+          return this.$snackbar.show({
+            content: '重命名失败',
+            color: 'danger'
+          })
+        }
+        this.data.name = newName
+      } catch (error) {}
+    }
   }
 }
 </script>
