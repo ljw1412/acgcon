@@ -5,6 +5,7 @@ const API = {
   TAG_GROUP: 'tag-group',
   TAG_GROUP_RENAME: 'tag-group/rename',
   TAG_GROUP_ORDER_UPDATE: 'tag-group/update_order',
+  TAG_GROUP_MULTIPLE_UPDATE: 'tag-group/update_multiple',
   TAG_ORDER_UPDATE: 'tag/update_order'
 }
 
@@ -26,6 +27,11 @@ interface UpdateTagOrderOption extends BaseTagOption {
   list: string[]
 }
 
+interface UpdateTagGroupMultipleOption extends BaseTagOption {
+  groupId: string
+  state: boolean
+}
+
 interface DeleteTagOption extends BaseTagOption {
   groupId: string
   id: string
@@ -38,6 +44,10 @@ interface AddTagOption extends BaseTagOption {
 
 export function renameTagGroup(opt: AddTagOption) {
   return post(API.TAG_GROUP_RENAME, opt)
+}
+
+export function updateTagGroupMultiple(opt: UpdateTagGroupMultipleOption) {
+  return post(API.TAG_GROUP_MULTIPLE_UPDATE, opt)
 }
 
 export function updateTagGroupOrder(opt: UpdateTagGroupOrderOption) {

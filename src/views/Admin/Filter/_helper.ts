@@ -5,6 +5,6 @@ export function groupNamePrompt(oldName = '') {
     title: `${oldName ? '修改' : '新增'}标签组名称`,
     content: '请输入标签组名称',
     defaultValue: oldName,
-    rules: { test: /.{1,8}/, message: '请输入1-8个字符' }
+    rules: { test: /^.{1,8}$/, message: '请输入1-8个字符' }
   })
 }

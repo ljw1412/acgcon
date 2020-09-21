@@ -3,12 +3,16 @@
     <div class="header d-flex align-items-center justify-content-between px-16"
       :class="{'border-bottom': !isGroupOrder}">
       <!-- 标题 -->
-      <div class="title d-flex align-items-center py-16 lh-22">
-        <div v-if="data.multiple"
+      <div class="title d-flex align-items-center py-16">
+        <div v-if="finalState !== 'edit' && data.multiple"
           class="mr-4 text-success">[多选]</div>
-        <div class="font-weight-bold"
+        <div class="font-weight-bold lh-22"
           :class="{'cursor-pointer':finalState === 'edit'}"
           @click="handleTitleClick">{{data.name}}</div>
+        <mz-checkbox v-if="finalState === 'edit'"
+          class="ml-10"
+          v-model="multiple"
+          @change="handleMultipleChange">多选</mz-checkbox>
       </div>
       <!-- 操作 -->
       <div>
@@ -28,7 +32,11 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import TagGroupAction from './TagGroupAction'
 import TagGroupGrid from './TagGroupGrid.vue'
-import { updateTagOrder, renameTagGroup } from '@/services/tag'
+import {
+  updateTagOrder,
+  renameTagGroup,
+  updateTagGroupMultiple
+} from '@/services/tag'
 import { groupNamePrompt } from './_helper'
 import { namespace } from 'vuex-class'
 
@@ -40,6 +48,7 @@ export default class AdminFilterTagGroupItem extends Vue {
   readonly isGroupOrder!: boolean
 
   state = 'normal'
+  multiple = false
   tagsBak = []
 
   get finalState() {
@@ -55,6 +64,7 @@ export default class AdminFilterTagGroupItem extends Vue {
     const { data } = this
     if (action === 'edit') {
       this.state = 'edit'
+      this.multiple = this.data.multiple
     } else if (action === 'sort') {
       this.tagsBak = this.data.tags
       this.state = 'tag-sort'
@@ -89,6 +99,13 @@ export default class AdminFilterTagGroupItem extends Vue {
         this.data.name = newName
       } catch (error) {}
     }
+  }
+
+  async handleMultipleChange(isMultiple: boolean) {
+    try {
+      await updateTagGroupMultiple({ ...this.baseParams, state: isMultiple })
+      this.data.multiple = isMultiple
+    } catch (error) {}
   }
 }
 </script>
