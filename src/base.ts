@@ -8,6 +8,8 @@ import controllers from '@/controllers/index'
 
 import Draggable from 'vuedraggable'
 import AcgBaseLayout from '@/components/AcgBaseLayout/BaseLayout'
+import AcgBetweenLayout from '@/components/AcgBaseLayout/BetweenLayout.vue'
+import AcgHeader from '@/components/AcgHeader/index.vue'
 import AcgImage from '@/components/AcgImage/index.vue'
 import AcgUserAvatar from '@/components/AcgUserAvatar/index.vue'
 
@@ -15,7 +17,9 @@ const plugins = [manzhaiUI]
 const components: Record<string, VueConstructor> = {
   Draggable,
   AcgImage,
+  AcgHeader,
   AcgBaseLayout,
+  AcgBetweenLayout,
   AcgUserAvatar
 }
 const prototypes: Record<string, any> = { $acg: controllers }

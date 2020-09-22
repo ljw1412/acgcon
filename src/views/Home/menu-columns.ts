@@ -7,21 +7,21 @@ export default [
     {
       w: 2,
       h: 1,
-      to: { name: 'subHome', params: { acgType: 'animation' } },
+      to: { name: 'SubHome', params: { acgType: 'animation' } },
       component: 'StartEntrance',
       props: { title: '动画' }
     },
     {
       w: 2,
       h: 1,
-      to: { name: 'subHome', params: { acgType: 'comic' } },
+      to: { name: 'SubHome', params: { acgType: 'comic' } },
       component: 'StartEntrance',
       props: { title: '漫画' }
     },
     {
       w: 2,
       h: 1,
-      to: { name: 'subHome', params: { acgType: 'game' } },
+      to: { name: 'SubHome', params: { acgType: 'game' } },
       component: 'StartEntrance',
       props: { title: '游戏' }
     }

@@ -5,10 +5,10 @@
         icon
         circle
         size="large"
-        class="mr-16">
+        class="mr-16"
+        @click="$router.push({ name: 'Home' })">
         <mz-icon name="home-outline"
-          size="22"
-          @click="$router.push({ name: 'Home' })"></mz-icon>
+          size="22"></mz-icon>
       </mz-button>
 
       <span class="text-gray-900 fs-22">ACG控管理</span>
