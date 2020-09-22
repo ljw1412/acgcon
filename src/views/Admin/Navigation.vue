@@ -11,7 +11,7 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class AdminNavigation extends Vue {
   data = [
     {
-      title: '筛选项管理',
+      title: '标签组管理',
       icon: 'pricetags-outline',
       to: { name: 'AdminFilter' }
     },

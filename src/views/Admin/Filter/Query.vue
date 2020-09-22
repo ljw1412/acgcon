@@ -18,14 +18,20 @@
     </mz-select>
 
     <mz-button color="primary"
-      key="btn-new">新增标签组</mz-button>
+      key="btn-new"
+      @click="$emit('action','create-group')">新增标签组</mz-button>
+
+    <mz-button color="danger"
+      @click="$emit('action','reset-cache')">重置缓存</mz-button>
 
     <mz-button v-if="isGroupOrder"
-      color="danger"
+      color="blue"
+      text-color="white"
       @click="$emit('action', 'sort-cancel')">取消排序</mz-button>
 
     <mz-button :color="isGroupOrder?'success':'warning'"
-      @click="$emit('action', 'sort', !isGroupOrder)">
+      :key="isGroupOrder ? 'btn-sort-save' : 'btn-sort'"
+      @click="$emit('action', isGroupOrder ? 'sort-save' : 'sort')">
       {{isGroupOrder?'保存排序':'标签组排序'}}
     </mz-button>
   </div>

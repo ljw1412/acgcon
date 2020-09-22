@@ -65,11 +65,11 @@ export default class AdminFilterTagGroupItem extends Vue {
     if (action === 'edit') {
       this.state = 'edit'
       this.multiple = this.data.multiple
+    } else if (action === 'edit-end') {
+      this.state = 'normal'
     } else if (action === 'sort') {
       this.tagsBak = this.data.tags
       this.state = 'tag-sort'
-    } else if (action === 'edit-end') {
-      this.state = 'normal'
     } else if (action === 'tag-sort-cancel') {
       data.tags = this.tagsBak
       this.state = 'normal'
@@ -78,10 +78,13 @@ export default class AdminFilterTagGroupItem extends Vue {
       const list = data.tags.map((item: any) => item._id)
       await updateTagOrder({ ...this.baseParams, list })
       this.state = 'normal'
+    } else if (action === 'delete') {
+      this.$emit('delete', this.data)
     }
     console.log(action)
   }
 
+  // 点击标题
   async handleTitleClick() {
     if (this.finalState === 'edit') {
       try {
@@ -101,6 +104,7 @@ export default class AdminFilterTagGroupItem extends Vue {
     }
   }
 
+  // 修改多选状态
   async handleMultipleChange(isMultiple: boolean) {
     try {
       await updateTagGroupMultiple({ ...this.baseParams, state: isMultiple })

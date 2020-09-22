@@ -11,7 +11,8 @@
         :key="item._id"
         :md="12"
         :lg="8">
-        <tag-group-item :data="item"></tag-group-item>
+        <tag-group-item :data="item"
+          @delete="(item)=>$emit('delete',item)"></tag-group-item>
       </mz-col>
     </transition-group>
   </draggable>

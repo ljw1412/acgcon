@@ -6,6 +6,7 @@ const API = {
   TAG_GROUP_RENAME: 'tag-group/rename',
   TAG_GROUP_ORDER_UPDATE: 'tag-group/update_order',
   TAG_GROUP_MULTIPLE_UPDATE: 'tag-group/update_multiple',
+  TAG_GROUP_RESET_CACHE: 'tag-group/reset_cache',
   TAG_ORDER_UPDATE: 'tag/update_order'
 }
 
@@ -16,6 +17,14 @@ export function fetchTagGroupList(acgType: string, subType: string) {
 interface BaseTagOption {
   acgType: string
   subType: string
+}
+
+interface CreateTagGroupOption extends BaseTagOption {
+  name: string
+}
+
+interface DeleteTagGroupOption extends BaseTagOption {
+  groupId: string
 }
 
 interface UpdateTagGroupOrderOption extends BaseTagOption {
@@ -40,6 +49,18 @@ interface DeleteTagOption extends BaseTagOption {
 interface AddTagOption extends BaseTagOption {
   groupId: string
   name: string
+}
+
+export function resetTagGroupCache(opt: BaseTagOption) {
+  return post(API.TAG_GROUP_RESET_CACHE, opt)
+}
+
+export function createTagGroup(opt: CreateTagGroupOption) {
+  return post(API.TAG_GROUP, opt)
+}
+
+export function deleteTagGroup(opt: DeleteTagGroupOption) {
+  return del(`${API.TAG_GROUP}/${opt.groupId}`, opt)
 }
 
 export function renameTagGroup(opt: AddTagOption) {

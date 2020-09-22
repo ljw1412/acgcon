@@ -57,6 +57,11 @@ export default class AcgAdminInformation extends Vue {
       pageIndex: this.pageIndex,
       pageSize: this.pageSize
     })
+
+    list.forEach((item: Record<string, any>) => {
+      item.time = moment(item.time).format('YYYY-MM-DD HH:mm')
+    })
+
     this.count = count
     this.informationList = list
   }
