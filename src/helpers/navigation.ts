@@ -23,68 +23,69 @@ const navMap: Record<string, Acgcon.NavigationItem[]> = {
   common: [
     {
       label: '资讯',
-      to: { name: 'information' }
+      type: 'information',
+      to: { name: 'Information' }
     }
   ],
   animation: [
     {
       label: '番剧',
-      type: 'baike',
-      to: { name: 'baike' }
+      type: 'baike_animation',
+      to: { name: 'Baike' }
     },
     {
       label: '声优',
-      type: 'baike',
-      to: { name: 'baike', params: { subType: 'va' } }
+      type: 'baike_va',
+      to: { name: 'Baike', params: { subType: 'va' } }
     },
     {
       label: '角色',
-      type: 'baike',
-      to: { name: 'baike', params: { subType: 'character' } }
+      type: 'baike_character',
+      to: { name: 'Baike', params: { subType: 'character' } }
     },
     {
       label: '监督',
-      type: 'baike',
-      to: { name: 'baike', params: { subType: 'director' } }
+      type: 'baike_director',
+      to: { name: 'Baike', params: { subType: 'director' } }
     },
     {
       label: '公司',
-      type: 'baike',
-      to: { name: 'baike', params: { subType: 'company' } }
+      type: 'baike_company',
+      to: { name: 'Baike', params: { subType: 'company' } }
     }
   ],
   comic: [
     {
       label: '漫画',
-      type: 'baike',
-      to: { name: 'baike' }
+      type: 'baike_comic',
+      to: { name: 'Baike' }
     },
     {
       label: '作者',
-      type: 'baike',
-      to: { name: 'baike', params: { subType: 'author' } }
+      type: 'baike_author',
+      to: { name: 'Baike', params: { subType: 'author' } }
     },
     {
       label: '杂志',
-      type: 'baike',
-      to: { name: 'baike', params: { subType: 'magazine' } }
+      type: 'baike_magazine',
+      to: { name: 'Baike', params: { subType: 'magazine' } }
     },
     {
       label: '公司',
-      type: 'baike',
-      to: { name: 'baike', params: { subType: 'company' } }
+      type: 'baike_company',
+      to: { name: 'Baike', params: { subType: 'company' } }
     }
   ],
   game: [
     {
       label: '游戏',
-      type: 'baike',
-      to: { name: 'baike' }
+      type: 'baike_game',
+      to: { name: 'Baike' }
     },
     {
       label: '公司',
-      type: 'baike',
-      to: { name: 'baike', params: { subType: 'company' } }
+      type: 'baike_company',
+      to: { name: 'Baike', params: { subType: 'company' } }
     }
   ]
 }
@@ -99,7 +100,8 @@ export function getNavByAcgType(acgType: Acgcon.Types, hasHome = true) {
   if (hasHome) {
     list.unshift({
       label: '首页',
-      to: { name: 'subHome', params: { acgType } }
+      type: 'home',
+      to: { name: 'SubHome', params: { acgType } }
     })
   }
   return list.concat([...navMap.common, ...navMap[acgType]])
@@ -111,7 +113,7 @@ export function getNavByAcgType(acgType: Acgcon.Types, hasHome = true) {
  */
 export function getSubTypesByAcgType(acgType: Acgcon.Types) {
   let navList = getNavByAcgType(acgType, false)
-  navList = navList.filter(item => item.type === 'baike')
+  navList = navList.filter(item => item.type?.includes('baike_'))
   return navList.map(item => {
     const params = (item.to as Location).params
     return { label: item.label, value: params ? params.subType : acgType }

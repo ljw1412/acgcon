@@ -13,17 +13,33 @@ export default [
         components: {
           animation: () =>
             import(
-              /* webpackChunkName: "main" */ '@/views/Main/AnimationHome/index.vue'
+              /* webpackChunkName: "main" */ '@/views/Main/Home/Animation.vue'
             ),
           comic: () =>
             import(
-              /* webpackChunkName: "main" */ '@/views/Main/ComicHome/index.vue'
+              /* webpackChunkName: "main" */ '@/views/Main/Home/Comic.vue'
             ),
           game: () =>
-            import(
-              /* webpackChunkName: "main" */ '@/views/Main/GameHome/index.vue'
-            )
+            import(/* webpackChunkName: "main" */ '@/views/Main/Home/Game.vue')
         }
+      },
+      {
+        path: ':acgType(animation|comic|game)/information',
+        name: 'Information',
+        component: () =>
+          import(
+            /* webpackChunkName: "main" */ '@/views/Main/Information/index.vue'
+          ),
+        meta: { title: '资讯' }
+      },
+      {
+        path: ':acgType(animation|comic|game)/baike/:subType?',
+        name: 'Baike',
+        component: () =>
+          import(
+            /* webpackChunkName: "main" */ '@/views/Main/Baike/List/index.vue'
+          ),
+        meta: { title: '百科' }
       }
     ]
   }

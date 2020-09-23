@@ -5,7 +5,7 @@ declare global {
     type Types = 'animation' | 'comic' | 'game'
     interface NavigationItem {
       label: string
-      type?: string
+      type: string
       to?: RawLocation
     }
 

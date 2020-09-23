@@ -1,6 +1,7 @@
 <template>
   <div class="acg-main">
     <acg-header :banner="config.banner"></acg-header>
+    <navigation></navigation>
     <router-view :name="currentRouteName"></router-view>
   </div>
 </template>
@@ -8,9 +9,10 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import AcgVue from '@/mixins/AcgVue'
-import { fetchBaseConfig } from '../../services/common'
+import Navigation from './Navigation.vue'
+import { fetchBaseConfig } from '@/services/common'
 
-@Component
+@Component({ components: { Navigation } })
 export default class AcgMain extends AcgVue {
   config = {}
 
