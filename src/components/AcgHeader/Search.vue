@@ -1,8 +1,9 @@
 <template>
   <div class="acg-header-search">
     <mz-input v-model="value"
+      shadow
       size="large"
-      shadow></mz-input>
+      placeholder="请输入想要搜索的关键词"></mz-input>
   </div>
 </template>
 

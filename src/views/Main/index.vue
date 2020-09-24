@@ -2,7 +2,9 @@
   <div class="acg-main">
     <acg-header :banner="config.banner"></acg-header>
     <navigation></navigation>
-    <router-view :name="currentRouteName"></router-view>
+    <div class="acg-main-content m-auto pt-20">
+      <router-view :name="currentRouteName"></router-view>
+    </div>
   </div>
 </template>
 
@@ -35,4 +37,7 @@ export default class AcgMain extends AcgVue {
 </script>
 
 <style lang="scss">
+.acg-main-content {
+  max-width: $screen-width-lg;
+}
 </style>

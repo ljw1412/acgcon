@@ -86,7 +86,6 @@ export default class AcgInformation extends AcgVue {
 .acg-information {
   margin-bottom: 20px;
   overflow: hidden;
-  padding-top: 6px;
 
   .information-list {
     display: flex;
