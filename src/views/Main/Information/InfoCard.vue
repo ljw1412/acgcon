@@ -9,8 +9,8 @@
     <div class="info-card-core">
       <h3>{{item.title}}</h3>
       <p class="info-card-info">
-        <span>来源：{{item.originCN}}</span>
-        <span>时间：{{item.time}}</span>
+        <span class="text-blue">{{item.originCN}}</span>
+        <span>{{item.time}}</span>
       </p>
       <p class="info-card-desc">{{item.desc}}</p>
     </div>

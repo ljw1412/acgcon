@@ -13,7 +13,7 @@ import BaikeFilter from './Filter.vue'
 import BaikeContent from './Content.vue'
 
 @Component({ components: { BaikeFilter, BaikeContent } })
-export default class BaikeList extends Vue {}
+export default class AcgBaikeList extends Vue {}
 </script>
 
 <style lang="scss">
