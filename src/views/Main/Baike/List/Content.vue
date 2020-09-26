@@ -28,20 +28,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import { baikeList } from '@/mocks/baike'
+import { Component, Prop } from 'vue-property-decorator'
+import AcgVue from '@/mixins/AcgVue'
 
 @Component
-export default class BaikeContent extends Vue {
-  list = baikeList
+export default class BaikeContent extends AcgVue {
+  @Prop({ type: Array, default: () => [] })
+  readonly list!: Record<string, any>
 }
 </script>
 
 <style lang="scss">
 .baike-content {
-  width: calc(100% - 320px);
-  transition: width 0.15s linear;
-  will-change: width;
+  width: 100%;
 
   .baike-item {
     height: 200px;

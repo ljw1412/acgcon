@@ -55,6 +55,13 @@ export default class BaikeListFilter extends AcgVue {
     this.loading = true
     try {
       this.tagList = await fetchTagGroupList(this.acgType, this.subType)
+      this.tagList.forEach(item => {
+        item.tags.unshift({ _id: 'all', name: '全部' })
+      })
+      this.value = this.tagList.reduce((obj, item) => {
+        obj[item._id] = 'all'
+        return obj
+      }, {})
     } catch (error) {
       this.error = true
     } finally {
