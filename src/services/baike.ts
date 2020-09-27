@@ -15,3 +15,7 @@ interface BaikeListOption {
 export function fetchBaikeList(opt: BaikeListOption) {
   return get(API.BAIKE, opt)
 }
+
+export function fetchBaike(id: string) {
+  return get(`${API.BAIKE}/${id}`)
+}
