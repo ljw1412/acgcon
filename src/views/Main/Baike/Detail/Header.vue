@@ -63,8 +63,15 @@ export default class BaikeDetailHeader extends Vue {
 
   .info {
     top: 100px;
-    left: 330px;
+    left: 50%;
+    width: 100%;
+    max-width: 1600px;
+    padding-left: 330px;
+    margin: auto;
     color: #ffffff;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    transition: all 0.15s linear;
 
     .title {
       color: #ffffff;
@@ -83,8 +90,11 @@ export default class BaikeDetailHeader extends Vue {
 
   .info-card {
     min-height: 220px;
+    max-width: 1600px;
+    margin: auto;
     margin-top: -200px;
     margin-bottom: 20px;
+    transition: all 0.15s linear;
     .cover {
       position: absolute;
       top: -140px;
@@ -96,6 +106,42 @@ export default class BaikeDetailHeader extends Vue {
       img {
         width: 100%;
         height: 100%;
+      }
+    }
+  }
+}
+@media screen and (max-width: $screen-width-lg + 20) and (min-width: $screen-width-sm + 1) {
+  .baike-detail-header {
+    .info-card {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: $screen-width-sm) {
+  .baike-detail-header {
+    .bg-wrapper {
+      height: 280px;
+    }
+
+    .info {
+      top: 60px;
+      padding-left: 190px;
+      .title {
+        font-size: 22px;
+      }
+    }
+
+    .info-card {
+      margin-top: 0;
+      border-radius: 0;
+      padding: 15px;
+      .cover {
+        width: 150px;
+        height: 200px;
+        left: 20px;
+        top: -220px;
       }
     }
   }
